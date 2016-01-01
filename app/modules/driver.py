@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from flask import flash, Blueprint, render_template, redirect, abort, g, session, request, flash, url_for, session, Flask
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.babelex import lazy_gettext, gettext as _, ngettext
-from .. import app, db, babel, celery_orders
+from .. import app, db, babel, celery_all
 from ..models import User, products_to_users, products_to_orders, Order, Shop, Settings
 from ..forms import UserForm
 from ..tools import check_rank_user, check_rank
@@ -164,7 +164,7 @@ def route(order_id):
     return render_template('driver/route.html', driver=current_user, order=order, shops=shops)
 
 
-@celery_orders.task(name='check-order-after-send')
+@celery_all.task(name='check-order-after-send')
 def check_order_after_send(order_id, re_count):
     order = Order.query.get(order_id)
     if re_count == order.re_count and order.status == 0:

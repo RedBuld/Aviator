@@ -6,7 +6,7 @@ from dateutil.relativedelta import relativedelta
 from flask import Blueprint, render_template, redirect, abort, g, session, request, flash, url_for, session, Flask
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.babelex import lazy_gettext, gettext as _, ngettext
-from .. import app, db, babel, mail, celery_mail
+from .. import app, db, babel, mail, celery_all
 from ..models import User, products_to_users, products_to_orders, Order, Shop, Product, Settings
 from ..forms import UserForm
 from ..tools import check_rank_user, check_rank
@@ -141,7 +141,7 @@ def change_driver(order_id):
         return redirect(url_for('order_module.active'))
     return render_template('order/change_driver.html', order=order)
 
-@celery_mail.task(name='send-mail')
+@celery_all.task(name='send-mail')
 def send_mail(msg):
     try:
         mail.send(msg)
