@@ -1,0 +1,60 @@
+{% from "_formhelpers.html" import render_messages %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %} | {{ config['SITE_NAME'] }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+</head>
+<body class="fixed-top-bar {% block bodySubClass %}{% endblock %}">
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">{% trans %}Toggle navigation{% endtrans %}</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ url_for('index') }}">{{ config['SITE_NAME'] }} {% block custom_top_bar %}{% endblock %}</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-left">
+          {% block menu %}{% endblock %}
+        </ul>
+        {% if current_user.is_authenticated() %}
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown right">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans %}Settings{% endtrans %} <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="{{ url_for('logout') }}">{% trans %}Log-out{% endtrans %}</a></li>
+              <li class="divider"></li>
+              <li><a href="{{ url_for('toggle_help', next=request.url) }}">{% trans %}Toggle help{% endtrans %}</a></li>
+              <li><a href="javascript:;" onclick="window.openDialogWindow(this)" data-url="{{ url_for('user_module.change_language', next=request.url) }}">{% trans %}Language{% endtrans %}</a></li>
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+  <div class="container">
+    {{ render_messages('error') }}
+    {{ render_messages('success') }}
+  </div>
+  {% block content %}{% endblock %}
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content"></div>
+    </div>
+  </div>
+  {% if (not request.cookies.get('help-cont') is none) and (not request.cookies.get('help-cont') == '') %}
+  <style>.help-cont{display:none;}</style>
+  {% endif %}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+  {% if 'charts' in request.path %}{% endif %}
+</body>
+</html>

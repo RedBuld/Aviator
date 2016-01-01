@@ -1,0 +1,45 @@
+<div class="rb-item-extra element-4">
+  <div class="product-thumb rb-item transition">
+    <div class="image">
+      <a href="{{ config['SITE_URL'] }}product/{{ product.id }}" d-id="{{ product.id }}"><img src="{{ product.img|thumbnail('200x200') }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a>
+      <!--<div class="rating">
+        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+        <span class="fa fa-stack fa-hidden"><i class="fa fa-star fa-stack-2x"></i></span>
+        <span class="fa fa-stack fa-hidden"><i class="fa fa-star fa-stack-2x"></i></span>
+        onclick="addProduct(this, '{{ product.id }}');"
+      </div>-->
+      <div class="dropdown d-{{ product.id }}">
+        <ul>
+          <li><a class="button btn-wishlist" onclick="Share.vkontakte('{{ config['SITE_URL'] }}pid{{ product.id }}','{{ product.name }}','{{ product.img|thumbnail('1300x1300') }}','{{ product.name }}')"><i class="sb sb-vk"></i></a></li>
+          <li><a class="button btn-wishlist" onclick="Share.facebook('{{ config['SITE_URL'] }}pid{{ product.id }}','{{ product.name }}','{{ product.img|thumbnail('1300x1300') }}','{{ product.name }}')"><i class="sb sb-fb"></i></a></li>
+          <li><a class="button btn-wishlist" onclick="Share.odnoklassniki('{{ config['SITE_URL'] }}pid{{ product.id }}','{{ product.name }}')"><i class="sb sb-ok"></i></a></li>
+          <li><a class="button btn-wishlist" onclick="Share.twitter('{{ config['SITE_URL'] }}pid{{ product.id }}','{{ product.name }}')"><i class="sb sb-tw"></i></a></li>
+        </ul>
+      </div>
+      <div class="button-group rb-button-group hidden-xs">
+        <button class="btn-cart" type="button" onclick="btadd.cart('{{ product.id }}');"><i class="fa fa-shopping-cart"></i></button>
+        <button class="btn-wishlist shorty" type="button" title="Поделится" data-id="{{ product.id }}"><i class="fa fa-heart"></i></button>
+        <button  title ="{% trans %}Quick View{% endtrans %}" onclick="getModalContent({{ product.id }});" class="sft_quickshop_icon" data-toggle="modal" data-target="#myModal">
+          <span class="qs_icon">
+            <i class="fa fa-search"></i>
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="small_detail">
+      <div class="caption">
+        <div class="name"><a href="{{ config['SITE_URL'] }}product/{{ product.id }}">{{ product.name }}</a></div>
+        <p class="description">{{ product.memo }}</p>
+        <p class="price">
+          <span class="price-new">{{ product.price }}{% trans %}rub.{% endtrans %}</span>
+        </p>
+      </div>
+    </div>
+    <div class="button-group visible-xs">
+      <button class="btn-cart" type="button" onclick="btadd.cart('{{ product.id }}');"><i class="fa fa-shopping-cart"></i>&nbsp;{% trans %}Add to Cart{% endtrans %}</button>
+      <button class="btn-wishlist" type="button" title="{% trans %}Share{% endtrans %}"><i class="fa fa-heart"></i></button>
+    </div>
+  </div>
+</div>

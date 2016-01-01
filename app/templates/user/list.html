@@ -1,0 +1,60 @@
+{% from "_formhelpers.html" import render_field, render_pagination, get_rank %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}Users{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('settings_module.index') }}">{% trans %}Settings{% endtrans %}</a></li>
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li class="active"><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}Users{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can add new users and configure created users.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li class="active">{% trans %}Users{% endtrans %}</li>
+  </ol>
+  <a href="{{ url_for('user_module.new') }}" class="btn btn-primary">{% trans %}Create a new user{% endtrans %}</a>
+  <button type="button" class="btn btn-default search-button" onclick="window.searchNow('{{ request.base_url }}')">{% trans %}Search{% endtrans %}</button>
+  <input type="text" class="form-control search-input" value="{{ query }}" placeholder="{% trans %}Search...{% endtrans %}">
+  <hr>
+  {{ render_pagination(users, 'user_module.list') }}
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>{% trans %}Name{% endtrans %}</th>
+        <th>{% trans %}Email{% endtrans %}</th>
+        <th>{% trans %}Rank{% endtrans %}</th>
+        <th>{% trans %}User settings{% endtrans %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users.items %}
+      <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ get_rank(user.rank) }}</td>
+        <td>
+          <a href="{{ url_for('user_module.edit', user_id=user.id) }}" class="btn btn-default btn-block">{% trans %}Set-up the user{% endtrans %}</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {{ render_pagination(users, 'user_module.list') }}
+</div>
+{% endblock %}

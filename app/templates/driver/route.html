@@ -1,0 +1,36 @@
+{% from "_formhelpers.html" import render_field, render_pagination, get_rank %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}Order{% endtrans %} #{{ order.id }}{% endblock %}
+{% block custom_top_bar %} <span class="small">{% trans %}Driver mode{% endtrans %}</span>{% endblock %}
+{% block menu %}
+<li class="active"><a href="{{ url_for('driver_module.orders') }}">{% trans %}Orders{% endtrans %}</a></li>
+<li><a href="{{ url_for('driver_module.products') }}">{% trans %}Products{% endtrans %}</a></li>
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}Order{% endtrans %} #{{ order.id }}</h1>
+    <p class="lead">{% trans %}Here you can see where you need to go.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('driver_module.orders', t='active') }}">{% trans %}Active orders{% endtrans %}</a></li>
+    <li class="active">{% trans %}Route for order{% endtrans %} #{{ order.id }}</li>
+  </ol>
+  <ul class="list-group" id="address-panel">
+    {% if order.need_market %}<li class="list-group-item for-marketplace"><h4>(B) {% trans %}Marketplace{% endtrans %}</h4></li>{% endif %}
+    <li class="list-group-item">
+      <h4>{% if order.need_market %}(C){% else %}(B){% endif %} {% trans %}Client address{% endtrans %}</h4>
+      {{ order.address }}
+    </li>
+  </ul>
+  <div id="map" style="width:100%; height:500px"></div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&language={{ current_user.locale }}"></script>
+<script type="text/javascript">
+  window.OrderNeedShop = {% if order.need_market %}true{% else %}false{% endif %};
+  window.OrderAddress = '{{ order.address }}';
+  window.OrderShops = [{% for shop in shops %}{name: '{{ shop.name }}', address: '{{ shop.address }}'}, {% endfor %}]
+</script>
+{% endblock %}

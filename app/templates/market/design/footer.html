@@ -1,0 +1,118 @@
+<div id="rb_footer_container" class="" >
+  <footer id="rb_footer">
+    <div class="container">
+      <div class="footer_column">
+        <div class="row">
+          <div class="col-sm-4 col-xs-6 not-animated" data-animate="fadeInUp" data-delay="200">
+            <div class="footer-contact">
+              <h3 style="text-transform:none;">{% trans %}Contact Us{% endtrans %}</h3>
+              <div class="contact-us not-animated" data-animate="fadeInUp" data-delay="300">
+                <div class="address">
+                  <i class="fa fa-map-marker"></i>
+                  {% for x in settings if x.name == 'address_'+session['locale'] %}
+                    <a class="map" href="#" data-lat="59.223486, 39.888875" data-toggle="modal" data-target="#mapsmodal">{{ x.value }}</a>
+                  {% endfor %}
+                </div>
+                <div class="email">
+                  <i class="fa fa-envelope-o"></i>
+                  {% for x in settings if x.name == 'email' %}
+                    <span>{{ x.value }}</span>
+                  {% endfor %}
+                </div>
+                <div class="phone">
+                  <i class="fa fa-phone"></i>
+                  {% for x in settings if x.name == 'phone' %}
+                    <span>{{ x.value }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-8 col-xs-6 not-animated" data-animate="fadeInUp" data-delay="300">
+            <div class="rb-newletter col-sm-8 hidden-xs">
+              <div class="footer-newletter">
+                <div class="title">
+                  <h3 style="text-transform:none;">{% trans %}Subscribe to our newsletter today!{% endtrans %}</h3>
+                </div>
+                <div>
+                  <div class="newletter-content">
+                    <div class="frm_subscribe">
+                      <form name="subscribe" id="subscribe">
+                        <table>
+                          <tr>
+                            <td>
+                              <div class="boss-newletter">
+                                <input class="form-control input-new" size="50" type="text" placeholder="{% trans %}E-mail address{% endtrans %}" name="subscribe_email" id="subscribe_email">
+                                <a class="btn btn-new" onclick="email_subscribe()">{% trans %}Subscribe{% endtrans %}</a>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td id="subscribe_result"></td>
+                          </tr>
+                        </table>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 col-xs-12 not-animated" data-animate="fadeInUp" data-delay="200">
+              <div class="row">
+                <div class="col-xs-12 pull-right not-animated" data-animate="fadeInUp" data-delay="200" style="text-align:right;">
+                  <h3>{% trans %}Infromation{% endtrans %}</h3>
+                  <ul>
+                    <li><a href="{{ config['SITE_URL'] }}contact">{% trans %}Contact us{% endtrans %}</a></li>
+                    <li><a href="{{ config['SITE_URL'] }}sitemap">{% trans %}Site Map{% endtrans %}</a></li>
+                    <li><a href="{{ config['SITE_URL'] }}about">{% trans %}About Us{% endtrans %}</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="social-payment">
+      <div class="container">
+        <div class="row">
+          <div class="column col-sm-6 col-xs-12 pull-left not-animated" data-animate="fadeInUp" data-delay="500">
+            <div class="payment pull-left">
+              {% for x in settings if x.name == 'emoney' and x.value=='1' %}
+                <ul>
+                  <li><a title="MasterCard" href="javascript:;" class="masterCard"><img alt="MasterCard" src="{{ url_for('static', filename='market/image/master.png') }}" /></a></li>
+                  <li><a title="Visa" href="javascript:;" class="visa"><img alt="Visa" src="{{ url_for('static', filename='market/image/visa.png') }}"></a></li>
+                </ul>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="column col-sm-6 col-xs-12 pull-right not-animated" data-animate="fadeInUp" data-delay="500">
+            <div class="footer-social pull-right">
+              <h3>{% trans %}Follow us{% endtrans %}</h3>
+              <ul>
+                <li class="icon-vk"><a href="http://vk.com/vegas_pizza" traget="_blank" title="В контакте"><i class="sb sb-vk"></i></a></li>
+                <li class="icon-facebook"><a href="javascript:;" onclick="Share.facebook('{{ config['SITE_URL'] }}','{{ config['SITE_NAME'] }}','','')" title="Facebook"><i class="sb sb-fb"></i></a></li>
+                <li class="icon-twitter"><a href="javascript:;" onclick="Share.facebook('{{ config['SITE_URL'] }}','{{ config['SITE_NAME'] }}')" title="Twitter"><i class="sb sb-tw"></i></a></li>
+                <li class="icon-ok"><a href="javascript:;" onclick="Share.facebook('{{ config['SITE_URL'] }}','{{ config['SITE_NAME'] }}')" title="Одноклассники"><i class="sb sb-ok"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rb-powered">
+      <div class="container">
+        <div class="row">
+          <div class="powered col-sm-12 col-xs-12">
+            <div id="powered">
+              <p> Copyright 2015 ©<span> Design for <a href="{{ config['SITE_URL'] }}">{{ config['SITE_NAME'] }}</a></span></p>
+              <p><span>Powered by <a href="http://vk.com/el_paramore">RedBuld</a></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+<div id="back_top" class="back_top" title="{% trans %}Back To Top{% endtrans %}"><span><i class="fa fa-angle-up"></i></span></div>
+<div id="mapsmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mapsmodal" aria-hidden="true" style="display: none;"><div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div id="map_canvas" style="min-height:400px;"></div></div></div></div></div>

@@ -1,0 +1,82 @@
+<div id="rb_header" class="" >
+  <nav id="top">
+    <div class="container">
+      <div class="row">
+        <div class="language-currency pull-right col-sm-8 col-xs-12">
+          <div id="cart" class="btn-group pull-right">
+            <button type="button" data-toggle="dropdown" role="button" data-loading-text="Загрузка..." class="btn btn-dropdown-cart pull-right">
+              <i class="fa fa-shopping-cart"></i>
+              <span id="cart-total">{{ ngettext('%(num)d item', '%(num)d items', session['total']['counts']) }} - {{ session['total']['price'] }} {% trans %}rub.{% endtrans %}</span>
+            </button>
+            <ul class="dropdown-menu pull-right"></ul>
+          </div>
+          <ul class="list-inline pull-right">
+            <li><a title="Вход" href="{{ config['SITE_URL'] }}admin"><i class="fa fa-user"></i></a></li>
+          </ul>
+          {#% if 'order_id' in session and session['order_id'] != '' %}
+          <ul class="list-inline pull-right">
+            <li>
+              <a title="Заказы" data-toggle="dropdown"><i class="fa fa-flag"></i></a>
+              <ul class="dropdown-menu order-codes" style="right:auto;top:auto;bottom:auto;">
+                <li>
+                  <p>{{ session['order_id'] }}</p>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          {% endif %#}
+          <div class="cur-lang">
+            <div class="pull-right">
+              <form action="/set_locale" method="post" enctype="multipart/form-data" id="language">
+                <div class="btn-group">
+                  <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                    {% for lang in config['LANGUAGES'] %}{% if lang[0] == session['locale'] %}<img src="{{ url_for('static', filename='') }}market/image/flags/{{ lang[0] }}.png" alt="{{ lang[1] }}" title="{{ lang[1] }}"> {{ lang[1] }}{% endif %}{% endfor %}<i class="fa fa-caret-down"></i>
+                  </button>
+                  <ul class="dropdown-menu">
+                    {% for lang in config['LANGUAGES'] %}
+                    <li>
+                      <a href="{{ lang[0] }}">
+                        <span class="text-left">{{ lang[1] }}</span>
+                        <span class="text-right"><img src="{{ url_for('static', filename='') }}market/image/flags/{{ lang[0] }}.png" alt="{{ lang[1] }}" title="{{ lang[1] }}"></span>
+                      </a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                <input type="hidden" name="code" value="{% for lang in config['LANGUAGES'] %}{% if lang[0] == session['locale'] %}{{ lang[0] }}{% endif %}{% endfor %}">
+                <input type="hidden" name="redirect" value="{{ request.path }}">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="pull-left col-sm-6">
+          <div id="logo" class="logo">
+            <a href="{{ config['SITE_URL'] }}">
+              <img src="{{ url_for('static', filename='market/image/logo_white.png') }}" title="{{ config['SITE_NAME'] }}" alt="{{ config['SITE_NAME'] }}" class="img-responsive"/></a>
+          </div>
+        </div>
+        <div class="list-links pull-right col-sm-6">
+          <div class="rb-menu-logo">
+            <ul>
+              <li><a href="http://vk.com/vegas_pizza" title="Вконтакте">Вконтакте</a></li>
+              <li><a href="{{ config['SITE_URL'] }}contact" title="{% trans %}Contact Us{% endtrans %}">{% trans %}Contact Us{% endtrans %}</a></li>
+              <li><a href="{{ config['SITE_URL'] }}about" title="{% trans %}About Us{% endtrans %}">{% trans %}About Us{% endtrans %}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="row">
+      <div class="rb-content-menu"></div>
+    </div>
+  </div>
+  {% include 'market/design/top_menu.html' %}
+</div>

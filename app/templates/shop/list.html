@@ -1,0 +1,58 @@
+{% from "_formhelpers.html" import render_field, render_pagination, get_rank %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}Shops{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('settings_module.index') }}">{% trans %}Settings{% endtrans %}</a></li>
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li class="active"><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}Shops{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can add new shop and configure created shops.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li class="active">{% trans %}Shops{% endtrans %}</li>
+  </ol>
+  <a href="{{ url_for('shop_module.new') }}" class="btn btn-primary">{% trans %}Create a new shop{% endtrans %}</a>
+  <button type="button" class="btn btn-default search-button" onclick="window.searchNow('{{ request.base_url }}')">{% trans %}Search{% endtrans %}</button>
+  <input type="text" class="form-control search-input" value="{{ query }}" placeholder="{% trans %}Search...{% endtrans %}">
+  <hr>
+  {{ render_pagination(shops, 'shop_module.list') }}
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>{% trans %}Shop Name{% endtrans %}</th>
+        <th>{% trans %}Address{% endtrans %}</th>
+        <th>{% trans %}Shop settings{% endtrans %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for shop in shops.items %}
+      <tr>
+        <td>{{ shop.name }}</td>
+        <td>{{ shop.address }}</td>
+        <td>
+          <a href="{{ url_for('shop_module.edit', shop_id=shop.id) }}" class="btn btn-default btn-block">{% trans %}Set-up the shop{% endtrans %}</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {{ render_pagination(shops, 'shop_module.list') }}
+</div>
+{% endblock %}

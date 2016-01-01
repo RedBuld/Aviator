@@ -1,0 +1,36 @@
+{% from "_formhelpers.html" import render_field %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aviator | {% trans %}Upload{% endtrans %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="upload-body">
+    <form id="load-form" action="{{ url_for('upload_module.image') }}" method="POST" enctype="multipart/form-data">
+        {{ render_field(form.img, class="hidden") }}
+        <button type="button" id="load-button" class="btn btn-primary">{% trans %}Select File{% endtrans %}</button>
+        <button type="button" id="start-button" class="btn btn-success">{% trans %}Upload{% endtrans %}</button>
+        <div id="loading" class="progress hidden">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <span>{% trans %}Loading{% endtrans %}...</span>
+            </div>
+        </div>
+    </form>
+    {% if not filename == none %}
+    <div class="hidden">{{ filename|thumbnail('400x400') }}</div>
+    {% endif %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script type="text/javascript">
+        $().ready(function() {
+            $('#load-button').click(function() {
+                $('#img').click()
+            });
+            $('#start-button').click(function() {
+                $('#loading').removeClass('hidden');
+                $('#load-form').submit()
+            })
+        })
+    </script>
+</body>
+</html>

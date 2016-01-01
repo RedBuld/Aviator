@@ -1,0 +1,22 @@
+<tr>
+  <td class="qc-name">
+    <a href="{{ config['SITE_URL'] }}product/{{ product['pid'] }}">
+    <img src="{{ product['img'] }}">
+    {{ product['name'] }}
+    </a>
+    <div class="qc-name-price "><span class="title">{% trans %}Price:{% endtrans %}</span> <span class="text">{{ product['price'] }}</span></div>
+  </td>
+  <td class="qc-quantity   ">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-defaut decrease" onclick="cobtadd.uncart('{{ product['pid'] }}');" ><i class="fa fa-minus"></i></button>
+      </span>            
+      <input type="text" value="{{ product['qty'] }}" class="qc-product-qantity form-control text-center" name="cart[{{ product['pid'] }}]" data-refresh="{{ product['qty'] }}" readonly="readonly">
+      <span class="input-group-btn">
+        <button class="btn btn-defaut increase" onclick="cobtadd.cart('{{ product['pid'] }}');" ><i class="fa fa-plus"></i></button>
+      </span>
+    </div>
+  </td>
+  <td class="qc-price  ">{{ product['price'] }} {% trans %}rub.{% endtrans %}</td>
+  <td class="qc-total  ">{{ product['qty']*product['price'] }} {% trans %}rub.{% endtrans %}</td>
+</tr>

@@ -1,0 +1,20 @@
+{% from "_formhelpers.html" import render_pagination %}
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h4 class="modal-title" id="myModalLabel">{% trans %}Select product{% endtrans %}</h4>
+</div>
+<div class="modal-body">
+  <input value="{{ query }}" type="text" id="search-button2" class="form-control" placeholder="{% trans %}Search...{% endtrans %}">
+  <br>
+  <button type="button" onclick="window.openDialogWindow(this)" data-url="{{ url_for('user_module.categories', user_id=user.id) }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> {% trans %}Return to categories list{% endtrans %}</button> <button class="btn btn-default btn" onclick="window.openDialogWindowSearch('{% if category is none %}{{ url_for('user_module.products', user_id=user.id, category_id=0) }}{% else %}{{ url_for('user_module.products', user_id=user.id, category_id=category.id) }}{% endif %}', '#search-button2')">{% trans %}Search{% endtrans %}</button>
+  <hr>
+  <div class="list-group">
+    {% for product in products.items %}
+    <a href="{% if request.args.get('a') == 'remove' %}{{ url_for('user_module.remove_product', user_id=user.id, product_id=product.id) }}{% else %}{{ url_for('user_module.add_product', user_id=user.id, product_id=product.id) }}{% endif %}" class="list-group-item">{{ product.name }} {{ product.price }}{% trans %}rub.{% endtrans %}</a>
+    {% endfor %}
+    {{ render_pagination(products, 'user_module.products', user_id=user.id, category_id=category.id) }}
+  </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}Close{% endtrans %}</button>
+</div>

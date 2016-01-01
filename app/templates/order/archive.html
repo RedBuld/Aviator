@@ -1,0 +1,82 @@
+{% from "_formhelpers.html" import render_field, render_pagination, get_rank %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}Order archive{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('settings_module.index') }}">{% trans %}Settings{% endtrans %}</a></li>
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li class="active"><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}Order archive{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can download all orders.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+    <li class="active">{% trans %}Order archive{% endtrans %}</li>
+  </ol>
+  <div class="btn-group">
+    <div class="btn-group">
+      <button type="button" onclick="window.openDialogWindow(this)" data-url="{{ url_for('order_module.download', t='day') }}" class="btn btn-default">{% trans %}Day{% endtrans %}</button>
+    </div>
+    <div class="btn-group">
+      <button type="button" onclick="window.openDialogWindow(this)" data-url="{{ url_for('order_module.download', t='week') }}" class="btn btn-default">{% trans %}Week{% endtrans %}</button>
+    </div>
+    <div class="btn-group">
+      <button type="button" onclick="window.openDialogWindow(this)" data-url="{{ url_for('order_module.download', t='month') }}" class="btn btn-default">{% trans %}Month{% endtrans %}</button>
+    </div>
+    <div class="btn-group">
+      <button type="button" onclick="window.openDialogWindow(this)" data-url="{{ url_for('order_module.download', t='year') }}" class="btn btn-default">{% trans %}Year{% endtrans %}</button>
+    </div>
+    <div class="btn-group">
+      <button type="button" onclick="window.openDialogWindow(this)" data-url="{{ url_for('order_module.download', t='all') }}" class="btn btn-default">{% trans %}All time{% endtrans %}</button>
+    </div>
+  </div>
+  <hr>
+  <div id="list-table">
+    {{ render_pagination(orders, 'order_module.active') }}
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>{% trans %}Id{% endtrans %}</th>
+          <th>{% trans %}Key{% endtrans %}</th>
+          <th>{% trans %}Phone{% endtrans %}</th>
+          <th>{% trans %}Name{% endtrans %}</th>
+          <th>{% trans %}Address{% endtrans %}</th>
+          <th>{% trans %}Date{% endtrans %}</th>
+          <th>{% trans %}Products{% endtrans %}</th>
+          <th>{% trans %}Driver{% endtrans %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders.items %}
+        <tr>
+          <td>{{ order.id }}</td>
+          <td>{{ order.key }}</td>
+          <td><a href="tel:{{ order.phone }}">{{ order.get_phone() }}</a></td>
+          <td>{{ order.name }}</td>
+          <td>{{ order.address }}</td>
+          <td>{{ order.registered_on }}</td>
+          <td><button onclick="window.openDialogWindow(this)" type="button" data-url="{{ url_for('order_module.products', order_id=order.id) }}" class="btn btn-primary btn-block">{% trans %}Show{% endtrans %}</button></td>
+          <td><a href="{{ url_for('user_module.edit', user_id=order._driver.id) }}">{{ order._driver.username }}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {{ render_pagination(orders, 'order_module.active') }}
+</div>
+{% endblock %}

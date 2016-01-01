@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]>
+<html dir="ltr" lang="en" class="ie8">
+<![endif]-->
+<!--[if IE 9 ]>
+<html dir="ltr" lang="en" class="ie9">
+<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->    
+<html dir="ltr">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<base href="{{ config['SITE_URL'] }}">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% trans %}Shopping Cart{% endtrans %} | {{ config['SITE_NAME'] }}</title>
+{% include 'market/functional/scripts.html' %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    var loader = $("body").DEPreLoad({
+      OnStep: function(percent) {
+        $("#depreload .cs_perc").text(percent + "%");
+      },
+      OnComplete: function() {
+        setTimeout(function(){
+          $("#depreload").css('display','none');
+        }, 200);
+      }
+    });
+    $('#cart > ul').load('/cart_overview');
+    $('#content.carttable').load('/cartview');
+  });
+  var cobtadd = {
+    'cart': function(product_id) {
+      $.ajax({
+        url: '/add_product/'+product_id+'/1',
+        type: 'get',
+        dataType: 'json',
+        success: function(json) {
+          if (json['result']=='success') {
+            addProductNotice(json['last']['name'], '<img src="'+json['last']['img']+'" alt="'+json['last']['name']+'" width="110px">', '<a href="/pid'+product_id+'">'+json['last']['name']+'</a> удалён из <a href="/cart">корзины</a>', 'success');
+            $('#cart-total').html(json['cartheader']);
+            $('#content.carttable').load('/cartview');
+          }
+        }
+      });
+    },
+    'uncart': function(product_id) {
+      $.ajax({
+        url: '/remove_product/'+product_id,
+        type: 'get',
+        dataType: 'json',
+        success: function(json) {
+          if (json['result']=='success') {
+            addProductNotice(json['last']['name'], '<img src="'+json['last']['img']+'" alt="'+json['last']['name']+'" width="110px">', '<a href="/pid'+product_id+'">'+json['last']['name']+'</a> удалён из <a href="/cart">корзины</a>', 'success');
+            $('#cart-total').html(json['cartheader']);
+            $('#content.carttable').load('/cartview');
+          }
+        }
+      });
+    },
+    'remove': function(product_id) {
+      $.ajax({
+        url: '/delete_product/'+product_id,
+        type: 'get',
+        dataType: 'json',
+        success: function(json) {
+          if (json['result']=='success') {
+            addProductNotice(json['last']['name'], '<img src="'+json['last']['img']+'" alt="'+json['last']['name']+'" width="110px">', '<a href="/pid'+product_id+'">'+json['last']['name']+'</a> удалён из <a href="/cart">корзины</a>', 'success');
+            $('#cart-total').html(json['cartheader']);
+            $('#content.carttable').load('/cartview');
+          }
+        }
+      });
+    } 
+  };
+</script>
+</head>
+<body class="checkout-cart rb-wide-boxed">
+<!-- Loader -->
+{% include 'market/functional/loader.html' %}
+<div id="rb_container" class="rb-wide-boxed " >
+{% include 'market/design/header.html' %}
+<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="{{ config['SITE_URL'] }}"><i class="fa fa-home"></i></a></li>
+    <li><a href="{{ config['SITE_URL'] }}cart">{% trans %}Shopping Cart{% endtrans %}</a></li>
+  </ul>
+  <div class="row">
+    <div id="content" class="col-sm-12 carttable"></div>
+  </div>
+</div>
+{% include 'market/design/footer.html' %}
+</body>
+</html>

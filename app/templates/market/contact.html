@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]>
+<html dir="ltr" lang="en" class="ie8">
+<![endif]-->
+<!--[if IE 9 ]>
+<html dir="ltr" lang="en" class="ie9">
+<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->    
+<html dir="ltr">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<base href="{{ config['SITE_URL'] }}">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% trans %}Contact Us{% endtrans %} | {{ config['SITE_NAME'] }}</title>
+{% include 'market/functional/scripts.html' %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    var loader = $("body").DEPreLoad({
+      OnStep: function(percent) {
+        $("#depreload .cs_perc").text(percent + "%");
+      },
+      OnComplete: function() {
+        setTimeout(function(){
+          $("#depreload").css('display','none');
+        }, 200);
+      }
+    });
+    $('#cart > ul').load('/cart_overview');
+  });
+</script>
+</head>
+<body class="contact rb-wide-boxed">
+<!-- Loader -->
+{% include 'market/functional/loader.html' %}
+<div id="rb_container" class="rb-wide-boxed " >
+{% include 'market/design/header.html' %}
+<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="{{ config['SITE_URL'] }}"><i class="fa fa-home"></i></a></li>
+    <li><a href="{{ config['SITE_URL'] }}contact">{% trans %}Contact Us{% endtrans %}</a></li>
+  </ul>
+  <div class="row">
+    <div id="content" class="col-sm-12">
+      <h1>{% trans %}Contact us{% endtrans %}</h1>
+      <form id="enquiryForm" class="form-horizontal">
+        <legend>{% trans %}Contact Form{% endtrans %}</legend>
+        <div class="form-group required">
+          <label class="col-sm-2 control-label" for="input-name">{% trans %}Name{% endtrans %}</label>
+          <div class="col-sm-10">
+            <input type="text" name="name" value="" id="input-name" class="form-control">
+          </div>
+        </div>
+        <div class="form-group required">
+          <label class="col-sm-2 control-label" for="input-email">E-Mail</label>
+          <div class="col-sm-10">
+            <input type="text" name="email" value="" id="input-email" class="form-control">
+          </div>
+        </div>
+        <div class="form-group required">
+          <label class="col-sm-2 control-label" for="input-enquiry">{% trans %}Message{% endtrans %}</label>
+          <div class="col-sm-10">
+            <textarea name="enquiry" rows="10" id="input-enquiry" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="buttons">
+            <div class="pull-left">
+              <button type="button" class="btn btn-primary" id="sendEnquiryBut" onclick="sendEnquiry();">{% trans %}Submit{% endtrans %}</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <script type="text/javascript">
+        sendEnquiry = function() {
+          var getStr, name, ok, tel, tel1;
+          name = $('#input-name').val();
+          email = $('#input-email').val();
+          enquiry = $('#input-enquiry').val();
+          ok = true;
+          $('#enquiryForm .er-er').remove();
+          $('#sendEnquiryBut').blur().hide();
+          if (name === '') {
+            $('#input-name').addEr('{% trans %}This field cannot be empty{% endtrans %}');
+            ok = false;
+          }
+          if (email === '') {
+            $('#input-email').addEr('{% trans %}This field cannot be empty{% endtrans %}.');
+            ok = false;
+          } else {
+            if (!(/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/i.test(email))) {
+              $('#input-email').addEr('{% trans %}E-Mail Address does not appear to be valid!{% endtrans %}.');
+              ok = false;
+            }
+          }
+          if (enquiry === '') {
+            $('#input-enquiry').addEr('{% trans %}This field cannot be empty{% endtrans %}.');
+            ok = false;
+          }
+          if (ok) {
+            $.ajax({
+              url:'/contact',
+              type: 'post',
+              data:  $('#enquiryForm input, #enquiryForm textarea'),
+              dataType: 'json',
+              success: function(data) {
+                if(data['result'] == "success"){
+                  a = new Btn('a', 'Ок', 'but-n', true);
+                  c = new Modal('{% trans %}Message sent{% endtrans %}', '{% trans %}Message sent successfully{% endtrans %}.', [a], true, 200);
+                  c.create();
+                  c.show();
+                  $("#enquiryForm")[0].reset();
+                  $('#sendEnquiryBut').show();
+                }
+              }
+            });
+          }else{
+            $('#sendEnquiryBut').show();
+          }
+        };
+      </script>
+    </div>
+  </div>
+</div>
+{% include 'market/design/footer.html' %}
+</body>
+</html>

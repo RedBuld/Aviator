@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h4 class="modal-title" id="myModalLabel">{% trans %}Change Driver{% endtrans %}</h4>
+</div>
+<div class="modal-body">
+  <p>{% trans %}Are you sure, that you want to change driver for order with id{% endtrans %} "{{ order.id }}"?</p>
+  <p class="help-cont">{% trans %}All products which were removed from the driver when he take order will be returned{% endtrans %}.</p>
+</div>
+<div class="modal-footer">
+  <form action="{{ url_for('order_module.change_driver', order_id=order.id, next=next) }}" method="POST">
+    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}Cancel{% endtrans %}</button>
+    <input type="submit" class="btn btn-primary" value="{% trans %}Change Driver{% endtrans %}">
+  </form>
+</div>

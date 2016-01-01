@@ -1,0 +1,87 @@
+{% from "_formhelpers.html" import render_field, render_ranks, render_categories_select, render_image_input %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}New product{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li class="active"><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}New product{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can create a new product.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+    <li class="active">{% trans %}New product{% endtrans %}</li>
+  </ol>
+  <form action="" method="POST" class="form-edit-big">
+    <div class="hidden">{{ form.csrf_token }}</div>
+    <h3>{% trans %}New product{% endtrans %}</h3>
+    <hr>
+    <div class="form-group{% if form.name.errors %} has-error{% endif %}">
+      {{ form.name.label }}
+      {{ render_field(form.name, class="form-control", placeholder=form.name.label.text, required="required") }}
+      {% for error in form.name.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.memo.errors %} has-error{% endif %}">
+      {{ form.memo.label }}
+      {{ render_field(form.memo, class="form-control", placeholder=form.memo.label.text) }}
+      {% for error in form.memo.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.price.errors %} has-error{% endif %}">
+      {{ form.price.label }}
+      <div class="input-group">
+        {{ render_field(form.price, class="form-control", placeholder=form.price.label.text, required="required") }}
+        <div class="input-group-addon">{% trans %}rub.{% endtrans %}</div>
+      </div>
+      {% for error in form.price.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.category.errors %} has-error{% endif %}">
+      {{ form.category.label }}
+      {{ render_field(form.category, class="form-control", placeholder=form.category.label.text, required="required") }}
+      {% for error in form.category.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.img.errors %} has-error{% endif %}">
+      {{ form.img.label }}
+      {{ render_field(form.img, class="form-control hidden", placeholder=form.img.label.text, required="required") }}
+      {% for error in form.img.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+      <br>
+      {% if not form.img.data == '' and not form.img.data is none %}
+      <img id="img-cont" width="400" src="{{ form.img.data|thumbnail('400x400') }}" alt="{{ form.img.label.text }}">
+      {% else %}
+      <img id="img-cont" width="400" src="" class="hidden" alt="{{ form.img.label.text }}">
+      {% endif %}
+      <br><br>
+      {{ render_image_input('100%') }}
+    </div>
+    <hr>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary btn-block" value="{% trans %}Create{% endtrans %}">
+    </div>
+  </form>
+</div>
+{% endblock %}

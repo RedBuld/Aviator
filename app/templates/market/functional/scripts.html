@@ -1,0 +1,26 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+window.jQuery || document.write('<script type="text/javascript" src="{{ url_for('static', filename='market/javascript/jquery/jquery-2.1.1.min.js') }}"><\/script>');
+</script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='market/stylesheet/depreload.css') }}" />
+<script type="text/javascript" src="{{ url_for('static', filename='market/javascript/jquery.DEPreLoad.js') }}"></script>
+<link rel="stylesheet" type="text/css" media="screen"  href="{{ url_for('static', filename='market/javascript/bootstrap/css/bootstrap.min.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='market/javascript/font-awesome/css/font-awesome.min.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='market/stylesheet/style.css') }}" />
+<script type="text/javascript" src="{{ url_for('static', filename='market/javascript/script.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='market/javascript/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='market/javascript/jquery.appear.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='market/javascript/jquery.jgrowl.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='market/javascript/cloud-zoom/cloud-zoom.1.0.3.js') }}"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpkWXdKWt3sakzjgXnFZSPQn07eL_QlPk"></script>
+<script type="text/javascript"><!--
+  $(window).scroll(function() {
+    var height_header = $('#rb_header').height();       
+    if($(window).scrollTop() > height_header) {
+      $('.rb-comb').addClass('rb-menu-fixed animated');
+    } else {
+      $('.rb-comb').removeClass('rb-menu-fixed animated');
+    }
+  });
+  //-->
+</script>

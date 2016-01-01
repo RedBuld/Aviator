@@ -1,0 +1,158 @@
+
+/*Loading*/
+#depreload {
+    background-size: cover;
+    background-color: #ccc;
+    position: fixed;
+    text-align: center;
+    z-index: 99;
+	height:100%;
+	top:0;
+	left:0;
+}
+
+.cs_bigloader{
+  height: 101%;
+  position: absolute;
+  width: 100%;
+  left:0;
+  top:0;
+}
+.cs_bigloader .cs_loader_line{
+  position: absolute;
+  left: 50%;
+  width: 294px;
+  height: 294px;
+  top: 50%;
+  overflow: visible;
+  -webkit-animation: loader_spin 4s infinite linear;
+  animation: loader_spin 4s infinite linear;
+  z-index: 1px;
+  margin-top:-147px;
+  margin-left:-147px;
+}
+
+.cs_bigloader .loader_tophalf {
+    position: absolute;
+    width: 294px;
+    height: 147px;
+    -webkit-border-top-left-radius: 193px;
+    -webkit-border-top-right-radius: 193px;
+    -moz-border-radius-topleft: 193px;
+    -moz-border-radius-topright: 193px;
+    border-top-left-radius: 193px;
+    border-top-right-radius: 193px;
+    background: -moz-linear-gradient(left, rgba(52, 192, 191, .5) 0, #1abc9c 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(52, 192, 191, .5)) color-stop(100%, #1abc9c));
+    background: -webkit-linear-gradient(left, #618d8e 1%, #72afb0 100%);
+    background: -o-linear-gradient(left, #618d8e 1%, #72afb0 100%);
+    background: -ms-linear-gradient(left, #618d8e 1%, #72afb0 100%);
+    background: linear-gradient(to right, #618d8e 1%, #72afb0 100%)
+}
+.cs_bigloader .loader_inner {
+	background-color: #333;
+    position: relative;
+    z-index: 1;
+    top: 15px;
+    left: 15px;
+	right: 15px;
+    width: 264px;
+    height: 263px;
+    border-radius: 100%
+}
+
+.cs_bigloader .loader_bottomhalf {
+    position: absolute;
+    top: 147px;
+    width: 294px;
+    height: 147px;
+    -webkit-border-bottom-right-radius: 193px;
+    -webkit-border-bottom-left-radius: 193px;
+    -moz-border-radius-bottomright: 193px;
+    -moz-border-radius-bottomleft: 193px;
+    border-bottom-right-radius: 193px;
+    border-bottom-left-radius: 193px;
+    background: -moz-linear-gradient(left, rgba(52, 192, 191, .5) 1%, rgba(77, 196, 226, 0) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(1%, rgba(52, 192, 191, .5)), color-stop(100%, rgba(77, 196, 226, 0)));
+    background: -webkit-linear-gradient(left, #618d8e 1%, #333 100%);
+    background: -o-linear-gradient(left, #618d8e 1%, #333 100%);
+    background: -ms-linear-gradient(left, #618d8e 1%, #333 100%);
+    background: linear-gradient(to right, #618d8e 1%, #333 100%)
+}
+.cs_bigloader .loader_button {
+    width: 15px;
+    height: 15px;
+    background: #72afb0;
+    /*border: 5px solid #fff;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .2);*/
+    position: absolute;
+    top: 52%;
+	right: 0;
+    margin-top: -10px;
+    z-index: 1;
+    border-radius: 100px
+}
+.cs_bigloader .cs_perc{
+  position: absolute;
+  text-align: center;
+  left: 55%;
+  top: 110px;
+  margin-top: 0;
+  line-height: 18px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #a1b1bc;
+  font-family: Lato;
+  transform: translate(-50%,50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+.cs_loader_logo {
+  /*width: 200px;
+  height: 200px;*/
+  z-index: 2;
+  /*box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1);*/
+  border-radius: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+.cs_loader_logo img{
+	  margin: 0 auto;
+  max-width: 150px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+}
+.cs_loader_logo:before{
+  content: '';
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@-webkit-keyframes loader_spin {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+@keyframes loader_spin {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}

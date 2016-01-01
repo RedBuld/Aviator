@@ -1,0 +1,112 @@
+{% from "_formhelpers.html" import render_field, render_pagination, get_rank %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}Charts{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('settings_module.index') }}">{% trans %}Settings{% endtrans %}</a></li>
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li class="active"><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}Charts{% endtrans %}</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+    <li class="active">{% trans %}Charts{% endtrans %}</li>
+  </ol>
+  <hr>
+  <div class="panel panel-default">
+    <div class="panel-heading">{% trans %}Orders{% endtrans %}</div>
+    <div class="panel-body">
+      <div class="col-xs-9">
+        <div id="sales_chart"></div>
+      </div>
+      <div class="col-xs-3">
+        <div class="btn-group sales">
+          <button class="btn btn-primary active" onclick="">{% trans %}Day{% endtrans %}</button>
+          <button class="btn btn-primary" onclick="">{% trans %}Week{% endtrans %}</button>
+          <button class="btn btn-primary">{% trans %}Month{% endtrans %}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }"></script>
+<script type="text/javascript">
+  google.setOnLoadCallback(drawChart);
+  /*$(document).ready(function () {
+    day();
+  });*/
+  function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales'],
+          ['0',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['1',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['2',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['3',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['4',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['5',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['6',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['7',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['8',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['9',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['10',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['11',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['12',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['13',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['14',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['15',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['16',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['17',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['18',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['19',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['20',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['21',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['22',  Math.floor( Math.random() * (50 - 10) + 10 )],
+          ['23',  Math.floor( Math.random() * (50 - 10) + 10 )]
+        ]);
+
+        var options = {
+          curveType: 'function',
+          legend: { position: 'none' },
+          height: 300
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('sales_chart'));
+
+        chart.draw(data, options);
+      }
+/*  function day(){
+    $.ajax({
+      url: '/admin/statistic/day',
+      type: 'get',
+      dataType: 'json',
+      success: function(json) {
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+      }
+    });
+  }*/
+</script>
+{% endblock %}

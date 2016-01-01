@@ -1,0 +1,28 @@
+<tr>
+  <td class="image">
+    <a href="/product/{{ i['pid'] }}">
+      <img src="{{ i['img'] }}" alt="{{ i['name'] }}" title="{{ i['name'] }}" class="img-thumbnail">
+    </a>
+  </td>
+  <td class="name">
+    <a href="/product/{{ i['pid'] }}">{{ get_name(i['pid']) }}</a>
+  </td>
+  <td class="quantity">
+    <div class="input-group btn-block" style="max-width: 200px;">
+      <input type="text" name="quantity" value="{{ i['qty'] }}" size="1" class="form-control" readonly="readonly">
+      <span class="input-group-btn">
+        <button type="button" onclick="cobtadd.cart('{{ i['pid'] }}');" title="{% trans %}Increase{% endtrans %}" class="btn-plus">
+          <i class="fa fa-plus"></i>
+        </button>
+        <button type="button" onclick="cobtadd.uncart('{{ i['pid'] }}');" title="{% trans %}Decrease{% endtrans %}" class="btn-minus">
+          <i class="fa fa-minus"></i>
+        </button>
+        <button type="button" onclick="cobtadd.remove('{{ i['pid'] }}');" title="{% trans %}Remove{% endtrans %}" class="btn-remove">
+          <i class="fa fa-times"></i>
+        </button>
+      </span>
+    </div>
+  </td>
+  <td class="product-price">{{ i['price'] }} {% trans %}rub.{% endtrans %}</td>
+  <td class="total">{{ i['qty']*i['price'] }} {% trans %}rub.{% endtrans %}</td>
+</tr>

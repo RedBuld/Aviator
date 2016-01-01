@@ -1,0 +1,27 @@
+<div class="rb-comb fadeInDown">
+  <div class="container">
+    <div class="row">
+      <div id="rb_mainmenu" class="col-sm-9 pull-left">
+        <a class="open-panel"><i class="fa fa-bars"></i></a>
+        <nav class="mega-menu">
+          <a class="close-panel"><i class="fa fa-times-circle"></i></a>
+          <ul class="nav nav-pills">
+            {% for category in categories_all %}
+              <li>
+                <a title="{{ category.name }}" href="{{ config['SITE_URL'] }}{{ category.name }}">{{ category.name }}</a>
+              </li>
+            {% endfor %}
+            <li>{{ request.script_root }}</li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-sm-3 pull-right rb-search">
+        <div id="search" class="input-group pull-right">
+          <input type="text" name="search" value="{% if 'search' in request.path %}{{ request.path.split('search/',1)[1] }}{% endif %}" placeholder="{% trans %}Search{% endtrans %}" class="form-control input-lg dropdown-toggle" data-toggle="dropdown">
+          <ul id="search_results" class="dropdown-menu" style="display:none;"></ul>
+          <button type="button" title="search" class="btn btn-search"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

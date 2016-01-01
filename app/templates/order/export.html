@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}Order archive{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('settings_module.index') }}">{% trans %}Settings{% endtrans %}</a></li>
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li class="active"><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont hidden-print">
+    <h1>{% trans %}Download orders{% endtrans %}</h1>
+    <p class="lead">{% trans %}Just press Ctrl+P or another print button.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb hidden-print">
+    <li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+    <li><a href="{{ url_for('order_module.archive') }}">{% trans %}Orders archive{% endtrans %}</a></li>
+    <li class="active">{% trans %}Download archive{% endtrans %}</li>
+  </ol>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>{% trans %}Id{% endtrans %}</th>
+        <th>{% trans %}Key{% endtrans %}</th>
+        <th>{% trans %}Phone{% endtrans %}</th>
+        <th>{% trans %}Name{% endtrans %}</th>
+        <th>{% trans %}Address{% endtrans %}</th>
+        <th>{% trans %}Date{% endtrans %}</th>
+        <th>{% trans %}Price{% endtrans %}</th>
+        <th>{% trans %}Products{% endtrans %}</th>
+        <th>{% trans %}Driver Id{% endtrans %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.key }}</td>
+        <td>{{ order.get_phone() }}</td>
+        <td>{{ order.name }}</td>
+        <td>{{ order.address }}</td>
+        <td>{{ order.registered_on }}</td>
+        {% set p = order.get_products() %}
+        <td>{{ p['price'] }}</td>
+        <td>{% for i in p['products'] %}{{ i.name }} ({{ i.price }}{% trans %}rub.{% endtrans %}, {{ i.count }}x); <br>{% endfor %}</td>
+        <td>{{ order.driver_id }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

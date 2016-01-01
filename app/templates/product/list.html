@@ -1,0 +1,77 @@
+{% from "_formhelpers.html" import render_field, render_pagination, get_rank %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}
+{% if category is none %}
+{% trans %}Products{% endtrans %}
+{% else %}
+{% trans %}Products in category{% endtrans %} "{{ category.name }}"
+{% endif %}
+{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('settings_module.index') }}">{% trans %}Settings{% endtrans %}</a></li>
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li class="active"><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    {% if category is none %}
+    <h1>{% trans %}Products{% endtrans %}</h1>
+    {% else %}
+    <h1>{% trans %}Products in category{% endtrans %} "{{ category.name }}"</h1>
+    {% endif %}
+    <p class="lead">{% trans %}Here you can add new product and configure created products.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li class="active">{% trans %}Products{% endtrans %}</li>
+  </ol>
+  <a href="{{ url_for('product_module.new') }}" class="btn btn-primary">{% trans %}Create a new product{% endtrans %}</a>
+  <button type="button" class="btn btn-default search-button" onclick="window.searchNow('{{ request.base_url }}')">{% trans %}Search{% endtrans %}</button>
+  <input type="text" class="form-control search-input" value="{{ query }}" placeholder="{% trans %}Search...{% endtrans %}">
+  <hr>
+  {% if category is none %}
+  {{ render_pagination(products, 'product_module.list') }}
+  {% else %}
+  {{ render_pagination(products, 'product_module.list', category=category.id) }}
+  {% endif %}
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>{% trans %}Product Name{% endtrans %}</th>
+        <th>{% trans %}Price{% endtrans %}</th>
+        <th>{% trans %}Product settings{% endtrans %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products.items %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}{% trans %}rub.{% endtrans %}</td>
+        <td>
+          <a href="{{ url_for('product_module.edit', product_id=product.id) }}" class="btn btn-default col-xs-6">{% trans %}Set-up the product{% endtrans %}</a>
+          <a data-toggle="modal" href="{{ url_for('product_module.delete', product_id=product.id) }}" data-target="#modal" class="btn btn-danger col-xs-6">{% trans %}Delete Product{% endtrans %}</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if category is none %}
+  {{ render_pagination(products, 'product_module.list') }}
+  {% else %}
+  {{ render_pagination(products, 'product_module.list', category=category.id) }}
+  {% endif %}
+</div>
+{% endblock %}

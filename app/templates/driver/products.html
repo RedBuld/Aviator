@@ -1,0 +1,45 @@
+{% from "_formhelpers.html" import render_field, render_pagination, get_rank %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}Products{% endtrans %}{% endblock %}
+{% block custom_top_bar %} <span class="small">{% trans %}Driver mode{% endtrans %}</span>{% endblock %}
+{% block menu %}
+<li><a href="{{ url_for('driver_module.orders') }}">{% trans %}Orders{% endtrans %}</a></li>
+<li class="active"><a href="{{ url_for('driver_module.products') }}">{% trans %}Products{% endtrans %}</a></li>
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}Products{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can see your products.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li class="active">{% trans %}Products{% endtrans %}</li>
+  </ol>
+  <table class="table table-bordered table-hover">
+    <colgroup>
+      <col>
+      <col width="100px">
+      <col width="150px" class="hidden-xs">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>{% trans %}Product Name{% endtrans %}</th>
+        <th>{% trans %}Count{% endtrans %}</th>
+        <th class="hidden-xs">{% trans %}Price for one{% endtrans %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in current_user.get_products() %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.count }}</td>
+        <td class="hidden-xs">{{ product.price }}{% trans %}rub.{% endtrans %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+{% endblock %}

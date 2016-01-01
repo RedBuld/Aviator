@@ -1,0 +1,63 @@
+{% from "_formhelpers.html" import render_field, render_pagination, get_rank %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}Contacts{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('settings_module.index') }}">{% trans %}Settings{% endtrans %}</a></li>
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li class="active"><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}Contacts{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can response on enquiry.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li class="active">{% trans %}Contacts{% endtrans %}</li>
+  </ol>
+  <button type="button" class="btn btn-default search-button" onclick="window.searchNow('{{ request.base_url }}')">{% trans %}Search{% endtrans %}</button>
+  <input type="text" class="form-control search-input" value="{{ query }}" placeholder="{% trans %}Search...{% endtrans %}">
+  <hr>
+  {{ render_pagination(contacts, 'contacts_module.list') }}
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>{% trans %}Contacts Name{% endtrans %}</th>
+        <th>{% trans %}Email{% endtrans %}</th>
+        <th>{% trans %}Enquiry{% endtrans %}</th>
+        <th>{% trans %}Reply{% endtrans %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for contact in contacts.items %}
+      <tr>
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.email }}</td>
+        <td>{{ contact.enquiry }}</td>
+        <td>
+          {% if contact.reply == '' %}
+            <a href="{{ url_for('contacts_module.reply', enquiry_id=contact.id) }}" class="btn btn-default btn-block">{% trans %}Reply{% endtrans %}</a>
+          {% else %}
+            {{ contact.reply }}
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {{ render_pagination(contacts, 'contacts_module.list') }}
+</div>
+{% endblock %}

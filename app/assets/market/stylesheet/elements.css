@@ -1,0 +1,118 @@
+body { 
+	background-color:#ffffff
+}
+table.minicart_total tr td, .product-filter, .htabs ul.nav-tabs li a, table.table thead td, .wishlist-info thead td, .cart-info thead td, #collapse-checkout-confirm td thead td, .rb-account ul li a.list-group-item, .rb-account .box-heading h3, .rb-account .box-content { 
+	background-color:#e2e2e2
+}
+.checkout .panel-default > .panel-heading, .article_content .image a:after, .boss-alphabet a:hover,.rb-block-theme-features { 
+	background-color:#72afb0
+}
+.boss-alphabet a:hover { 
+	border-color:#72afb0
+}
+body, a, #rb_header #top #language .btn-link.btn-block, #rb_header #top #language .dropdown-menu li a, .mega-menu > ul.nav > li .dropdown .menu-row .staticblock p, .mega-menu > ul.nav > li .dropdown .menu-row ul.column.category li a, .boss-blog-featured .block-heading a:hover, a.list-group-item, .price_info span.price-tax, .price_info p, .radio label, .checkbox label, .result-pagination ul.pagination li > span, .result-pagination ul.pagination li > a,
+.boss-panigation ul.pagination li > span, .boss-panigation ul.pagination li > a, .form-control, .panel-title>a { 
+	color:#505050
+}
+table.minicart_total tr td, .rb-featured-pro h1, .htabs ul.nav-tabs li.active > a, .htabs ul.nav-tabs li:hover a, .cart-total table tr td, p.text_next_choice, .panel-body p, table.table thead td, .wishlist-info thead td, .cart-info thead td, #collapse-checkout-confirm td thead td, p.tags, h2, h3, label, table.table-default tfoot tr td, a.article-title, .article-name a, .post-by span, .boss-recent-comments .comment-by span, .comment-count span, span.article-title-boss, .boss_article-action .tags span, table.table-compare tr td:first-child, .cate-name a { 
+	color:#1e1e1e
+}
+.time-stamp, div.post-by, span.post-by, .comment-by, .comment-count, .htabs ul.nav-tabs li a { 
+	color:#969696
+}
+.rb-menu-logo ul li a:hover, a:hover, #rb_header #top .btn-link.btn-block:hover, #rb_header #top #language .dropdown-menu li a:hover, .mega-menu > ul.nav > li .dropdown .menu-row ul.column.category > li:hover > a, .mega-menu > ul.nav > li .dropdown .menu-row ul li:hover > .sub_menu a:hover, .boss-blog-featured .block-heading a, .boss-blog-featured .article-name a:hover, h1.title, .box.rb-category .box-content .box-category li.active > a, .box.rb-category .box-content .box-category li a.list-group-item.active, a.list-group-item:hover, .box.boss_blog-cat .box-content .box-category li.active > a, .panel-title>a:hover, .mega-menu > ul.nav > li .dropdown .menu-row a.parent, .mega-menu > ul.nav > li .dropdown .menu-row .staticblock strong, .mega-menu > ul.nav > li .dropdown .menu-column h3 { 
+	color:#72afb0
+}
+.tp-caption.medium_text span.btn:hover { 
+	background-color: transparent
+}
+.tp-caption.medium_text span.btn:hover { 
+	color:#fff
+}
+.tp-caption.medium_text span.btn:hover { 
+	border-color:#fff
+}
+.btn-quickshop:hover button, .rb-block-home-bg a.btn.sample, .read_more a.btn.sample, .btn.btn-default, button.btn-default, .btn-wishlist, .btn-compare, button.sft_quickshop_icon, button.increase, button.decrease, button#button-review, .btn-remove, .btn-plus, .btn-minus, button.btn-update, .btn.btn-primary, .btn.btn-checkout:hover, a.nav_thumb, .rb-product-grid .button-group button.btn-compare:hover, .product-grid .button-group button.btn-compare:hover, .rb-product-grid .button-group button.btn-wishlist:hover, .product-grid .button-group button.btn-wishlist:hover, .boss-blog-featured .view_more a:hover, .rb-block-purchase a { 
+	background-color:#3c3c3c
+}
+.btn-quickshop:hover button, .rb-block-home-bg a.btn.sample, .read_more a.btn.sample, .btn.btn-default, button.btn-default, .btn-wishlist, .btn-compare, button.sft_quickshop_icon, button.increase, button.decrease, button#button-review, .btn-remove, .btn-plus, .btn-minus, button.btn-update, .btn.btn-primary, .btn.btn-checkout:hover, a.nav_thumb, .rb-product-grid .button-group button.btn-compare:hover, .product-grid .button-group button.btn-compare:hover, .rb-product-grid .button-group button.btn-wishlist:hover, .product-grid .button-group button.btn-wishlist:hover, .rb-block-purchase a { 
+	color:#fff
+}
+.rb-block-home-bg a.btn.sample, .read_more a.btn.sample, .btn.btn-default, button.btn-default, .btn-wishlist, .btn-compare, button.sft_quickshop_icon, button.increase, button.decrease, button#button-review, .btn-remove, .btn-plus, .btn-minus, button.btn-update, .btn.btn-primary, .btn.btn-checkout:hover,.boss-blog-featured .view_more a:hover,.rb-block-purchase a { 
+	border-color:#3c3c3c
+}
+.rb-block-home-bg a.btn.sample:hover, .read_more a.btn.sample:hover, .btn-wishlist:hover, .btn-compare:hover, button.sft_quickshop_icon:hover, button.increase:hover, button.decrease:hover, button#button-review:hover, .boss-newletter a.btn:hover, #back_top:hover { 
+	background-color:#000
+}
+.rb-block-home-bg a.btn.sample:hover, .read_more a.btn.sample:hover, .btn-wishlist:hover, .btn-compare:hover, button.sft_quickshop_icon:hover, button.increase:hover, button.decrease:hover, button#button-review:hover, .boss-newletter a.btn:hover, #back_top:hover { 
+	color:#fff
+}
+.rb-block-home-bg a.btn.sample:hover, .read_more a.btn.sample:hover, .btn-wishlist:hover, .btn-compare:hover, button.sft_quickshop_icon:hover, button.increase:hover, button.decrease:hover, button#button-review:hover, .boss-newletter a.btn:hover { 
+	border-color:#000
+}
+.btn-cart, .button_cart, .boss-newletter a.btn, .btn.btn-default:hover, button.btn-default:hover, .btn-remove:hover, .btn-plus:hover, .btn-minus:hover, button.btn-update:hover, .btn.btn-primary:hover, .btn.btn-checkout, a.nav_thumb:hover, #back_top, .tp-caption.medium_text span.btn,.boss-blog-featured .view_more a,.rb-block-purchase a:hover { 
+	background-color:#72afb0
+}
+.btn-cart, .button_cart, .boss-newletter a.btn, .btn.btn-default:hover, button.btn-default:hover, .btn-remove:hover, .btn-plus:hover, .btn-minus:hover, button.btn-update:hover, .btn.btn-primary:hover, .btn.btn-checkout, a.nav_thumb:hover, #back_top, .tp-caption.medium_text span.btn, .boss-blog-featured .view_more a,.rb-block-purchase a:hover { 
+	color:#fff
+}
+.btn-cart, .button_cart, .boss-newletter a.btn, .btn.btn-default:hover, button.btn-default:hover, .btn-remove:hover, .btn-plus:hover, .btn-minus:hover, button.btn-update:hover, .btn.btn-primary:hover, .btn.btn-checkout, .tp-caption.medium_text span.btn, .boss-blog-featured .view_more a,.rb-block-purchase a:hover { 
+	border-color:#72afb0
+}
+.btn-cart:hover, .button_cart:hover, button.button_cart:focus, .rb-product-grid .button-group button.btn-cart:hover, .product-grid .button-group button.btn-cart:hover { 
+	background-color:#588889
+}
+.btn-cart:hover, .button_cart:hover, button.button_cart:focus, .rb-product-grid .button-group button.btn-cart:hover, .product-grid .button-group button.btn-cart:hover { 
+	color:#fff
+}
+.btn-cart:hover, .button_cart:hover, button.button_cart:focus { 
+	border-color:#588889
+}
+#rb_header #top { 
+	background-color:#333333
+}
+header { 
+	background-color:#333333
+}
+#rb_header #top .rb-block-header, .rb-block-header a, #rb_header #top .btn-link, .list-inline a, #cart button.btn-dropdown-cart { 
+	color:#fff
+}
+.list-inline a:hover, #rb_header #top .btn-link:hover, .rb-block-header a:hover, .rb-menu-logo ul li a:hover { 
+	color:#969696
+}
+.rb-menu-logo ul li a { 
+	color:#fff
+}
+footer#rb_footer { 
+	background-color:#1f1f1f
+}
+footer#rb_footer h3, footer#rb_footer a:hover, footer#rb_footer .footer-social a { 
+	color:#fff
+}
+footer#rb_footer a { 
+	color:#969696
+}
+.rb-comb, .rb-boxed .rb-comb.rb-menu-fixed > div { 
+	background-color:#72afb0
+}
+.mega-menu > ul.nav > li:hover, #search input.input-lg { 
+	background-color:#3f8081
+}
+.mega-menu > ul.nav > li > a, #rb_mainmenu > p { 
+	color:#fff
+}
+.name a { 
+	color:#1e1e1e
+}
+.name a:hover { 
+	color:#72afb0
+}
+.price, .price_info, table tbody td.product-price, table tbody td.total { 
+	color:#1e1e1e
+}
+.product-thumb .price-old { 
+	color:#999
+}
+.price-new { 
+	color:#72afb0
+}

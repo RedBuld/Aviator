@@ -1,0 +1,30 @@
+{% if empty %}
+  <div style="overflow-x: hidden;overflow-y: auto; max-height:500px;">
+    <li>
+      <table class="table table-striped">
+        <tbody>
+          {% for i in products %}
+            {% include 'market/templates/productinbag.html' %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </li>
+  </div>
+  <li class="last">
+    <div class="cart_bottom">
+      <table class="minicart_total">
+        <tbody>
+          <tr>
+            <td class="left">{% trans %}Total{% endtrans %}</td>
+            <td class="right">{{ total['price'] }} {% trans %}rub.{% endtrans %}</td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="{{ config['SITE_URL'] }}cart" class="btn btn-default">{% trans %}Shopping Cart{% endtrans %}</a>
+      &nbsp;
+      <a href="{{ config['SITE_URL'] }}checkout" class="btn btn-checkout">{% trans %}Checkout{% endtrans %}</a>
+    </div>
+  </li>
+{% else %}
+    <li><p class="text-center">{% trans %}Your shopping cart is empty{% endtrans %}!</p></li>
+{% endif %}

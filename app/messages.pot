@@ -1,0 +1,1280 @@
+# Translations template for PROJECT.
+# Copyright (C) 2015 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2015-12-17 14:35+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.1.1\n"
+
+#: forms.py:25 forms.py:66 forms.py:95 templates/contacts/list.html:39
+#: templates/market/checkout.html:108 templates/user/list.html:40
+msgid "Email"
+msgstr ""
+
+#: forms.py:26 forms.py:70 forms.py:96
+msgid "Password"
+msgstr ""
+
+#: forms.py:27
+msgid "Remember Me"
+msgstr ""
+
+#: forms.py:38
+msgid "Email or Password is invalid."
+msgstr ""
+
+#: forms.py:53
+msgid "You do not have enough rights."
+msgstr ""
+
+#: forms.py:55
+msgid "No rank with id "
+msgstr ""
+
+#: forms.py:59
+msgid "Passwords do not match."
+msgstr ""
+
+#: forms.py:62 forms.py:94 forms.py:235 forms.py:247
+#: templates/market/contact.html:52 templates/market/templates/cartview.html:7
+#: templates/market/templates/checkview.html:12 templates/order/active.html:40
+#: templates/order/archive.html:58 templates/order/export.html:37
+#: templates/order/list.html:39 templates/user/list.html:39
+msgid "Name"
+msgstr ""
+
+#: forms.py:74 forms.py:97
+msgid "Repeat Password"
+msgstr ""
+
+#: forms.py:79 forms.py:98 templates/base.html:36
+msgid "Language"
+msgstr ""
+
+#: forms.py:80 forms.py:99 templates/user/list.html:41
+msgid "Rank"
+msgstr ""
+
+#: forms.py:85 forms.py:100
+msgid "Amount"
+msgstr ""
+
+#: forms.py:89 forms.py:101 templates/driver/list.html:69
+#: templates/order/active.html:39 templates/order/archive.html:57
+#: templates/order/export.html:36 templates/order/list.html:38
+msgid "Phone"
+msgstr ""
+
+#: forms.py:108 forms.py:126
+msgid "This email is already in use"
+msgstr ""
+
+#: forms.py:152 forms.py:164 templates/shop/list.html:39
+msgid "Shop Name"
+msgstr ""
+
+#: forms.py:156 forms.py:165 templates/order/active.html:41
+#: templates/order/archive.html:59 templates/order/export.html:38
+#: templates/order/list.html:40 templates/shop/list.html:40
+msgid "Address"
+msgstr ""
+
+#: forms.py:190 forms.py:203 templates/category/list.html:39
+msgid "Category Name"
+msgstr ""
+
+#: forms.py:194 forms.py:204 templates/category/list.html:40
+msgid "Position"
+msgstr ""
+
+#: forms.py:198 forms.py:205 templates/category/list.html:41
+#: templates/category/list.html:50
+msgid "Visible"
+msgstr ""
+
+#: forms.py:239 forms.py:248
+msgid "Reply Text"
+msgstr ""
+
+#: forms.py:263 forms.py:282 templates/driver/products.html:28
+#: templates/product/list.html:53 templates/user/edit.html:132
+msgid "Product Name"
+msgstr ""
+
+#: forms.py:267 forms.py:283
+msgid "Memo"
+msgstr ""
+
+#: forms.py:268 forms.py:284 forms.py:341
+msgid "Image"
+msgstr ""
+
+#: forms.py:271 forms.py:285 templates/market/templates/cartview.html:9
+#: templates/market/templates/checkview.html:14 templates/order/export.html:40
+#: templates/product/list.html:54
+msgid "Price"
+msgstr ""
+
+#: forms.py:275 forms.py:286
+msgid "Category"
+msgstr ""
+
+#: forms.py:297 forms.py:321
+msgid "Category not found"
+msgstr ""
+
+#: forms.py:300
+msgid "Image not found"
+msgstr ""
+
+#: forms.py:343
+msgid "Images only"
+msgstr ""
+
+#: modules/category.py:36
+msgid "Category successfully created"
+msgstr ""
+
+#: modules/category.py:64
+msgid "Category successfully deleted"
+msgstr ""
+
+#: modules/contacts.py:39
+msgid "Thanks for your feedback "
+msgstr ""
+
+#: modules/contacts.py:58 modules/contacts.py:65
+msgid "Thanks for your feedback"
+msgstr ""
+
+#: modules/contacts.py:63 modules/order.py:189
+msgid "Dear"
+msgstr ""
+
+#: modules/driver.py:130 modules/driver.py:137
+msgid "Order has been successfully completed"
+msgstr ""
+
+#: modules/driver.py:139
+msgid "The key is incorrect"
+msgstr ""
+
+#: modules/market.py:103
+msgid "added to "
+msgstr ""
+
+#: modules/market.py:103 modules/market.py:126 modules/market.py:150
+msgid "shopping cart"
+msgstr ""
+
+#: modules/market.py:104 modules/market.py:127 modules/market.py:151
+#: templates/market/design/header.html:9
+#, python-format
+msgid "%(num)d item"
+msgid_plural "%(num)d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: modules/market.py:104 modules/market.py:127 modules/market.py:151
+#: templates/driver/orders.html:31 templates/driver/orders.html:37
+#: templates/driver/orders.html:59 templates/driver/orders.html:67
+#: templates/driver/products.html:38 templates/market/cart_overview.html:19
+#: templates/market/product.html:84 templates/market/quickview.html:34
+#: templates/market/design/header.html:9
+#: templates/market/templates/cartview.html:25
+#: templates/market/templates/checkview.html:27
+#: templates/market/templates/product.html:36
+#: templates/market/templates/productinbag.html:28
+#: templates/market/templates/productincart.html:26
+#: templates/market/templates/productincart.html:27
+#: templates/market/templates/productincheck.html:20
+#: templates/market/templates/productincheck.html:21
+#: templates/order/export.html:56 templates/order/products.html:4
+#: templates/order/products.html:9 templates/product/edit.html:51
+#: templates/product/list.html:62 templates/product/new.html:53
+#: templates/user/edit.html:118 templates/user/products.html:13
+msgid "rub."
+msgstr ""
+
+#: modules/market.py:126 modules/market.py:150
+msgid "been removed from "
+msgstr ""
+
+#: modules/market.py:278
+msgid "Incorrect Email"
+msgstr ""
+
+#: modules/market.py:284
+msgid "You already subscribed"
+msgstr ""
+
+#: modules/market.py:292
+msgid "You have subscribed to our newsletter"
+msgstr ""
+
+#: modules/order.py:104
+msgid "Order successfully deleted"
+msgstr ""
+
+#: modules/order.py:140
+msgid "Order' driver successfully changed"
+msgstr ""
+
+#: modules/order.py:173
+msgid "Hey! That's your order code from"
+msgstr ""
+
+#: modules/order.py:184
+msgid "Order code"
+msgstr ""
+
+#: modules/order.py:190
+msgid "It's your order code"
+msgstr ""
+
+#: modules/order.py:191
+msgid "Thank you for your order!"
+msgstr ""
+
+#: modules/product.py:49
+msgid "Product successfully created"
+msgstr ""
+
+#: modules/product.py:85
+msgid "Product successfully deleted"
+msgstr ""
+
+#: modules/settings.py:25
+msgid "Settings successfully updated"
+msgstr ""
+
+#: modules/shop.py:36
+msgid "Shop successfully created"
+msgstr ""
+
+#: modules/shop.py:64
+msgid "Shop successfully deleted"
+msgstr ""
+
+#: modules/user.py:53
+msgid "User successfully created"
+msgstr ""
+
+#: modules/user.py:84
+msgid "User successfully deleted"
+msgstr ""
+
+#: settings/common.py:26 templates/order/active.html:43
+#: templates/order/archive.html:62
+msgid "Driver"
+msgstr ""
+
+#: settings/common.py:26
+msgid "Operator"
+msgstr ""
+
+#: settings/common.py:26
+msgid "Manager"
+msgstr ""
+
+#: settings/common.py:26
+msgid "Senior Manager"
+msgstr ""
+
+#: templates/base.html:17
+msgid "Toggle navigation"
+msgstr ""
+
+#: templates/base.html:31 templates/category/list.html:8
+#: templates/contacts/list.html:8 templates/driver/list.html:8
+#: templates/driver/list.html:73 templates/order/active.html:8
+#: templates/order/archive.html:8 templates/order/export.html:6
+#: templates/order/list.html:8 templates/product/list.html:14
+#: templates/settings/index.html:5 templates/settings/index.html:8
+#: templates/settings/index.html:25 templates/settings/index.html:29
+#: templates/shop/list.html:8 templates/user/edit.html:8
+#: templates/user/edit.html:34 templates/user/list.html:8
+#: templates/user/new.html:8
+msgid "Settings"
+msgstr ""
+
+#: templates/base.html:33
+msgid "Log-out"
+msgstr ""
+
+#: templates/base.html:35
+msgid "Toggle help"
+msgstr ""
+
+#: templates/auth/login.html:5
+msgid "Authorization Log-in"
+msgstr ""
+
+#: templates/auth/login.html:6
+msgid "Authorization"
+msgstr ""
+
+#: templates/auth/login.html:10 templates/auth/login.html:23
+msgid "Log-in"
+msgstr ""
+
+#: templates/category/delete.html:3 templates/category/edit.html:61
+#: templates/contacts/delete.html:3
+msgid "Delete Category"
+msgstr ""
+
+#: templates/category/delete.html:6 templates/contacts/delete.html:6
+msgid "Are you sure, that you want to delete category"
+msgstr ""
+
+#: templates/category/delete.html:10 templates/contacts/delete.html:10
+#: templates/driver/complete.html:13 templates/driver/orders.html:45
+#: templates/order/change_driver.html:11 templates/order/delete.html:10
+#: templates/order/download.html:10 templates/product/delete.html:10
+#: templates/shop/delete.html:10 templates/user/change_language.html:14
+#: templates/user/delete.html:10 templates/user/replenish.html:33
+msgid "Cancel"
+msgstr ""
+
+#: templates/category/delete.html:11 templates/contacts/delete.html:11
+#: templates/order/active.html:45 templates/order/active.html:59
+#: templates/order/delete.html:11 templates/order/list.html:43
+#: templates/order/list.html:55 templates/product/delete.html:11
+#: templates/shop/delete.html:11 templates/user/delete.html:11
+msgid "Delete"
+msgstr ""
+
+#: templates/category/edit.html:5 templates/category/edit.html:24
+#: templates/category/list.html:42 templates/contacts/reply.html:5
+#: templates/contacts/reply.html:24
+msgid "Category settings"
+msgstr ""
+
+#: templates/category/edit.html:8 templates/category/list.html:9
+#: templates/category/new.html:8 templates/contacts/list.html:9
+#: templates/contacts/new.html:8 templates/contacts/reply.html:8
+#: templates/driver/list.html:9 templates/driver/list.html:25
+#: templates/driver/list.html:29 templates/order/active.html:9
+#: templates/order/archive.html:9 templates/order/export.html:7
+#: templates/order/list.html:9 templates/product/edit.html:8
+#: templates/product/list.html:15 templates/product/new.html:8
+#: templates/settings/index.html:9 templates/shop/edit.html:8
+#: templates/shop/list.html:9 templates/shop/new.html:8
+#: templates/user/edit.html:9 templates/user/list.html:9
+#: templates/user/new.html:9
+msgid "Drivers"
+msgstr ""
+
+#: templates/category/edit.html:9 templates/category/list.html:10
+#: templates/category/new.html:9 templates/contacts/list.html:10
+#: templates/contacts/new.html:9 templates/contacts/reply.html:9
+#: templates/driver/list.html:10 templates/order/active.html:10
+#: templates/order/archive.html:10 templates/order/export.html:8
+#: templates/order/list.html:10 templates/product/edit.html:9
+#: templates/product/list.html:16 templates/product/new.html:9
+#: templates/settings/index.html:10 templates/shop/edit.html:9
+#: templates/shop/edit.html:28 templates/shop/list.html:5
+#: templates/shop/list.html:10 templates/shop/list.html:25
+#: templates/shop/list.html:29 templates/shop/new.html:9
+#: templates/shop/new.html:28 templates/user/edit.html:10
+#: templates/user/list.html:10 templates/user/new.html:10
+msgid "Shops"
+msgstr ""
+
+#: templates/category/edit.html:12 templates/category/list.html:13
+#: templates/category/new.html:12 templates/contacts/list.html:13
+#: templates/contacts/new.html:12 templates/contacts/reply.html:12
+#: templates/driver/list.html:13 templates/order/active.html:13
+#: templates/order/archive.html:13 templates/order/export.html:11
+#: templates/order/list.html:13 templates/product/edit.html:12
+#: templates/product/list.html:19 templates/product/new.html:12
+#: templates/settings/index.html:13 templates/shop/edit.html:12
+#: templates/shop/list.html:13 templates/shop/new.html:12
+#: templates/user/edit.html:13 templates/user/edit.html:29
+#: templates/user/list.html:5 templates/user/list.html:13
+#: templates/user/list.html:25 templates/user/list.html:29
+#: templates/user/new.html:13 templates/user/new.html:29
+msgid "Users"
+msgstr ""
+
+#: templates/category/edit.html:13 templates/category/edit.html:28
+#: templates/category/list.html:5 templates/category/list.html:14
+#: templates/category/list.html:25 templates/category/list.html:29
+#: templates/category/new.html:13 templates/category/new.html:28
+#: templates/contacts/list.html:14 templates/contacts/new.html:13
+#: templates/contacts/new.html:28 templates/contacts/reply.html:13
+#: templates/driver/list.html:14 templates/order/active.html:14
+#: templates/order/archive.html:14 templates/order/export.html:12
+#: templates/order/list.html:14 templates/product/edit.html:13
+#: templates/product/list.html:20 templates/product/new.html:13
+#: templates/settings/index.html:14 templates/shop/edit.html:13
+#: templates/shop/list.html:14 templates/shop/new.html:13
+#: templates/user/edit.html:14 templates/user/list.html:14
+#: templates/user/new.html:14
+msgid "Categories"
+msgstr ""
+
+#: templates/category/edit.html:14 templates/category/list.html:15
+#: templates/category/new.html:14 templates/contacts/list.html:15
+#: templates/contacts/new.html:14 templates/contacts/reply.html:14
+#: templates/driver/list.html:15 templates/driver/orders.html:9
+#: templates/driver/products.html:5 templates/driver/products.html:9
+#: templates/driver/products.html:14 templates/driver/products.html:18
+#: templates/driver/route.html:9 templates/order/active.html:15
+#: templates/order/active.html:42 templates/order/archive.html:15
+#: templates/order/archive.html:61 templates/order/export.html:13
+#: templates/order/export.html:41 templates/order/list.html:15
+#: templates/order/list.html:41 templates/product/edit.html:14
+#: templates/product/edit.html:28 templates/product/list.html:7
+#: templates/product/list.html:21 templates/product/list.html:32
+#: templates/product/list.html:39 templates/product/new.html:14
+#: templates/product/new.html:28 templates/settings/index.html:15
+#: templates/shop/edit.html:14 templates/shop/list.html:15
+#: templates/shop/new.html:14 templates/user/edit.html:15
+#: templates/user/edit.html:35 templates/user/list.html:15
+#: templates/user/new.html:15
+msgid "Products"
+msgstr ""
+
+#: templates/category/edit.html:15 templates/category/list.html:16
+#: templates/category/new.html:15 templates/contacts/list.html:5
+#: templates/contacts/list.html:16 templates/contacts/list.html:25
+#: templates/contacts/list.html:29 templates/contacts/new.html:15
+#: templates/contacts/reply.html:15 templates/contacts/reply.html:28
+#: templates/driver/list.html:16 templates/order/active.html:16
+#: templates/order/archive.html:16 templates/order/export.html:14
+#: templates/order/list.html:16 templates/product/edit.html:15
+#: templates/product/list.html:22 templates/product/new.html:15
+#: templates/settings/index.html:16 templates/shop/edit.html:15
+#: templates/shop/list.html:16 templates/shop/new.html:15
+#: templates/user/edit.html:16 templates/user/list.html:16
+#: templates/user/new.html:16
+msgid "Contacts"
+msgstr ""
+
+#: templates/category/edit.html:18 templates/category/list.html:19
+#: templates/category/new.html:18 templates/contacts/list.html:19
+#: templates/contacts/new.html:18 templates/contacts/reply.html:18
+#: templates/driver/list.html:19 templates/driver/orders.html:5
+#: templates/driver/orders.html:8 templates/driver/orders.html:14
+#: templates/driver/orders.html:18 templates/driver/products.html:8
+#: templates/driver/route.html:8 templates/order/active.html:19
+#: templates/order/active.html:29 templates/order/archive.html:19
+#: templates/order/archive.html:29 templates/order/export.html:17
+#: templates/order/export.html:27 templates/order/list.html:5
+#: templates/order/list.html:19 templates/order/list.html:25
+#: templates/order/list.html:29 templates/product/edit.html:18
+#: templates/product/list.html:25 templates/product/new.html:18
+#: templates/settings/index.html:19 templates/shop/edit.html:18
+#: templates/shop/list.html:19 templates/shop/new.html:18
+#: templates/user/edit.html:19 templates/user/list.html:19
+#: templates/user/new.html:19
+msgid "Orders"
+msgstr ""
+
+#: templates/category/edit.html:25 templates/contacts/reply.html:25
+msgid "Here you can change category name, position and visible."
+msgstr ""
+
+#: templates/category/edit.html:31
+msgid "Go to list of products, which added to this category"
+msgstr ""
+
+#: templates/category/edit.html:57 templates/product/edit.html:76
+#: templates/settings/index.html:48 templates/shop/edit.html:48
+#: templates/user/edit.html:79 templates/user/edit.html:101
+msgid "Save"
+msgstr ""
+
+#: templates/category/list.html:26
+msgid "Here you can add new category and configure created categories."
+msgstr ""
+
+#: templates/category/list.html:31
+msgid "Create a new category"
+msgstr ""
+
+#: templates/category/list.html:32 templates/contacts/list.html:31
+#: templates/driver/list.html:53 templates/product/list.html:42
+#: templates/shop/list.html:32 templates/user/categories.html:9
+#: templates/user/list.html:32 templates/user/products.html:9
+msgid "Search"
+msgstr ""
+
+#: templates/category/list.html:33 templates/contacts/list.html:32
+#: templates/driver/list.html:52 templates/product/list.html:43
+#: templates/shop/list.html:33 templates/user/categories.html:7
+#: templates/user/list.html:33 templates/user/products.html:7
+msgid "Search..."
+msgstr ""
+
+#: templates/category/list.html:50
+msgid "Not Visible"
+msgstr ""
+
+#: templates/category/list.html:52
+msgid "Set-up the category"
+msgstr ""
+
+#: templates/category/new.html:5 templates/category/new.html:24
+#: templates/category/new.html:29 templates/category/new.html:33
+#: templates/contacts/new.html:5 templates/contacts/new.html:24
+#: templates/contacts/new.html:29 templates/contacts/new.html:33
+msgid "New category"
+msgstr ""
+
+#: templates/category/new.html:25 templates/contacts/new.html:25
+msgid "Here you can create a new category."
+msgstr ""
+
+#: templates/category/new.html:48 templates/contacts/new.html:48
+msgid "Position - it's integer attribute. It's used for sorting."
+msgstr ""
+
+#: templates/category/new.html:59 templates/contacts/new.html:59
+#: templates/product/new.html:83 templates/shop/new.html:51
+#: templates/user/new.html:87
+msgid "Create"
+msgstr ""
+
+#: templates/contacts/list.html:26
+msgid "Here you can response on enquiry."
+msgstr ""
+
+#: templates/contacts/list.html:38
+msgid "Contacts Name"
+msgstr ""
+
+#: templates/contacts/list.html:40
+msgid "Enquiry"
+msgstr ""
+
+#: templates/contacts/list.html:41 templates/contacts/list.html:52
+#: templates/contacts/reply.html:49
+msgid "Reply"
+msgstr ""
+
+#: templates/driver/complete.html:4
+msgid "Complete Order"
+msgstr ""
+
+#: templates/driver/complete.html:8 templates/driver/complete.html:9
+msgid "Order key"
+msgstr ""
+
+#: templates/driver/complete.html:14
+msgid "Post key"
+msgstr ""
+
+#: templates/driver/list.html:5
+msgid "Drivers on map"
+msgstr ""
+
+#: templates/driver/list.html:26
+msgid ""
+"Here you can see where drivers are. In the map (press \"Load map\", to "
+"load it) you can see only drivers who stay in a system now. If you want "
+"to see where there was current driver for the last time - click \"Show\" "
+"button in his item in the list from the bottom of the page."
+msgstr ""
+
+#: templates/driver/list.html:40
+msgid "Load map"
+msgstr ""
+
+#: templates/driver/list.html:42
+msgid "Active Drivers"
+msgstr ""
+
+#: templates/driver/list.html:44
+msgid "Hide active drivers"
+msgstr ""
+
+#: templates/driver/list.html:45
+msgid "Show active drivers"
+msgstr ""
+
+#: templates/driver/list.html:50
+msgid "All Drivers"
+msgstr ""
+
+#: templates/driver/list.html:68
+msgid "Driver Name"
+msgstr ""
+
+#: templates/driver/list.html:70
+msgid "Location"
+msgstr ""
+
+#: templates/driver/list.html:71
+msgid "Last update"
+msgstr ""
+
+#: templates/driver/list.html:72
+msgid "Workload"
+msgstr ""
+
+#: templates/driver/list.html:81 templates/order/active.html:56
+#: templates/order/archive.html:74 templates/order/list.html:53
+msgid "Show"
+msgstr ""
+
+#: templates/driver/list.html:82
+msgid "None"
+msgstr ""
+
+#: templates/driver/list.html:85
+msgid "Set-up driver's user"
+msgstr ""
+
+#: templates/driver/orders.html:6 templates/driver/products.html:6
+#: templates/driver/route.html:6
+msgid "Driver mode"
+msgstr ""
+
+#: templates/driver/orders.html:15
+msgid "Here you can see new and active orders."
+msgstr ""
+
+#: templates/driver/orders.html:15 templates/driver/orders.html:18
+#: templates/order/list.html:26 templates/order/list.html:29
+msgid "Content on this page is refreshed every 10 seconds."
+msgstr ""
+
+#: templates/driver/orders.html:21
+msgid "New"
+msgstr ""
+
+#: templates/driver/orders.html:22
+msgid "Active"
+msgstr ""
+
+#: templates/driver/orders.html:42
+msgid "Accept"
+msgstr ""
+
+#: templates/driver/orders.html:62 templates/driver/route.html:22
+msgid "Marketplace"
+msgstr ""
+
+#: templates/driver/orders.html:73
+msgid "Build a route"
+msgstr ""
+
+#: templates/driver/orders.html:79 templates/driver/orders.html:83
+msgid "Complete"
+msgstr ""
+
+#: templates/driver/products.html:15
+msgid "Here you can see your products."
+msgstr ""
+
+#: templates/driver/products.html:29 templates/user/edit.html:133
+msgid "Count"
+msgstr ""
+
+#: templates/driver/products.html:30
+msgid "Price for one"
+msgstr ""
+
+#: templates/driver/route.html:5 templates/driver/route.html:14
+msgid "Order"
+msgstr ""
+
+#: templates/driver/route.html:15
+msgid "Here you can see where you need to go."
+msgstr ""
+
+#: templates/driver/route.html:18 templates/order/active.html:5
+#: templates/order/active.html:25 templates/order/active.html:30
+msgid "Active orders"
+msgstr ""
+
+#: templates/driver/route.html:19
+msgid "Route for order"
+msgstr ""
+
+#: templates/driver/route.html:24
+msgid "Client address"
+msgstr ""
+
+#: templates/market/about.html:16 templates/market/about.html:44
+#: templates/market/design/footer.html:58
+#: templates/market/design/header.html:69
+msgid "About Us"
+msgstr ""
+
+#: templates/market/cart.html:16 templates/market/cart.html:90
+#: templates/market/cart_overview.html:23 templates/market/checkout.html:59
+#: templates/market/checkout.html:258
+#: templates/market/checkout_finished.html:43
+#: templates/market/templates/cartview.html:2
+#: templates/market/templates/cartview.html:35
+msgid "Shopping Cart"
+msgstr ""
+
+#: templates/market/cart_overview.html:18
+#: templates/market/templates/cartview.html:10
+#: templates/market/templates/cartview.html:24
+#: templates/market/templates/checkview.html:15
+#: templates/market/templates/checkview.html:26
+msgid "Total"
+msgstr ""
+
+#: templates/market/cart_overview.html:25 templates/market/checkout.html:16
+#: templates/market/checkout.html:60 templates/market/checkout.html:67
+#: templates/market/checkout_finished.html:44
+#: templates/market/templates/cartview.html:31
+msgid "Checkout"
+msgstr ""
+
+#: templates/market/cart_overview.html:29 templates/market/checkout.html:259
+#: templates/market/templates/cartview.html:36
+msgid "Your shopping cart is empty"
+msgstr ""
+
+#: templates/market/checkout.html:77
+msgid "Your Personal Details"
+msgstr ""
+
+#: templates/market/checkout.html:85
+msgid "First Name"
+msgstr ""
+
+#: templates/market/checkout.html:91
+msgid "The \"First Name\" can not be empty"
+msgstr ""
+
+#: templates/market/checkout.html:97
+msgid "Last Name"
+msgstr ""
+
+#: templates/market/checkout.html:114
+msgid "The \"Email\" can not be empty"
+msgstr ""
+
+#: templates/market/checkout.html:115
+msgid "The \"Email\" incorrect"
+msgstr ""
+
+#: templates/market/checkout.html:121
+msgid "Telephone"
+msgstr ""
+
+#: templates/market/checkout.html:127
+msgid "The \"Telephone\" can not be empty"
+msgstr ""
+
+#: templates/market/checkout.html:140
+msgid "Your Address"
+msgstr ""
+
+#: templates/market/checkout.html:147
+msgid "Street"
+msgstr ""
+
+#: templates/market/checkout.html:152
+msgid "Select street"
+msgstr ""
+
+#: templates/market/checkout.html:155
+msgid "Select the street from the list"
+msgstr ""
+
+#: templates/market/checkout.html:160
+msgid "House"
+msgstr ""
+
+#: templates/market/checkout.html:166
+msgid "The \"House\" can not be empty"
+msgstr ""
+
+#: templates/market/checkout.html:171
+msgid "Apartment / Office"
+msgstr ""
+
+#: templates/market/checkout.html:177
+msgid "The \"Apartment / Office\" can not be empty"
+msgstr ""
+
+#: templates/market/checkout.html:199
+msgid "Add Comments About Your Order"
+msgstr ""
+
+#: templates/market/checkout.html:213
+msgid "Confirm Order"
+msgstr ""
+
+#: templates/market/checkout_finished.html:15
+msgid "Checkout success"
+msgstr ""
+
+#: templates/market/checkout_finished.html:45
+msgid "Success"
+msgstr ""
+
+#: templates/market/checkout_finished.html:49
+msgid "Your order has been placed!"
+msgstr ""
+
+#: templates/market/checkout_finished.html:51
+msgid "it's your order code"
+msgstr ""
+
+#: templates/market/checkout_finished.html:53
+msgid "Continue"
+msgstr ""
+
+#: templates/market/contact.html:16 templates/market/contact.html:44
+#: templates/market/design/footer.html:8 templates/market/design/header.html:68
+msgid "Contact Us"
+msgstr ""
+
+#: templates/market/contact.html:48 templates/market/design/footer.html:56
+msgid "Contact us"
+msgstr ""
+
+#: templates/market/contact.html:50
+msgid "Contact Form"
+msgstr ""
+
+#: templates/market/contact.html:64
+msgid "Message"
+msgstr ""
+
+#: templates/market/contact.html:72
+msgid "Submit"
+msgstr ""
+
+#: templates/market/contact.html:87 templates/market/contact.html:91
+#: templates/market/contact.html:100
+msgid "This field cannot be empty"
+msgstr ""
+
+#: templates/market/contact.html:95
+msgid "E-Mail Address does not appear to be valid!"
+msgstr ""
+
+#: templates/market/contact.html:112
+msgid "Message sent"
+msgstr ""
+
+#: templates/market/contact.html:112
+msgid "Message sent successfully"
+msgstr ""
+
+#: templates/market/product.html:76 templates/market/quickview.html:26
+#: templates/market/templates/cartview.html:8
+#: templates/market/templates/checkview.html:13
+msgid "Quantity"
+msgstr ""
+
+#: templates/market/product.html:88 templates/upload/icon.html:16
+#: templates/upload/image.html:16
+msgid "Loading"
+msgstr ""
+
+#: templates/market/product.html:88 templates/market/quickview.html:38
+#: templates/market/templates/product.html:41
+msgid "Add to Cart"
+msgstr ""
+
+#: templates/market/product.html:93 templates/market/templates/product.html:42
+msgid "Share"
+msgstr ""
+
+#: templates/market/design/footer.html:26
+msgid "Subscribe to our newsletter today!"
+msgstr ""
+
+#: templates/market/design/footer.html:36
+msgid "E-mail address"
+msgstr ""
+
+#: templates/market/design/footer.html:37
+msgid "Subscribe"
+msgstr ""
+
+#: templates/market/design/footer.html:54
+msgid "Infromation"
+msgstr ""
+
+#: templates/market/design/footer.html:57
+msgid "Site Map"
+msgstr ""
+
+#: templates/market/design/footer.html:80
+msgid "Follow us"
+msgstr ""
+
+#: templates/market/design/footer.html:106
+msgid "Back To Top"
+msgstr ""
+
+#: templates/market/functional/info.html:7
+msgid "WHO ARE WE"
+msgstr ""
+
+#: templates/market/templates/cartview.html:32
+msgid "Continue Shopping"
+msgstr ""
+
+#: templates/market/templates/checkview.html:6
+msgid "Cart"
+msgstr ""
+
+#: templates/market/templates/product.html:24
+msgid "Quick View"
+msgstr ""
+
+#: templates/market/templates/productinbag.html:8
+#: templates/market/templates/productincart.html:20
+msgid "Remove"
+msgstr ""
+
+#: templates/market/templates/productinbag.html:13
+#: templates/market/templates/productincart.html:14
+msgid "Increase"
+msgstr ""
+
+#: templates/market/templates/productinbag.html:18
+#: templates/market/templates/productincart.html:17
+msgid "Decrease"
+msgstr ""
+
+#: templates/market/templates/productincheck.html:7
+msgid "Price:"
+msgstr ""
+
+#: templates/order/active.html:26
+msgid "Here you can see active orders."
+msgstr ""
+
+#: templates/order/active.html:37 templates/order/archive.html:55
+#: templates/order/export.html:34 templates/order/list.html:37
+msgid "Id"
+msgstr ""
+
+#: templates/order/active.html:38 templates/order/archive.html:56
+#: templates/order/export.html:35
+msgid "Key"
+msgstr ""
+
+#: templates/order/active.html:44
+msgid "Change driver"
+msgstr ""
+
+#: templates/order/active.html:58
+msgid "Change"
+msgstr ""
+
+#: templates/order/archive.html:5 templates/order/archive.html:25
+#: templates/order/archive.html:30 templates/order/export.html:3
+msgid "Order archive"
+msgstr ""
+
+#: templates/order/archive.html:26
+msgid "Here you can download all orders."
+msgstr ""
+
+#: templates/order/archive.html:34
+msgid "Day"
+msgstr ""
+
+#: templates/order/archive.html:37
+msgid "Week"
+msgstr ""
+
+#: templates/order/archive.html:40
+msgid "Month"
+msgstr ""
+
+#: templates/order/archive.html:43
+msgid "Year"
+msgstr ""
+
+#: templates/order/archive.html:46
+msgid "All time"
+msgstr ""
+
+#: templates/order/archive.html:60 templates/order/export.html:39
+msgid "Date"
+msgstr ""
+
+#: templates/order/change_driver.html:3 templates/order/change_driver.html:12
+msgid "Change Driver"
+msgstr ""
+
+#: templates/order/change_driver.html:6
+msgid "Are you sure, that you want to change driver for order with id"
+msgstr ""
+
+#: templates/order/change_driver.html:7
+msgid ""
+"All products which were removed from the driver when he take order will "
+"be returned"
+msgstr ""
+
+#: templates/order/delete.html:3
+msgid "Delete Order"
+msgstr ""
+
+#: templates/order/delete.html:6
+msgid "Are you sure, that you want to delete order with id"
+msgstr ""
+
+#: templates/order/download.html:3
+msgid "Download Archive"
+msgstr ""
+
+#: templates/order/download.html:6
+msgid "Are you sure, that you want to download archive"
+msgstr ""
+
+#: templates/order/download.html:11
+msgid "Download"
+msgstr ""
+
+#: templates/order/export.html:23
+msgid "Download orders"
+msgstr ""
+
+#: templates/order/export.html:24
+msgid "Just press Ctrl+P or another print button."
+msgstr ""
+
+#: templates/order/export.html:28
+msgid "Orders archive"
+msgstr ""
+
+#: templates/order/export.html:29
+msgid "Download archive"
+msgstr ""
+
+#: templates/order/export.html:42
+msgid "Driver Id"
+msgstr ""
+
+#: templates/order/list.html:26
+msgid "Here you can see orders, that have not taken drivers."
+msgstr ""
+
+#: templates/order/list.html:31
+msgid "Open archive"
+msgstr ""
+
+#: templates/order/list.html:31
+msgid "Show active orders"
+msgstr ""
+
+#: templates/order/list.html:42
+msgid "Take time"
+msgstr ""
+
+#: templates/order/products.html:4
+msgid "Products in order"
+msgstr ""
+
+#: templates/order/products.html:14 templates/user/categories.html:19
+#: templates/user/products.html:19
+msgid "Close"
+msgstr ""
+
+#: templates/product/delete.html:3 templates/product/edit.html:80
+msgid "Delete Product"
+msgstr ""
+
+#: templates/product/delete.html:6
+msgid "Are you sure, that you want to delete product"
+msgstr ""
+
+#: templates/product/edit.html:5 templates/product/edit.html:24
+#: templates/product/list.html:55
+msgid "Product settings"
+msgstr ""
+
+#: templates/product/edit.html:25
+msgid "Here you can change selected product."
+msgstr ""
+
+#: templates/product/list.html:9 templates/product/list.html:34
+msgid "Products in category"
+msgstr ""
+
+#: templates/product/list.html:36
+msgid "Here you can add new product and configure created products."
+msgstr ""
+
+#: templates/product/list.html:41
+msgid "Create a new product"
+msgstr ""
+
+#: templates/product/list.html:64
+msgid "Set-up the product"
+msgstr ""
+
+#: templates/product/new.html:5 templates/product/new.html:24
+#: templates/product/new.html:29 templates/product/new.html:33
+msgid "New product"
+msgstr ""
+
+#: templates/product/new.html:25
+msgid "Here you can create a new product."
+msgstr ""
+
+#: templates/settings/index.html:26
+msgid "Base settings of site."
+msgstr ""
+
+#: templates/shop/delete.html:3 templates/shop/edit.html:52
+msgid "Delete Shop"
+msgstr ""
+
+#: templates/shop/delete.html:6
+msgid "Are you sure, that you want to delete shop"
+msgstr ""
+
+#: templates/shop/edit.html:5 templates/shop/edit.html:24
+#: templates/shop/list.html:41
+msgid "Shop settings"
+msgstr ""
+
+#: templates/shop/edit.html:25
+msgid "Here you can change shop name and shop address."
+msgstr ""
+
+#: templates/shop/list.html:26
+msgid "Here you can add new shop and configure created shops."
+msgstr ""
+
+#: templates/shop/list.html:31
+msgid "Create a new shop"
+msgstr ""
+
+#: templates/shop/list.html:50
+msgid "Set-up the shop"
+msgstr ""
+
+#: templates/shop/new.html:5 templates/shop/new.html:24
+#: templates/shop/new.html:29 templates/shop/new.html:33
+msgid "New shop"
+msgstr ""
+
+#: templates/shop/new.html:25
+msgid "Here you can create a new shop."
+msgstr ""
+
+#: templates/upload/icon.html:6 templates/upload/icon.html:13
+#: templates/upload/image.html:6 templates/upload/image.html:13
+msgid "Upload"
+msgstr ""
+
+#: templates/upload/icon.html:12 templates/upload/image.html:12
+msgid "Select File"
+msgstr ""
+
+#: templates/user/categories.html:4
+msgid "Select category"
+msgstr ""
+
+#: templates/user/categories.html:9
+msgid "Open all products"
+msgstr ""
+
+#: templates/user/change_language.html:3
+msgid "Change Language"
+msgstr ""
+
+#: templates/user/change_language.html:6
+msgid "What language you need?"
+msgstr ""
+
+#: templates/user/delete.html:3 templates/user/edit.html:105
+msgid "Delete User"
+msgstr ""
+
+#: templates/user/delete.html:6
+msgid "Are you sure, that you want to delete user"
+msgstr ""
+
+#: templates/user/edit.html:5 templates/user/edit.html:25
+#: templates/user/list.html:42
+msgid "User settings"
+msgstr ""
+
+#: templates/user/edit.html:26
+msgid "Here you can change user name, password and language for selected user."
+msgstr ""
+
+#: templates/user/edit.html:84
+msgid "Change Password"
+msgstr ""
+
+#: templates/user/edit.html:112
+msgid "Add product"
+msgstr ""
+
+#: templates/user/edit.html:113
+msgid "Remove product"
+msgstr ""
+
+#: templates/user/edit.html:120 templates/user/replenish.html:22
+msgid "Replenish"
+msgstr ""
+
+#: templates/user/edit.html:134
+msgid "Go to this product"
+msgstr ""
+
+#: templates/user/edit.html:135
+msgid "Actions"
+msgstr ""
+
+#: templates/user/edit.html:143
+msgid "Product"
+msgstr ""
+
+#: templates/user/list.html:26
+msgid "Here you can add new users and configure created users."
+msgstr ""
+
+#: templates/user/list.html:31
+msgid "Create a new user"
+msgstr ""
+
+#: templates/user/list.html:52
+msgid "Set-up the user"
+msgstr ""
+
+#: templates/user/new.html:5 templates/user/new.html:25
+#: templates/user/new.html:30 templates/user/new.html:34
+msgid "New user"
+msgstr ""
+
+#: templates/user/new.html:26
+msgid "Here you can create a new user."
+msgstr ""
+
+#: templates/user/products.html:4
+msgid "Select product"
+msgstr ""
+
+#: templates/user/products.html:9
+msgid "Return to categories list"
+msgstr ""
+
+#: templates/user/replenish.html:4
+msgid "Replenish the balance"
+msgstr ""
+

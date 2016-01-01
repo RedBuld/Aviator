@@ -1,0 +1,27 @@
+{% from "_formhelpers.html" import render_field %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}gray-body{% endblock %}
+{% block title %}{% trans %}Authorization Log-in{% endtrans %}{% endblock %}
+{% block custom_top_bar %} <span class="small">{% trans %}Authorization{% endtrans %}</span>{% endblock %}
+{% block content %}
+  <div class="container">
+    <form action="" method="POST" class="form-signin">
+      <h2>{% trans %}Log-in{% endtrans %}</h2>
+        <div class="hidden">{{ form.csrf_token }}</div>
+        <div class="form-group{% if form.email.errors %} has-error{% endif %}">
+          {{ render_field(form.email, class="form-control", placeholder=form.email.label.text, required="required") }}
+          {{ render_field(form.password, class="form-control", placeholder=form.password.label.text, required="required") }}
+          {% for error in form.email.errors %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        </div>
+        <div class="form-group">
+          <label>{{ render_field(form.remember_me) }}{{ form.remember_me.label.text }}<label>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">{% trans %}Log-in{% endtrans %}</button>
+        </div>
+    </form>
+  </div>
+{% endblock %}

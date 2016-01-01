@@ -1,0 +1,94 @@
+{% from "_formhelpers.html" import render_field, render_pagination, get_rank, render_workload %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}Drivers on map{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('settings_module.index') }}">{% trans %}Settings{% endtrans %}</a></li>
+<li class="active"><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}Drivers{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can see where drivers are. In the map (press "Load map", to load it) you can see only drivers who stay in a system now. If you want to see where there was current driver for the last time - click "Show" button in his item in the list from the bottom of the page.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li class="active">{% trans %}Drivers{% endtrans %}</li>
+  </ol>
+  <hr>
+  <script type="text/javascript">
+    window.fresh_drivers_url = '{{ url_for('driver_module.fresh_drivers') }}';
+    window.fresh_drivers = [
+    {% for driver in fresh_drivers %}
+      {id: {{ driver.id }}, name: '{{ driver.username }}', phone: '{{ driver.get_phone() }}', coord: '{{ driver.coord }}', marker: {}},
+    {% endfor %}
+    ]
+  </script>
+  <button type="button" id="load-map-button" class="btn btn-primary">{% trans %}Load map{% endtrans %}</button>
+  <div id="map-cont" class="hidden">
+    <h3>{% trans %}Active Drivers{% endtrans %}</h3>
+    <br>
+    <button type="button" id="hide_active_drivers" class="btn btn-primary">{% trans %}Hide active drivers{% endtrans %}</button>
+    <button type="button" id="show_active_drivers" class="btn btn-primary hidden">{% trans %}Show active drivers{% endtrans %}</button>
+    <br><br>
+    <div id="map" style="width:100%; height:400px"></div>
+  </div>
+  <br>
+  <h3>{% trans %}All Drivers{% endtrans %}</h3>
+  <hr>
+  <input type="text" class="form-control search-input search-input-left" value="{{ query }}" placeholder="{% trans %}Search...{% endtrans %}">
+  <button type="button" class="btn btn-default search-button search-button-left" onclick="window.searchNow('{{ request.base_url }}')">{% trans %}Search{% endtrans %}</button>
+  <br>
+  <br>
+  {{ render_pagination(drivers, 'driver_module.list') }}
+  <table class="table table-bordered table-hover">
+    <colgroup>
+      <col>
+      <col width="140px">
+      <col>
+      <col width="135px">
+      <col>
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th>{% trans %}Driver Name{% endtrans %}</th>
+        <th>{% trans %}Phone{% endtrans %}</th>
+        <th>{% trans %}Location{% endtrans %}</th>
+        <th>{% trans %}Last update{% endtrans %}</th>
+        <th>{% trans %}Workload{% endtrans %}</th>
+        <th>{% trans %}Settings{% endtrans %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for driver in drivers.items %}
+      <tr>
+        <td>{{ driver.username }}</td>
+        <td><a href="tel:{{ driver.phone }}">{{ driver.get_phone() }}</a></td>
+        <td><button type="button" class="btn btn-default btn-block" onclick="window.showDriver('{{ url_for('driver_module.fresh_coord', driver_id=driver.id) }}')" {% if driver.coord is none %}disabled="disabled"{% endif %}>{% trans %}Show{% endtrans %}</button></td>
+        <td>{% if driver.coord_date is none %}{% trans %}None{% endtrans %}{% else %}{{ driver.coord_date }}{% endif %}</td>
+        <td>{{ render_workload(driver.get_products_count(), 20) }}</td>
+        <td>
+          <a href="{{ url_for('user_module.edit', user_id=driver.id, t='products') }}" class="btn btn-default btn-block">{% trans %}Set-up driver's user{% endtrans %}</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {{ render_pagination(drivers, 'driver_module.list') }}
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&language={{ current_user.locale }}"></script>
+{% endblock %}

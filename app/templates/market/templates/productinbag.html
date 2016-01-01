@@ -1,0 +1,30 @@
+<tr>
+	<td class="text-center">
+		<div class="image">
+			<a href="{{ config['SITE_URL'] }}product/{{ i['pid'] }}">
+				<img src="{{ i['img'] }}" alt="{{ i['name'] }}" title="{{ i['name'] }}" class="img-thumbnail" width="130px">
+			</a>
+			<div class="remove">
+				<button type="button" onclick="btadd.remove('{{ i['pid'] }}');;" title="{% trans %}Remove{% endtrans %}" class="btn-remove">
+					<i class="fa fa-times"></i>
+				</button>
+			</div>
+			<div class="plus">
+				<button type="button" onclick="btadd.cart('{{ i['pid'] }}');" title="{% trans %}Increase{% endtrans %}" class="btn-plus">
+					<i class="fa fa-plus"></i>
+				</button>
+			</div>
+			<div class="minus">
+				<button type="button" onclick="btadd.uncart('{{ i['pid'] }}');" title="{% trans %}Decrease{% endtrans %}" class="btn-minus">
+					<i class="fa fa-minus"></i>
+				</button>
+			</div>
+		</div>
+	</td>
+	<td class="text-left">
+		<div class="name">
+			<a href="{{ config['SITE_URL'] }}product/{{ i['pid'] }}">{{ i['name'] }}</a>
+		</div>
+		<div class="price"> {{ i['qty'] }} x {{ i['price'] }} {% trans %}rub.{% endtrans %}</div>
+	</td>
+</tr>

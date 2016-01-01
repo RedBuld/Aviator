@@ -1,0 +1,153 @@
+{% from "_formhelpers.html" import render_field, render_ranks, attr_or_val %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}User settings{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('settings_module.index') }}">{% trans %}Settings{% endtrans %}</a></li>
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li class="active"><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}User settings{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can change user name, password and language for selected user.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+    <li class="active">{{ user.username }}</li>
+  </ol>
+  {% if user.rank == 1%}
+  <ul class="nav nav-tabs" id="settings-tab" role="tablist">
+    <li{% if not request.args.get('t') == 'products' %} class="active"{% endif %}><a href="#main-settings" role="tab" data-toggle="tab">{% trans %}Settings{% endtrans %}</a></li>
+    <li{% if request.args.get('t') == 'products' %} class="active"{% endif %}><a href="#main-products" role="tab" data-toggle="tab">{% trans %}Products{% endtrans %}</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="main-settings" class="{% if not request.args.get('t') == 'products' %}active {% endif %}tab-pane">
+  {% endif %}
+  <br>
+  <form action="?password=0" method="POST" class="form-edit-big">
+    <input type="hidden" id="id" name="id" value="{{ user.id }}">
+    <div class="form-group{% if form.email.errors %} has-error{% endif %}">
+      {{ form.email.label }}
+      {{ render_field(form.email, value=attr_or_val(user.email, form.email.data), class="form-control", placeholder=form.email.label.text, required="required") }}
+      {% for error in form.email.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.name.errors %} has-error{% endif %}">
+      {{ form.name.label }}
+      {{ render_field(form.name, value=attr_or_val(user.username, form.name.data), class="form-control", placeholder=form.name.label.text, required="required") }}
+      {% for error in form.name.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.lang.errors %} has-error{% endif %}">
+      {{ form.lang.label }}
+      {{ render_field(form.lang, value=attr_or_val(user.locale, form.lang.data), class="form-control", placeholder=form.lang.label.text, required="required") }}
+      {% for error in form.lang.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.rank.errors %} has-error{% endif %}">
+      {{ form.rank.label }}
+      {{ render_ranks(user.rank, current_user) }}
+      {% for error in form.rank.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.phone.errors %} has-error{% endif %}">
+      {{ form.phone.label }}
+      {{ render_field(form.phone, value=attr_or_val(user.phone, form.phone.data), class="form-control", placeholder=form.phone.label.text) }}
+      {% for error in form.phone.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary btn-block" value="{% trans %}Save{% endtrans %}">
+    </div>
+  </form>
+  <form action="?password=1" method="POST" class="form-edit-big">
+    <br>
+    <h4>{% trans %}Change Password{% endtrans %}</h4>
+    <br>
+    <div class="form-group{% if form.password.errors %} has-error{% endif %}">
+      {{ form.password.label }}
+      {{ render_field(form.password, class="form-control", placeholder=form.password.label.text, required="required") }}
+      {% for error in form.password.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.password2.errors %} has-error{% endif %}">
+      {{ form.password2.label }}
+      {{ render_field(form.password2, class="form-control", placeholder=form.password2.label.text, required="required") }}
+      {% for error in form.password2.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary btn-block" value="{% trans %}Save{% endtrans %}">
+    </div>
+    <hr>
+    <div class="form-group">
+      <button type="button" onclick="window.openDialogWindow(this)" data-url="{{ url_for('user_module.delete', user_id=user.id) }}" class="btn btn-danger btn-block">{% trans %}Delete User{% endtrans %}</button>
+    </div>
+  </form>
+  {% if user.rank == 1 %}
+    </div>
+    <div id='main-products' class="{% if request.args.get('t') == 'products' %}active {% endif %}tab-pane">
+      <br>
+      <button onclick="window.openDialogWindow(this)" data-url="{{ url_for('user_module.categories', user_id=user.id) }}" class="btn btn-primary">{% trans %}Add product{% endtrans %}</button>
+      <button onclick="window.openDialogWindow(this)" data-url="{{ url_for('user_module.categories', user_id=user.id, a='remove') }}" class="btn btn-primary">{% trans %}Remove product{% endtrans %}</button>
+      <div class="form-inline pull-right">
+        <label>Current balance: </label>
+        <div class="input-group">
+          <input class="form-control" type="number" value="{{ user.get_bank() }}" readonly="readonly" />
+          <span class="input-group-addon">{% trans %}rub.{% endtrans %}</span>
+        </div>
+        <button onclick="window.openDialogWindow(this)" data-url="{{ url_for('user_module.replenish_balance', user_id=user.id) }}" class="btn btn-primary">{% trans %}Replenish{% endtrans %}</button>
+      </div>
+      <br><br>
+      <table class="table table-bordered table-hover">
+        <colgroup>
+          <col>
+          <col>
+          <col width="230px">
+          <col width="120px">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>{% trans %}Product Name{% endtrans %}</th>
+            <th>{% trans %}Count{% endtrans %}</th>
+            <th>{% trans %}Go to this product{% endtrans %}</th>
+            <th>{% trans %}Actions{% endtrans %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in user.get_products() %}
+          <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.count }}</td>
+            <td><a href="{{ url_for('product_module.edit', product_id=product.id) }}" class="btn btn-primary btn-block">{% trans %}Product{% endtrans %}</a></td>
+            <td><a href="{{ url_for('user_module.add_product', user_id=user.id, product_id=product.id) }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></a> <a href="{{ url_for('user_module.remove_product', user_id=user.id, product_id=product.id) }}" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

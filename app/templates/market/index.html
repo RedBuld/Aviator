@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]>
+<html dir="ltr" lang="en" class="ie8">
+<![endif]-->
+<!--[if IE 9 ]>
+<html dir="ltr" lang="en" class="ie9">
+<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->    
+<html dir="ltr">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<base href="{{ config['SITE_URL'] }}">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ category.name|capitalize }} | {{ config['SITE_NAME'] }}</title>
+{% include 'market/functional/scripts.html' %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    var loader = $("body").DEPreLoad({
+      OnStep: function(percent) {
+        $("#depreload .cs_perc").text(percent + "%");
+      },
+      OnComplete: function() {
+        setTimeout(function(){
+          $("#depreload").css('display','none');
+        }, 200);
+      }
+    });
+    $('#cart > ul').load('/cart_overview');
+  });
+</script>
+</head>
+<body class="common-home rb-wide-boxed">
+<!-- Loader -->
+{% include 'market/functional/loader.html' %}
+<div id="rb_container" class="rb-wide-boxed " >
+{% include 'market/design/header.html' %}
+  <div id="content" class="col-sm-12 nopadding">
+    <script type="text/javascript">
+      $(window).load(function() {
+        $('.display').bind('click', function() {
+          $('.sft_quickshop_icon').remove();
+        });	
+      });
+    </script> 
+    <div class="rb-featured-pro rb-nprolarge-nslider" data-animate="fadeInUp" data-delay="300">
+      <div class="box-heading title">
+        <h1>{{ category.name }}</h1>
+      </div>
+      <div class="box-content rb-product-content">
+        <div class="rb-items rb-product-grid">
+          <div id="boss_featured_0">
+            {% for product in products %}
+              {% include 'market/templates/product.html' %}
+            {% endfor %}
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+</div>
+{% include 'market/design/footer.html' %}
+</div>
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;"></div>
+<div class="loading" style="position:fixed;top:50%;left:50%"></div>
+</body>
+</html>

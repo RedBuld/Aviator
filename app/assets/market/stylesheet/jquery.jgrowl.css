@@ -1,0 +1,159 @@
+
+div.jGrowl {
+	z-index: 			9999;
+	color: 				#fff;
+	font-size: 			12px;
+}
+
+/** Normal Style Positions **/
+div.jGrowl {
+	position:			absolute;
+}
+
+body > div.jGrowl {
+	position:			fixed;
+}
+
+div.jGrowl.top-left {
+	left: 				0px;
+	top: 				0px;
+}
+
+div.jGrowl.top-right {
+	right: 				0px;
+	top: 				50px;
+}
+
+div.jGrowl.bottom-left {
+	left: 				0px;
+	bottom:				0px;
+}
+
+div.jGrowl.bottom-right {
+	right: 				0px;
+	bottom: 			0px;
+}
+
+div.jGrowl.center {
+	top: 				0px;
+	width: 				50%;
+	left: 				25%;
+}
+
+/** Cross Browser Styling **/
+div.center div.jGrowl-notification, div.center div.jGrowl-closer {
+	margin-left: 		auto;
+	margin-right: 		auto;
+}
+
+div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
+	zoom: 					1;
+	width: 					295px;
+	
+	margin-top: 			5px;
+	margin-bottom: 			5px;
+	font-size: 				1em;
+	text-align: 			left;
+	display: 				none;
+	-moz-border-radius: 	0px;
+	-webkit-border-radius:	0px;
+	border-radius:			0px;
+	
+	
+    overflow: 				hidden;
+  
+	background:				#fff;
+	box-shadow:0 3px 13px -10px #505050;
+	border:none;
+}
+
+div.jGrowl div.jGrowl-notification {
+	min-height: 			40px;
+}
+
+div.jGrowl div.jGrowl-notification,
+div.jGrowl div.jGrowl-closer {
+	margin: 				10px;
+}
+
+div.jGrowl div.jGrowl-notification div.jGrowl-header {
+	font-weight:			700;	
+	text-transform:uppercase;
+	background-color:#72afb0;
+	font-family: 'Open Sans', sans-serif;
+	font-size:12px;
+	font-weight:700;
+	color:#ffffff;
+	padding-top:8px;
+	padding-bottom:7px;
+	padding-left:20px;
+	padding-right:20px;
+	position:relative;	
+}
+div.jGrowl div.jGrowl-notification div.jGrowl-header:before{
+	 background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);
+    bottom: 0;
+    content: "";
+    height: 3px;
+    left: 0;
+    position: absolute;
+    transition: all 0.3s ease-in-out 0s;
+    width: 100%;
+}
+div.jGrowl div.jGrowl-notification div.jGrowl-message img { 
+	float:					left; 
+	margin-right:			15px
+}
+div.jGrowl div.jGrowl-notification div.jGrowl-message h3 {
+	color:#505050;
+    font-size: 16px;
+	font-weight:400;
+	line-height:18px;
+	margin-top: 0;
+}
+div.jGrowl div.jGrowl-notification div.jGrowl-message h3 a:first-child{
+    float: none;   
+}
+div.jGrowl div.jGrowl-notification div.jGrowl-message h3 a{
+	color:#72afb0;
+}
+div.jGrowl div.jGrowl-notification div.jGrowl-message{
+	overflow:hidden;
+	padding:20px;
+	border-left:1px solid #dadada;
+	border-right:1px solid #dadada;
+	border-bottom:1px solid #dadada;
+}
+div.jGrowl div.jGrowl-notification div.jGrowl-message h3 a:hover{color:#505050;}
+div.jGrowl div.jGrowl-notification div.jGrowl-close {
+	background: url("../image/remove.png") no-repeat scroll 0 0;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    font-size: 0;
+    font-weight: bold;
+    height: 18px;
+    text-indent: -9999px;
+    width: 18px;
+    z-index: 99;
+	margin:7px;
+	position:relative;
+}
+
+div.jGrowl div.jGrowl-closer {
+	padding-top: 			4px;
+	padding-bottom: 		4px;
+	cursor: 				pointer;
+	font-size:				.9em;
+	font-weight: 			bold;
+	text-align: 			center;
+	color:#040404;
+	text-transform:uppercase;
+}
+div.jGrowl div.jGrowl-closer:hover{color:#c35000}
+/** Hide jGrowl when printing **/
+@media print {
+	div.jGrowl {
+		display: 			none;
+	}
+}

@@ -1,0 +1,37 @@
+{% if empty %}
+  <h1 class="title">{% trans %}Shopping Cart{% endtrans %}</h1>
+    <div class="cart-info">
+      <table class="table">
+        <thead>
+          <tr>
+            <td class="image" colspan="2">{% trans %}Name{% endtrans %}</td>
+            <td class="quantity">{% trans %}Quantity{% endtrans %}</td>
+            <td class="product-price">{% trans %}Price{% endtrans %}</td>
+            <td class="total">{% trans %}Total{% endtrans %}</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in products %}
+            {% include 'market/templates/productincart.html' %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="cart-total">
+      <table>
+        <tbody>
+          <tr>
+            <td class="left">{% trans %}Total{% endtrans %}:</td>
+            <td class="right">{{ total['price'] }} {% trans %}rub.{% endtrans %}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="buttons">
+      <div><a href="{{ config['SITE_URL'] }}checkout" class="btn btn-checkout">{% trans %}Checkout{% endtrans %}</a></div>
+      <div><a href="{{ config['SITE_URL'] }}" class="btn btn-default">{% trans %}Continue Shopping{% endtrans %}</a></div>
+    </div>
+{% else %}
+    <h1 class="title">{% trans %}Shopping Cart{% endtrans %}</h1>
+    <p>{% trans %}Your shopping cart is empty{% endtrans %}!</p>
+{% endif %}

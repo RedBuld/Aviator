@@ -1,0 +1,92 @@
+{% macro render_field(field) %}
+  {{ field(**kwargs)|safe }}
+{% endmacro %}
+
+{% macro render_pagination(pagination, endpoint) %}
+  <ul class=pagination>
+    {% if pagination.has_prev %}<li><a href="{{ url_for(endpoint, page=pagination.prev_num, **kwargs) }}">&laquo;</a></li>{% else %}<li class="disabled"><a href="javascript:;">&laquo;</a></li>{% endif %}
+  {%- for page in pagination.iter_pages() %}
+    {% if page %}
+      {% if page != pagination.page %}
+        <li><a href="{{ url_for(endpoint, page=page, **kwargs) }}">{{ page }}</a></li>
+      {% else %}
+        <li class="active"><a href="javascript:;">{{ page }}<span class="sr-only">(current)</span>
+      {% endif %}
+    {% else %}
+      <span class=ellipsis>…</span>
+    {% endif %}
+  {%- endfor %}
+  {% if pagination.next_prev %}<li><a href="{{ url_for(endpoint, page=pagination.next_num, **kwargs) }}">&raquo;</a></li>{% else %}<li class="disabled"><a href="javascript:;">&raquo;</a></li>{% endif %}
+  </ul>
+{% endmacro %}
+
+{% macro render_ranks(val, user) %}
+<select name="rank" id="rank" class="form-control">
+  {% for rank in config['RANKS'] %}
+  {% if user.rank >= rank[2] %}
+  <option value="{{ rank[0] }}" {% if val == rank[0] %} selected="selected"{% endif %}>{{ rank[1] }}</option>
+  {% endif %}
+  {% endfor %}
+</select>
+{% endmacro %}
+
+{% macro get_rank(user_rank) %}
+{% for rank in config['RANKS'] %}
+{% if rank[0] == user_rank %}{{ rank[1] }}{% endif %}
+{% endfor %}
+{% endmacro %}
+
+{% macro attr_or_val(attr, val) %}{% if (val is none) or (val == '') or (val == 'None')%}{{ attr }}{% else %}{{ val }}{% endif %}{% endmacro %}
+
+{% macro render_checkbox(checkbox, val) %}
+{% if val %}
+{{ render_field(checkbox, checked='checked') }}
+{% else %}
+{{ render_field(checkbox) }}
+{% endif %}
+{% endmacro %}
+
+{% macro render_categories_select(categories) %}
+<select name="category" id="category" class="form-control">
+  {% for category in categories %}
+  <option value="{{ category.id }}">{{ category.name }}</option>
+  {% endfor %}
+</select>
+{% endmacro %}
+
+{% macro render_image_input(width) %}
+<iframe src="{{ url_for('upload_module.image') }}" class="file-load" style="overflow:hidden;" width="{{ width }}" height="34" frameborder="0"></iframe>
+{% endmacro %}
+
+{% macro render_icon_input(width) %}
+<iframe src="{{ url_for('upload_module.icon') }}" class="file-load" style="overflow:hidden;" width="{{ width }}" height="34" frameborder="0"></iframe>
+{% endmacro %}
+
+{% macro render_workload(len, max) %}
+<div class="progress">
+  <div class="progress-bar {% if 0 > len %}progress-bar-danger{% endif %}{% if max/2 > len and len >= 0 %}progress-bar-warning{% endif %}{% if max*3/4 > len and len >= max/2 %}progress-bar-info{% endif %}{% if len > max*3/4 %}progress-bar-success{% endif %}{% if len > max %} progress-bar-striped active{% endif %}" role="progressbar" aria-valuenow="{% if len > max %}{{ max }}{% else %}{{ len }}{% endif %}" aria-valuemin="{{ -max }}" aria-valuemax="{{ max }}" style="width: {% if len > max %}100{% else %}{{ 50+len*(50/max) }}{% endif %}%">
+    <span>{{ len }}/{{ max }}</span>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro render_messages(cat) %}
+{% with messages = get_flashed_messages(category_filter=[cat]) %}
+{% if messages %}
+{% for message in messages %}
+  {% if cat == 'error' %}
+  <div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>{{ message }}</div>
+  {% endif %}
+  {% if cat == 'success' %}
+  <div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>{{ message }}</div>
+  {% endif %}
+  {% if cat == 'warning' %}
+  <div class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>{{ message }}</div>
+  {% endif %}
+  {% if (not cat == 'error') and (not cat == 'success') and (not cat == 'warning') %}
+  <div class="alert alert-info" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>{{ message }}</div>
+  {% endif %}
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% endmacro %}

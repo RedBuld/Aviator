@@ -1,0 +1,91 @@
+{% from "_formhelpers.html" import render_field, render_ranks %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}New user{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('settings_module.index') }}">{% trans %}Settings{% endtrans %}</a></li>
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li class="active"><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}New user{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can create a new user.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+    <li class="active">{% trans %}New user{% endtrans %}</li>
+  </ol>
+  <form action="" method="POST" class="form-edit-big">
+    <div class="hidden">{{ form.csrf_token }}</div>
+    <h3>{% trans %}New user{% endtrans %}</h3>
+    <hr>
+    <div class="form-group{% if form.email.errors %} has-error{% endif %}">
+      {{ form.email.label }}
+      {{ render_field(form.email, class="form-control", placeholder=form.email.label.text, required="required") }}
+      {% for error in form.email.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.name.errors %} has-error{% endif %}">
+      {{ form.name.label }}
+      {{ render_field(form.name, class="form-control", placeholder=form.name.label.text, required="required") }}
+      {% for error in form.name.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.lang.errors %} has-error{% endif %}">
+      {{ form.lang.label }}
+      {{ render_field(form.lang, class="form-control", placeholder=form.lang.label.text, required="required") }}
+      {% for error in form.lang.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.password.errors %} has-error{% endif %}">
+      {{ form.password.label }}
+      {{ render_field(form.password, class="form-control", placeholder=form.password.label.text, required="required") }}
+      {% for error in form.password.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.password2.errors %} has-error{% endif %}">
+      {{ form.password2.label }}
+      {{ render_field(form.password2, class="form-control", placeholder=form.password2.label.text, required="required") }}
+      {% for error in form.password2.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.rank.errors %} has-error{% endif %}">
+      {{ form.rank.label }}
+      {{ render_ranks(form.rank.data, current_user) }}
+      {% for error in form.rank.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.phone.errors %} has-error{% endif %}">
+      {{ form.phone.label }}
+      {{ render_field(form.phone, class="form-control", placeholder=form.phone.label.text, required="required") }}
+      {% for error in form.phone.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <hr>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary btn-block" value="{% trans %}Create{% endtrans %}">
+    </div>
+  </form>
+</div>
+{% endblock %}

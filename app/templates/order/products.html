@@ -1,0 +1,15 @@
+{% set order_products = order.get_products() %}
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h4 class="modal-title" id="myModalLabel">{% trans %}Products in order{% endtrans %} ({{ order_products['price'] }}{% trans %}rub.{% endtrans %})</h4>
+</div>
+<div class="modal-body">
+  <div class="list-group">
+    {% for product in order_products['products'] %}
+    <li class="list-group-item"><span class="badge">{{ product.count }}</span>{{ product.name }} ({{ product.price }}{% trans %}rub.{% endtrans %})</li>
+    {% endfor %}
+  </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans %}Close{% endtrans %}</button>
+</div>

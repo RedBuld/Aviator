@@ -1,0 +1,55 @@
+{% from "_formhelpers.html" import render_field, render_ranks %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}New shop{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li class="active"><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}New shop{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can create a new shop.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+    <li class="active">{% trans %}New shop{% endtrans %}</li>
+  </ol>
+  <form action="" method="POST" class="form-edit-big">
+    <div class="hidden">{{ form.csrf_token }}</div>
+    <h3>{% trans %}New shop{% endtrans %}</h3>
+    <hr>
+    <div class="form-group{% if form.name.errors %} has-error{% endif %}">
+      {{ form.name.label }}
+      {{ render_field(form.name, class="form-control", placeholder=form.name.label.text, required="required") }}
+      {% for error in form.name.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.address.errors %} has-error{% endif %}">
+      {{ form.address.label }}
+      {{ render_field(form.address, class="form-control", placeholder=form.address.label.text, required="required") }}
+      {% for error in form.address.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <hr>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary btn-block" value="{% trans %}Create{% endtrans %}">
+    </div>
+  </form>
+</div>
+{% endblock %}

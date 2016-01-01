@@ -1,0 +1,102 @@
+{% from "_formhelpers.html" import render_field, render_pagination, get_rank %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}Orders{% endtrans %}{% endblock %}
+{% block custom_top_bar %} <span class="small">{% trans %}Driver mode{% endtrans %}</span>{% endblock %}
+{% block menu %}
+<li class="active"><a href="{{ url_for('driver_module.orders') }}">{% trans %}Orders{% endtrans %}</a></li>
+<li><a href="{{ url_for('driver_module.products') }}">{% trans %}Products{% endtrans %}</a></li>
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}Orders{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can see new and active orders.{% endtrans %}<hr><span class="glyphicon glyphicon-refresh"></span> {% trans %}Content on this page is refreshed every 10 seconds.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li class="active">{% trans %}Orders{% endtrans %} <span class="glyphicon glyphicon-refresh" title="{% trans %}Content on this page is refreshed every 10 seconds.{% endtrans %}"></span></li>
+  </ol>
+  <ul class="nav nav-tabs" role="tablist">
+    <li{% if not request.args.get('t') == 'active' %} class="active"{% endif %}><a href="#new-orders" role="tab" data-toggle="tab">{% trans %}New{% endtrans %}</a></li>
+    <li{% if request.args.get('t') == 'active' %} class="active"{% endif %}><a href="#active-orders" role="tab" data-toggle="tab">{% trans %}Active{% endtrans %}</a></li>
+  </ul>
+  <br>
+  <div class="tab-content" id="tab-content">
+    <div id="new-orders" class="tab-pane{% if not request.args.get('t') == 'active' %} active{% endif %}">
+      {%- for order in orders %}
+      {% if order.status == 0 %}
+      {% set order_products = order.get_products() %}
+      <div class="panel panel-primary">
+        <div class="panel-heading"><h3 class="panel-title">#{{ order.id }}&nbsp; ({{ order_products['price'] }}{% trans %}rub.{% endtrans %})</h3></div>
+        <div class="panel-body">
+          <h4>{{ order.address }}</h4>
+          <br>
+          <ul class="list-group">
+            {% for product in order_products['products'] %}
+            <li class="list-group-item"><span class="badge">{{ product.count }}</span>{{ product.name }} ({{ product.price }}{% trans %}rub.{% endtrans %})</li>
+            {% endfor %}
+          </ul>
+          <div class="btn-group btn-group-justified">
+            <div class="btn-group">
+              <a href="{{ url_for('driver_module.order_accept', order_id=order.id) }}" class="btn btn-primary"><strong>{% trans %}Accept{% endtrans %}</strong></a>
+            </div>
+            <div class="btn-group">
+              <a href="{{ url_for('driver_module.order_cancel', order_id=order.id) }}" class="btn btn-default"><strong>{% trans %}Cancel{% endtrans %}</strong></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      {% endif %}
+      {% endfor -%}
+    </div>
+    <div id="active-orders" class="tab-pane{% if request.args.get('t') == 'active' %} active{% endif %}">
+      {%- for order in orders %}
+      {% if order.status == 1 %}
+      {% set order_products = order.get_products() %}
+      <div class="panel panel-primary">
+        <div class="panel-heading"><h3 class="panel-title">#{{ order.id }}&nbsp; ({{ order_products['price'] }}{% trans %}rub.{% endtrans %})</h3></div>
+        <div class="panel-body">
+          <ul class="list-group">
+            {% if order.need_market %}<li class="list-group-item">{% trans %}Marketplace{% endtrans %}</li>{% endif %}
+            <li class="list-group-item">{{ order.address }}</li>
+          </ul>
+          <ul class="list-group">
+            {% for product in order_products['products'] %}
+            <li class="list-group-item"><span class="badge">{{ product.count }}</span>{{ product.name }} ({{ product.price }}{% trans %}rub.{% endtrans %})</li>
+            {% endfor %}
+          </ul>
+          <div class="btn-group btn-group-justified">
+            <div class="btn-group">
+              <a href="{{ url_for('driver_module.route', order_id=order.id) }}" class="btn btn-primary">
+                <strong>{% trans %}Build a route{% endtrans %}</strong>
+              </a>
+            </div>
+            <div class="btn-group">
+            {% if key_enabled == '0' %}
+              <a href="{{ url_for('driver_module.order_complete', order_id=order.id) }}" class="btn btn-default">
+                <strong>{% trans %}Complete{% endtrans %}</strong>
+              </a>
+            {% else %}
+              <button onclick="window.openDialogWindow(this)" data-url="{{ url_for('driver_module.order_complete', order_id=order.id) }}" class="btn btn-default">
+                <strong>{% trans %}Complete{% endtrans %}</strong>
+              </button>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor -%}
+    </div>
+  </div>
+  {% set i = 0 %}
+  {% for order in orders if order.status == 0 and i == 0 %}
+    {% set i=1 %}
+    <audio autoplay>
+      <source src="/media/signal.mp3">
+    </audio>
+  {% endfor %}
+</div>
+{% endblock %}

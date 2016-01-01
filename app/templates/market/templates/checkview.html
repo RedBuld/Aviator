@@ -1,0 +1,33 @@
+{% if empty %}
+  <div id="cart_wrap">
+    <div class="panel panel-default">
+      <div class="panel-heading ">
+        <span class="wrap"><span class="qc-icon-cart"></span></span> 
+        <span class="text">{% trans %}Cart{% endtrans %}</span>
+      </div>
+      <div class="qc-checkout-product panel-body ">
+        <table class="table table-bordered qc-cart">
+          <thead>
+            <tr>
+              <td class="qc-name">{% trans %}Name{% endtrans %}</td>
+              <td class="qc-quantity">{% trans %}Quantity{% endtrans %}</td>
+              <td class="qc-price">{% trans %}Price{% endtrans %}</td>
+              <td class="qc-total">{% trans %}Total{% endtrans %}</td>
+            </tr>
+          </thead>
+          <tbody>
+          {% for product in products %}
+            {% include 'market/templates/productincheck.html' %}
+          {% endfor %}
+          </tbody>
+        </table>
+        <div class="form-horizontal qc-summary ">
+          <div class="row qc-totals">
+            <label class="col-xs-6 control-label">{% trans %}Total{% endtrans %}</label>
+            <div class="col-xs-6 form-control-static">{{ total['price'] }} {% trans %}rub.{% endtrans %}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

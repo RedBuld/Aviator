@@ -1,0 +1,65 @@
+{% from "_formhelpers.html" import render_field, render_ranks, attr_or_val, render_checkbox, render_icon_input %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}Category settings{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li class="active"><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}Category settings{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can change category name, position and visible.{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+    <li class="active">{{ category.name }}</li>
+  </ol>
+  <a href="{{ url_for('product_module.list', category=category.id) }}">{% trans %}Go to list of products, which added to this category{% endtrans %} &raquo;</a>
+  <hr>
+  <form action="" method="POST" class="form-edit-big">
+    <input type="hidden" id="id" name="id" value="{{ category.id }}">
+    <div class="form-group{% if form.name.errors %} has-error{% endif %}">
+      {{ form.name.label }}
+      {{ render_field(form.name, value=attr_or_val(category.name, form.name.data), class="form-control", placeholder=form.name.label.text, required="required") }}
+      {% for error in form.name.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.num.errors %} has-error{% endif %}">
+      {{ form.num.label }}
+      {{ render_field(form.num, value=attr_or_val(category.num, form.num.data), class="form-control", placeholder=form.num.label.text, required="required") }}
+      {% for error in form.num.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.visible.errors %} has-error{% endif %}">
+      {{ form.visible.label }}&nbsp;
+      {{ render_checkbox(form.visible, category.visible) }}
+      {% for error in form.visible.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary btn-block" value="{% trans %}Save{% endtrans %}">
+    </div>
+    <hr>
+    <div class="form-group">
+        <a data-toggle="modal" href="{{ url_for('category_module.delete', category_id=category.id) }}" data-target="#modal" class="btn btn-danger btn-block">{% trans %}Delete Category{% endtrans %}</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
