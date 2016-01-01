@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, abort, g, session, request, flash, url_for, session, Flask
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.babelex import lazy_gettext, gettext as _, ngettext
-from .. import app, db, babel, mail, celery_mail
+from .. import app, db, babel
 from ..models import Settings
 from ..tools import check_rank_user, check_rank
 
