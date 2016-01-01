@@ -165,17 +165,6 @@ window.initPackage ['product/'+$('#id').val()+'/edit'], ->
     b = a.attr 'value'
     a.select2("val", b)
 
-window.initPackage ['category/new', 'category/'+$('#id').val()+'/edit'], ->
-    setInterval ->
-        v = window.getUrlVars document.getElementsByClassName('file-load')[0].contentWindow
-        if typeof v.path != 'undefined'
-            if v.path != prev
-                $('#img-cont').removeClass 'hidden'
-                $('#img-cont').attr 'src', '/static/market/icons/' + v.path.substr(0, v.path.lastIndexOf('.'))  + v.path.substr(v.path.lastIndexOf('.'))
-                $('#img').val v.path
-            prev = v.path
-    , 500
-
 window.initPackage ['driver/map', 'driver/list'], ->
     window.MAP = null
     window.DRIVERS = []
