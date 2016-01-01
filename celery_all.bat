@@ -1,0 +1,1 @@
+celery worker -A app.celery_all -c 10
