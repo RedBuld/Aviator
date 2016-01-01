@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock %} | {{ config['SITE_NAME'] }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 </head>
 <body class="fixed-top-bar {% block bodySubClass %}{% endblock %}">
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">

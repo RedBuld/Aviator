@@ -152,12 +152,4 @@ input[type="checkbox"].switch:checked + div > div {
     </div>
   </form>
 </div>
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.switcher span').on('click',function(){
-      $(this).parent().find('span').removeClass('enabled'); $(this).addClass('enabled');
-      $('.'+$(this).attr('d-param')).removeClass('active'); $('textarea[name='+$(this).attr('d-param')+'_'+$(this).attr('d-lang')+']').addClass('active');
-    });
-  })
-</script>
 {% endblock %}

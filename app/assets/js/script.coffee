@@ -1,3 +1,4 @@
+//=require jquery.min
 //=require bootstrap/bootstrap.min
 //=require select2/select2.min
 //=require select2/select2_locale_ru
@@ -409,3 +410,11 @@ window.initPackage ['order/list'], ->
         $('#list-table').load window.location.href+' #list-table', -> return
         return
     , 10000
+
+window.initPackage ['settings'], ->
+    $('.switcher span').on 'click', ->
+        $(this).parent().find('span').removeClass 'enabled'
+        $(this).addClass 'enabled'
+        $('.' + $(this).attr('d-param')).removeClass 'active'
+        $('textarea[name=' + $(this).attr('d-param') + '_' + $(this).attr('d-lang') + ']').addClass 'active'
+        return

@@ -48,3 +48,4 @@ Temporary Items
 
 *.py[cod]
 *.sublime-workspace
+app/settings/common.py
