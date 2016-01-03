@@ -356,9 +356,6 @@
 	#container{
 		width: 100%;
 	}
-	body {
-        font-size:0.8em; 
-    }
 	#quickcheckout  #step_1 #login_wrap .box{
 		float:none;
 		width:98% !important}
@@ -377,7 +374,6 @@
 		width:100% !important;
 		margin-bottom: 15px;
 	}
-	
 	#quickcheckout #option_login_popup_trigger{
 		width: 100% !important;
 		margin: 0px 0px 0px 2px !important;
@@ -416,10 +412,9 @@
 		float:none;
 		overflow: hidden;
 		box-sizing: border-box;}
-
 	#quickcheckout #qc_right{
 	  width: 100% !important
-	 }
+	}
 }
 /*style.css*/
 @font-face {

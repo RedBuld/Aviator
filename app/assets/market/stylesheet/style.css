@@ -3210,6 +3210,9 @@ h1.title{
 	display: block;
 	overflow-x: auto;
 }
+.cart-info {
+	min-width: 480px;
+}
 table.table thead td, .wishlist-info thead td, .cart-info thead td, #collapse-checkout-confirm td thead td{
 	background: #e2e2e2;
 	color: #1e1e1e;
