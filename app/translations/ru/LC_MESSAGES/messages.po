@@ -213,7 +213,7 @@ msgstr "руб."
 
 #: modules/market.py:126 modules/market.py:150
 msgid "removed from "
-msgstr "был удален "
+msgstr "был удален из "
 
 #: modules/market.py:278
 msgid "Incorrect Email"
