@@ -1625,12 +1625,9 @@ header {
 	background: #fff;
 }
 #rb_header #logo{
-	margin: -25px 0 0 0;
+	margin: 37px 0 0 0;
 	display: inline-block;
 	/*margin-right: 50px;*/
-}
-#rb_header #logo img{
-	width: 200px;
 }
 .rb-menu-logo {
 	/*display: inline-block;*/

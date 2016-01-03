@@ -9,7 +9,7 @@ def path(*args):
 
 SECRET_KEY = '\x8f\xb2KTt\xd0\xe7\xf1"\xd2\x86:\xb9\xdcF\xf1\x18\x1c\x92\xb6\xbbk\xa0\x02'
 
-SITE_NAME = 'Migom'
+SITE_NAME = 'HEAT PIZZA'
 
 BABEL_DEFAULT_LOCALE = 'ru'
 
