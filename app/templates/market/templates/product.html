@@ -12,8 +12,8 @@
       </div>-->
       <div class="dropdown d-{{ product.id }}">
         <ul>
-          <li><a class="button btn-wishlist" onclick="Share.vkontakte('{{ config['SITE_URL'] }}pid{{ product.id }}','{{ product.name }}','{{ product.img|thumbnail('1300x1300') }}','{{ product.name }}')"><i class="sb sb-vk"></i></a></li>
-          <li><a class="button btn-wishlist" onclick="Share.facebook('{{ config['SITE_URL'] }}pid{{ product.id }}','{{ product.name }}','{{ product.img|thumbnail('1300x1300') }}','{{ product.name }}')"><i class="sb sb-fb"></i></a></li>
+          <li><a class="button btn-wishlist" onclick="Share.vkontakte('{{ config['SITE_URL'] }}pid{{ product.id }}','{{ product.name }}','{{ config['SITE_URL'] }}{{ product.img|thumbnail('1300x1300') }}','{{ product.name }}')"><i class="sb sb-vk"></i></a></li>
+          <li><a class="button btn-wishlist" onclick="Share.facebook('{{ config['SITE_URL'] }}pid{{ product.id }}','{{ product.name }}','{{ config['SITE_URL'] }}{{ product.img|thumbnail('1300x1300') }}','{{ product.name }}')"><i class="sb sb-fb"></i></a></li>
           <li><a class="button btn-wishlist" onclick="Share.odnoklassniki('{{ config['SITE_URL'] }}pid{{ product.id }}','{{ product.name }}')"><i class="sb sb-ok"></i></a></li>
           <li><a class="button btn-wishlist" onclick="Share.twitter('{{ config['SITE_URL'] }}pid{{ product.id }}','{{ product.name }}')"><i class="sb sb-tw"></i></a></li>
         </ul>
