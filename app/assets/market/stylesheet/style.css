@@ -3210,9 +3210,6 @@ h1.title{
 	display: block;
 	overflow-x: auto;
 }
-.cart-info {
-	min-width: 480px;
-}
 table.table thead td, .wishlist-info thead td, .cart-info thead td, #collapse-checkout-confirm td thead td{
 	background: #e2e2e2;
 	color: #1e1e1e;
@@ -5481,6 +5478,15 @@ div#boss_testimonial_1{
 		min-width: inherit;
 		padding: 10px 0;
 	}
+	.cart-info .table tbody tr td:first-child{
+		width: 30%;
+	}
+	.cart-info .table tbody tr td:first-child img{
+		max-width: 100%;
+	}
+	.cart-info .table tbody tr td{
+		width: 70%;
+	}
 	.rb-featured-pro .box-heading.htabs a{
 		margin-bottom: 15px;
 	}
@@ -5550,6 +5556,12 @@ div#boss_testimonial_1{
 	}
 }
 @media (max-width:400px){
+	.cart-info .table tbody tr td:first-child{
+		display: none;
+	}
+	.cart-info .table tbody tr td{
+		width: 100%;
+	}
 	.rb-video{
 		max-height: 220px;
 	}
