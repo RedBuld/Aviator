@@ -27,6 +27,26 @@ def list(page=1):
     orders = Order.query.filter_by(status=3).order_by(desc(Order.registered_on)).paginate(page, per_page, False)
     return render_template('order/list.html', orders=orders)
 
+@order_module.route('/calculation', methods=['GET','POST'])
+@login_required
+def calculation():
+    if not check_rank(3):
+        return abort(403)
+    drivers = User.query.filter_by(rank=1).order_by(desc(User.id)).all()
+    if request.method == "POST":
+        date_start = request.form['date_start']+' '+request.form['time_start']
+        date_end = request.form['date_end']+' '+request.form['time_end']
+        driver = (int)(request.form['driver_calc'])
+        total = {}
+        total['summ'] = 0
+        total['counts'] = 0
+        orderz = Order.query.filter(Order.registered_on>=date_start, Order.registered_on<=date_end, Order.driver_id==driver, Order.status==2).all()
+        for order in orderz:
+            total['summ'] += order.get_products()['price']
+            total['counts'] += 1
+        return render_template('order/calculation.html',drivers=drivers, orderz=orderz, total=total)
+    return render_template('order/calculation.html',drivers=drivers)
+
 @order_module.route('/<int:order_id>/products')
 @login_required
 def products(order_id):
@@ -194,3 +214,10 @@ def order_message(order):
     </html>
     '''
 
+@app.context_processor
+def my_utility_processor():
+
+    def date_now(format="%d.%m.%Y %H:%M:%S"):
+        return datetime.now().strftime(format)
+
+    return dict(date_now=date_now)

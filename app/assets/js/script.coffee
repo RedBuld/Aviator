@@ -411,6 +411,11 @@ window.initPackage ['order/list'], ->
         return
     , 10000
 
+window.initPackage ['order/calculation'], ->
+    $('#driver_calc').select2()
+    $('#driver_calc').select2('val', $('#driver_calc').attr 'value' )
+    return
+
 window.initPackage ['settings'], ->
     $('.switcher span').on 'click', ->
         $(this).parent().find('span').removeClass 'enabled'

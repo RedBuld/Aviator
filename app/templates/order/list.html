@@ -28,7 +28,7 @@
   <ol class="breadcrumb">
     <li class="active">{% trans %}Orders{% endtrans %} <span class="glyphicon glyphicon-refresh" title="{% trans %}Content on this page is refreshed every 10 seconds.{% endtrans %}"></span></li>
   </ol>
-  {% if current_user.rank > 3 %}{% if current_user.rank > 4 %}<a href="{{ url_for('order_module.archive') }}" class="btn btn-primary">{% trans %}Open archive{% endtrans %}</a> {% endif %}<a href="{{ url_for('order_module.active') }}" class="btn btn-primary">{% trans %}Show active orders{% endtrans %}</a><hr>{% endif %}
+  {% if current_user.rank > 3 %}{% if current_user.rank > 4 %}<a href="{{ url_for('order_module.archive') }}" class="btn btn-primary">{% trans %}Open archive{% endtrans %}</a> {% endif %}<a href="{{ url_for('order_module.active') }}" class="btn btn-primary">{% trans %}Show active orders{% endtrans %}</a> <a href="{{ url_for('order_module.calculation') }}" class="btn btn-primary">{% trans %}Calculation{% endtrans %}</a><hr>{% endif %}
   <div id="list-table">
     {{ render_pagination(orders, 'order_module.list') }}
     <table class="table table-bordered table-hover">

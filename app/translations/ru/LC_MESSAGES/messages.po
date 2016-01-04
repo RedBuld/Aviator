@@ -1296,3 +1296,28 @@ msgstr "По вашему запросу ничего не найдено. Ут�
 
 msgid "Charts"
 msgstr "Графики"
+
+msgid "Calculation"
+msgstr "Расчет"
+
+msgid "Here you can calculate drivers"
+msgstr "Здесь вы можете расчитать водителя"
+
+msgid "Start date"
+msgstr "Дата начала"
+
+msgid "Stop date"
+msgstr "Дата окончания"
+
+msgid "finished"
+msgstr "выполнил(а)"
+
+msgid "to the amount of"
+msgstr "на сумму"
+
+#, python-format
+msgid "%(num)d order"
+msgid_plural "%(num)d orders"
+msgstr[0] "%(num)d заказ"
+msgstr[1] "%(num)d заказа"
+msgstr[2] "%(num)d заказов"

@@ -1,0 +1,73 @@
+{% from "_formhelpers.html" import render_field, render_pagination, get_rank %}
+
+{% extends "base.html" %}
+{% block bodySubClass %}{% endblock %}
+{% block title %}{% trans %}Calculation{% endtrans %}{% endblock %}
+{% block menu %}
+{% if current_user.rank > 3 %}
+<li><a href="{{ url_for('settings_module.index') }}">{% trans %}Settings{% endtrans %}</a></li>
+<li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
+<li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 2 %}
+<li><a href="{{ url_for('user_module.list') }}">{% trans %}Users{% endtrans %}</a></li>
+<li><a href="{{ url_for('category_module.list') }}">{% trans %}Categories{% endtrans %}</a></li>
+<li><a href="{{ url_for('product_module.list') }}">{% trans %}Products{% endtrans %}</a></li>
+<li><a href="{{ url_for('contacts_module.list') }}">{% trans %}Contacts{% endtrans %}</a></li>
+{% endif %}
+{% if current_user.rank > 1 %}
+<li class="active"><a href="{{ url_for('order_module.list') }}">{% trans %}Orders{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron jumbotron-small help-cont">
+    <h1>{% trans %}Calculation{% endtrans %}</h1>
+    <p class="lead">{% trans %}Here you can calculate drivers{% endtrans %}</p>
+  </div>
+  <ol class="breadcrumb">
+    <li class="active">{% trans %}Calculation{% endtrans %}</li>
+  </ol>
+  <hr>
+  <div id="calculate_place">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <form action="{{ url_for('order_module.calculation') }}" method="POST" class="form-inline">
+          <div class="form-group">
+            <legend>{% trans %}Start date{% endtrans %}</legend>
+            <input id="date_start" name="date_start" class="datte form-control" style="width:250px;" type="date" value="{{ date_now('%Y-%m-%d') }}" max="{{ date_now('%Y-%m-%d') }}" required="required">
+            <input id="time_start" name="time_start" class="timme form-control" style="width:100px;" type="time" value="00:00" required="required">
+          </div>
+          <div class="form-group">
+            <legend>{% trans %}Stop date{% endtrans %}</legend>
+            <input id="date_end" name="date_end" class="datte form-control" style="width:250px;" type="date" value="{{ date_now('%Y-%m-%d') }}" required="required">
+            <input id="time_end" name="time_end" class="timme form-control" style="width:100px;" type="time" value="23:59" required="required">
+          </div>
+          <div class="form-group">
+            <legend>{% trans %}Driver{% endtrans %}</legend>
+            <select name="driver_calc" id="driver_calc" class=" form-control" style="width:250px;" placeholder="{% trans %}Driver{% endtrans %}" value="{% if 'driver_calc' in request.form %}{{ request.form['driver_calc'] }}{% endif %}" required="required">
+              <option value=""></option>
+              {% for driver in drivers %}
+                <option value="{{ driver.id }}">{{ driver.username }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group" style="vertical-align:bottom;">
+            <button class="btn btn-primary" type="submit" value="q">{% trans %}Calculate{% endtrans %}</button>
+          </div>
+        </form>
+      </div>
+      <div class="panel-body" style="text-align:center;">
+        {% if 'date_start' in request.form %}
+          <h3>{% for x in drivers if x.id == request.form['driver_calc']|int %}{{ x.username }}{% endfor %} {% trans %}finished{% endtrans %} <b>{{ ngettext('%(num)d order', '%(num)d orders', total['counts']) }}</b> {% trans %}to the amount of{% endtrans %} <b>{{ total['summ'] }} {% trans %}rub.{% endtrans %}</b></h3>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .datte::-webkit-inner-spin-button { display: none; }
+  .datte::-o-inner-spin-button { display: none; }
+  .datte::-moz-inner-spin-button { display: none; }
+</style>
+{% endblock %}
