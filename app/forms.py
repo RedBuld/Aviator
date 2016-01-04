@@ -58,6 +58,16 @@ def user_validate_password(form, field):
     if not field.data == form.password.data:
         raise ValidationError(_(u'Passwords do not match.'))
 
+class ReplenishForm(Form):
+    amount = IntegerField(_(u'Amount'), [
+        validators.NumberRange(min=0, max=100000),
+        validators.Required()
+    ])
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+        self.amount.label.text = _(u'Amount')
+        
+
 class UserForm(Form):
     name = TextField(_(u'Name'), [
         validators.Length(min=2, max=250),
@@ -82,10 +92,6 @@ class UserForm(Form):
         validators.Required(),
         user_validate_rank
     ])
-    amount = IntegerField(_(u'Amount'), [
-        validators.NumberRange(min=1, max=100000),
-        validators.Required()
-    ])
     phone = TextField(_(u'Phone'), [])
 
     def __init__(self, *args, **kwargs):
@@ -97,7 +103,6 @@ class UserForm(Form):
         self.password2.label.text = _(u'Repeat Password')
         self.lang.label.text = _(u'Language')
         self.rank.label.text = _(u'Rank')
-        self.amount.label.text = _(u'Amount')
         self.phone.label.text = _(u'Phone')
 
     def create_new(self):

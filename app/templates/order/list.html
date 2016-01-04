@@ -49,10 +49,10 @@
           <td>{{ order.id }}</td>
           <td><a href="tel:{{ order.phone }}">{{ order.get_phone() }}</a></td>
           <td>{{ order.name }}</td>
-          <td>{{ order.address }}</td>
+          <td>{{ order.address }}{% if order.status == 3 %} <p style="color:red;">{% trans %}Canceled{% endtrans %}{% endif %}</p></td>
           <td><button onclick="window.openDialogWindow(this)" type="button" data-url="{{ url_for('order_module.products', order_id=order.id) }}" class="btn btn-primary btn-block">{% trans %}Show{% endtrans %}</button></td>
           <td>{{ order.registered_on }}</td>
-          <td><button onclick="window.openDialogWindow(this)" type="button" data-url="{{ url_for('order_module.delete', order_id=order.id) }}" class="btn btn-danger btn-block">{% trans %}Delete{% endtrans %}</button></td>
+          <td><button onclick="window.openDialogWindow(this)" type="button" data-url="{{ url_for('order_module.delete', order_id=order.id) }}" class="btn btn-danger btn-block">{% trans %}Delete{% endtrans %}</button><button onclick="window.openDialogWindow(this)" data-url="{{ url_for('order_module.change_driver', order_id=order.id) }}" class="btn btn-primary btn-block">{% trans %}Change{% endtrans %}</button></td>
         </tr>
         {% endfor %}
       </tbody>

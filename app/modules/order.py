@@ -134,7 +134,7 @@ def change_driver(order_id):
         return abort(404)
     if not check_rank(2):
         return abort(403)
-    if not order.status == 1:
+    if not (order.status == 1 or order.status == 3):
         return abort(403)
     if request.method == 'POST':
         d = order.driver

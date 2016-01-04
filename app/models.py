@@ -44,6 +44,7 @@ class User(db.Model):
         self.locale = locale
         self.registered_on = datetime.now()
         self.rank = rank
+        self.bank = 0
         self.set_phone(phone)
 
     def set_password(self, password):

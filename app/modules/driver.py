@@ -186,7 +186,7 @@ def send_order(order, user):
     else:
         products2 = db.session.query(products_to_users).filter(products_to_users.c.user_id.in_(ids)).all()
         orders = Order.query.filter(Order.driver_id.in_(ids), Order.status==1).all()
-        # nm = {}
+        nm = {}
         for i in products2:
             if data.get(str(i[1])) is None:
                 data[str(i[1])] = []
@@ -198,7 +198,7 @@ def send_order(order, user):
         def sort_by_count(x):
             p = data.get(str(x.id))
             p_ball = 0
-            # nm[str(x.id)] = True
+            nm[str(x.id)] = True
             l = 0
             if not p is None:
                 for i in p:
@@ -207,9 +207,9 @@ def send_order(order, user):
                             for u in xrange(1, j[2]+1):
                                 if i[2] >= u:
                                     p_ball += 1
-                                # l += 1
-            # if l == p_ball and not p_ball == 0:
-            #     nm[str(x.id)] = False
+                                l += 1
+            if l == p_ball and not p_ball == 0:
+                nm[str(x.id)] = False
             o = data2.get(str(x.id))
             if o is None:
                 o = 0
@@ -222,7 +222,7 @@ def send_order(order, user):
                 order.status = 3
             else:
                 order.driver = d[0]
-                # order.need_market = nm.get(str(d[0].id))
+                order.need_market = nm.get(str(d[0].id))
     order.take_time = datetime.now()
     order.re_count += 1
     if order.re_count == 4:

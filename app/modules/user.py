@@ -3,7 +3,7 @@ from flask.ext.login import login_user, logout_user, current_user, login_require
 from flask.ext.babelex import lazy_gettext, gettext as _, ngettext
 from .. import app, db, babel
 from ..models import User, Product, Category
-from ..forms import UserForm
+from ..forms import UserForm, ReplenishForm
 from ..tools import check_rank_user, check_rank
 
 
@@ -52,6 +52,8 @@ def new():
         if rv:
             flash(_('User successfully created'), 'success')
             return redirect(url_for('user_module.edit', user_id=form.user.id))
+        else:
+            flash(_('User creation failed'), 'error')
     return render_template('user/new.html', form=form)
 
 @user_module.route('/<int:user_id>/edit', methods=['GET', 'POST'])
@@ -170,5 +172,5 @@ def replenish_balance(user_id):
     if request.method == 'POST':
         user.set_bank(request.form['amount'],request.form['type'])
         return redirect(url_for('user_module.edit', user_id=user.id, t='products'))
-    form = UserForm(request.form)
+    form = ReplenishForm(request.form)
     return render_template('user/replenish.html', form=form, user=user)
