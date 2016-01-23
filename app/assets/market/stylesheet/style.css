@@ -929,6 +929,11 @@ img{
   width: 100% !important;
 }
 .hormenu a {
+  font-family: 'Hind', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 17px;
+  text-transform: uppercase;
   color:white;
 }
 .hormenu nav {
