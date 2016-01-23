@@ -4,6 +4,22 @@ from datetime import datetime
 from sqlalchemy import bindparam
 import hashlib, re, random, string
 
+def get_full_lenght_name(id,full_name):
+    category = Category.query.filter_by(id=id).first()
+    if not category.parentid == 0:
+        full_name = get_full_lenght_name(category.parentid,full_name)+'>'+category.name
+    else:
+        return category.name
+    return full_name
+
+def get_chained_cats(id,arr):
+    categories = Category.query.filter_by(parentid=id).all()
+    for category in categories:
+        if not category.id in arr:
+            arr.append(category.id)
+        arr = arr+get_chained_cats(category.id,arr)
+    return arr
+
 products_to_users = db.Table('products_to_users',
     db.Column('product_id', db.Integer, db.ForeignKey('product.id')),
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
@@ -192,12 +208,13 @@ class Category(db.Model):
     num = db.Column('num', db.Integer, index=True)
     name = db.Column('name', db.String(250), index=True)
     products = db.relationship('Product', backref='category', lazy='dynamic')
-    visible = db.Column('visible', db.Boolean)
+    parentid = db.Column('parentid', db.Integer, db.ForeignKey('category.id'), index=True)
+    childrens = db.relationship('Category', lazy='subquery')
 
-    def init(self, name, num, visible):
+    def init(self, name, num, parentid, visible):
         self.name = name.lower()
         self.num = num
-        self.visible = visible
+        self.parentid = parentid
 
 class Product(db.Model):
     id = db.Column('id', db.Integer, primary_key=True)

@@ -5,7 +5,7 @@ from flask_wtf.file import FileAllowed, FileRequired, FileField
 from flask_wtf import Form, RecaptchaField
 import hashlib
 from flask.ext.login import current_user
-from app.models import User, Shop, Category, Product, Upload, Settings
+from app.models import User, Shop, Category, Product, Upload, Settings, get_full_lenght_name, get_chained_cats
 from app.tools import remove_img, check_img
 
 class LoginForm(Form):
@@ -200,6 +200,7 @@ class CategoryForm(Form):
         validators.NumberRange(min=1, max=500),
         validators.Required()
     ])
+    parentid = SelectField(_(u'Parent category'), coerce=int)
     visible = BooleanField(_(u'Visible'))
 
     def __init__(self, *args, **kwargs):
@@ -208,12 +209,14 @@ class CategoryForm(Form):
         self.name.label.text = _(u'Category Name')
         self.num.label.text = _(u'Position')
         self.visible.label.text = _(u'Visible')
+        self.parentid.label.text = _(u'Parent category')
+        self.parentid.choices = [(0,u'No parent category')]+[(h.id, get_full_lenght_name(h.id,h.name)) for h in Category.query.all()]
 
     def create_new(self):
         rv = Form.validate(self)
         if rv:
             category = Category()
-            category.init(self.name.data, self.num.data, self.visible.data)
+            category.init(self.name.data, self.num.data, self.parentid.data, self.visible.data)
             db.session.add(category)
             db.session.commit()
             self.category = category
@@ -226,6 +229,7 @@ class CategoryForm(Form):
         if r1 and r2:
             category.name = self.name.data
             category.num = self.num.data
+            category.parentid = self.parentid.data
             category.visible = False
             print str(self.visible.data)
             if str(self.visible.data) == 'True':

@@ -35,7 +35,7 @@ def set_client_session():
 # 404 страница
 @app.errorhandler(404)
 def page_not_found(e):
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(visible=1)
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
     settings = Settings.query.all()
     return render_template('market/functional/error_page.html', categories_all=categories_all, settings=settings), 404
     return redirect(url_for('market_module.index'))
@@ -57,22 +57,26 @@ def set_locale():
 @market_module.route('/', defaults={'category_name': ''})
 @market_module.route('/<category_name>')
 def index(category_name):
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(visible=1)
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
     if category_name == '':
-        category = Category.query.order_by(asc(Category.num)).filter_by(visible=1).first_or_404()
+        category = Category.query.order_by(asc(Category.num)).first_or_404()
     else:
-        category = Category.query.filter_by(name=category_name.lower(),visible=1).first_or_404()
-    cid = ''
+        category = Category.query.filter_by(name=category_name.lower()).first_or_404()
     products = Product.query.filter_by(category_id=category.id)
     settings = Settings.query.all()
     return render_template('market/index.html', categories_all=categories_all, category=category, products=products, settings=settings)
 
+@market_module.route('/testx/')
+def testx():
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
+    return render_template('market/testx.html', categories_all=categories_all)
+
 #страница продукта
 @market_module.route('/product/<int:product_id>')
 def product(product_id):
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(visible=1)
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
     product = Product.query.filter_by(id=product_id).first_or_404()
-    current_category = Category.query.filter_by(id=product.category_id,visible=1).first_or_404()
+    current_category = Category.query.filter_by(id=product.category_id).first_or_404()
     settings = Settings.query.all()
     return render_template('market/product.html', product=product, categories_all=categories_all, category=current_category, settings=settings)
 
@@ -177,7 +181,7 @@ def cart_overview():
 # большая корзина
 @market_module.route('/cart')
 def cart():
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(visible=1)
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
     if len(session['bag']) > 0:
         e = 1
     else:
@@ -197,7 +201,7 @@ def cartview():
 # заполнение данных клиента
 @market_module.route('/checkout')
 def checkout():
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(visible=1)
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
     if len(session['bag']) > 0:
         e = 1
     else:
@@ -240,7 +244,7 @@ def order_create():
 def success():
     if 'order_id' not in session:
         abort(404)
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(visible=1)
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
     order = Order.query.filter_by(id=session['order_id']).first()
     settings = Settings.query.all()
     return render_template('market/checkout_finished.html', categories_all=categories_all, order=order, settings=settings)
@@ -249,14 +253,14 @@ def success():
 # о нас
 @market_module.route('/about')
 def about():
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(visible=1)
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
     data = {}
     settings = Settings.query.all()
     return render_template('market/about.html', categories_all=categories_all, settings=settings)
 
 @market_module.route('/sitemap')
 def sitemap():
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(visible=1)
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
     products_by_cat = {}
     for category in categories_all:
         products_by_cat[category.name] = Product.query.filter_by(category_id=category.id).all()
@@ -280,7 +284,7 @@ def contact():
         }
         return json.dumps(result)
     else:
-        categories_all = Category.query.order_by(asc(Category.num)).filter_by(visible=1)
+        categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
         settings = Settings.query.all()
         return render_template('market/contact.html', categories_all=categories_all, settings=settings)
 
@@ -359,7 +363,7 @@ def search(search_string):
             results['counts']['text'] = _('Show more')
         return json.dumps(results)
     else:
-        categories_all = Category.query.order_by(asc(Category.num)).filter_by(visible=1)
+        categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
         settings = Settings.query.all()
         products = {}
         if not search_string == '':

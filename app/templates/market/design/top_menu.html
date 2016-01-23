@@ -1,27 +1,57 @@
 <div class="rb-comb fadeInDown">
-  <div class="container">
-    <div class="row">
-      <div id="rb_mainmenu" class="col-sm-9 pull-left">
-        <a class="open-panel"><i class="fa fa-bars"></i></a>
-        <nav class="mega-menu">
-          <a class="close-panel"><i class="fa fa-times-circle"></i></a>
-          <ul class="nav nav-pills">
-            {% for category in categories_all %}
+  <div class="navbar menu">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class="hormenu col-sm-9 pull-left">
+          <nav class="hidden-xs">
+            <ul>
+            {% for category in categories_all recursive %}
               <li>
+                {% if category.childrens %}<p class="plus visible-xs">+</p>{% endif %}
                 <a title="{{ category.name }}" href="{{ config['SITE_URL'] }}{{ category.name }}">{{ category.name }}</a>
+                {%- if category.childrens -%}
+                  <ul>
+                    {{- loop(category.childrens) -}}
+                  </ul>
+                {%- endif -%}
               </li>
             {% endfor %}
-            <li>{{ request.script_root }}</li>
-          </ul>
-        </nav>
-      </div>
-      <div class="col-sm-3 pull-right rb-search">
-        <div id="search" class="input-group pull-right">
-          <input type="text" name="search" value="{% if 'search' in request.path %}{{ request.path.split('search/',1)[1] }}{% endif %}" placeholder="{% trans %}Search{% endtrans %}" class="form-control input-lg dropdown-toggle" data-toggle="dropdown">
-          <ul id="search_results" class="dropdown-menu" style="display:none;"></ul>
-          <button type="button" title="search" class="btn btn-search"><i class="fa fa-search"></i></button>
+            </ul>
+          </nav>
+          <nav class="visible-xs hidden-sm hidden-md hidden-lg">
+            <button type="button" class="btn xs-menu">
+              <i class="fa fa-bars"></i>
+            </button>
+          </nav>
+        </div>
+        <div class="col-sm-3 pull-right rb-search">
+          <div id="search" class="input-group pull-right">
+            <input type="text" name="search" value="{% if 'search' in request.path %}{{ request.path.split('search/',1)[1] }}{% endif %}" placeholder="{% trans %}Search{% endtrans %}" class="form-control input-lg dropdown-toggle" data-toggle="dropdown">
+            <ul id="search_results" class="dropdown-menu" style="display:none;"></ul>
+            <button type="button" title="search" class="btn btn-search"><i class="fa fa-search"></i></button>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+<div id="xsmenu" class="hidden-sm hidden-md hidden-lg">
+  <button type="button" class="btn xs-menu">
+    <i class="fa fa-times-circle"></i>
+  </button>
+  <div class="xsmenuover">
+    <ul>
+      {% for category in categories_all recursive %}
+        <li>
+          {% if category.childrens %}<p class="plus visible-xs">+</p>{% endif %}
+          <a title="{{ category.name }}" href="{{ config['SITE_URL'] }}{{ category.name }}">{{ category.name }}</a>
+          {%- if category.childrens -%}
+            <ul>
+              {{- loop(category.childrens) -}}
+            </ul>
+          {%- endif -%}
+        </li>
+      {% endfor %}
+    </ul>
   </div>
 </div>

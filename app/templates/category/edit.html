@@ -39,19 +39,20 @@
         <p class="help-block">{{ error }}</p>
       {% endfor %}
     </div>
+    <div class="form-group{% if form.parentid.errors %} has-error{% endif %}">
+      {{ form.parentid.label }}
+      {{ render_field(form.parentid, class="form-control", placeholder=form.parentid.label.text, required="required") }}
+      {% for error in form.parentid.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
     <div class="form-group{% if form.num.errors %} has-error{% endif %}">
       {{ form.num.label }}
       {{ render_field(form.num, value=attr_or_val(category.num, form.num.data), class="form-control", placeholder=form.num.label.text, required="required") }}
       {% for error in form.num.errors %}
         <p class="help-block">{{ error }}</p>
       {% endfor %}
-    </div>
-    <div class="form-group{% if form.visible.errors %} has-error{% endif %}">
-      {{ form.visible.label }}&nbsp;
-      {{ render_checkbox(form.visible, category.visible) }}
-      {% for error in form.visible.errors %}
-        <p class="help-block">{{ error }}</p>
-      {% endfor %}
+      <p class="help-block grey">{% trans %}Position - it's integer attribute. It's used for sorting.{% endtrans %}</p>
     </div>
     <div class="form-group">
       <input type="submit" class="btn btn-primary btn-block" value="{% trans %}Save{% endtrans %}">

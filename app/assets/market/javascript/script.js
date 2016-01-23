@@ -22,8 +22,28 @@ function getURLVar(key) {
 		}
 	}
 }
-
+init_xs = function(){
+	$('button.xs-menu').off('click').on('click',function(){
+		if($('#xsmenu').hasClass('open')){
+			$('#xsmenu').removeClass('open');
+		}else{
+			$('#xsmenu').addClass('open');
+		}
+	});
+	$('#xsmenu p.plus').off('click').on('click',function(){
+		console.log($(this).parent().hasClass('active'));
+		if($(this).parent().hasClass('active'))
+		{
+			$(this).parent().removeClass('active');
+			$(this).html('<i class="fa fa-plus"></i>');
+		}else{
+			$(this).parent().addClass('active');
+			$(this).html('<i class="fa fa-minus"></i>');
+		}
+	});
+}
 $(document).ready(function() {
+	init_xs();
 	// Highlight any found errors
 	$('.text-danger').each(function() {
 		var element = $(this).parent().parent();

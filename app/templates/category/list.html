@@ -38,7 +38,6 @@
       <tr>
         <th>{% trans %}Category Name{% endtrans %}</th>
         <th>{% trans %}Position{% endtrans %}</th>
-        <th>{% trans %}Visible{% endtrans %}</th>
         <th>{% trans %}Category settings{% endtrans %}</th>
       </tr>
     </thead>
@@ -47,7 +46,6 @@
       <tr>
         <td>{{ category.name }}</td>
         <td>{{ category.num }}</td>
-        <td>{% if category.visible %}{% trans %}Visible{% endtrans %}{% else %}{% trans %}Not Visible{% endtrans %}{% endif %}</td>
         <td>
           <a href="{{ url_for('category_module.edit', category_id=category.id) }}" class="btn btn-default btn-block">{% trans %}Set-up the category{% endtrans %}</a>
         </td>

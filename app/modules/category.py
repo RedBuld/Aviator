@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, abort, g, session, reque
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.babelex import lazy_gettext, gettext as _, ngettext
 from .. import app, db, babel
-from ..models import Category
+from ..models import Category, get_full_lenght_name, get_chained_cats
 from ..forms import CategoryForm
 from ..tools import check_rank_user, check_rank, remove_img
 
@@ -35,6 +35,7 @@ def new():
         if rv:
             flash(_('Category successfully created'), 'success')
             return redirect(url_for('category_module.edit', category_id=form.category.id))
+    form.parentid.data = 0
     return render_template('category/new.html', form=form)
 
 @category_module.route('/<int:category_id>/edit', methods=['GET', 'POST'])
@@ -48,6 +49,9 @@ def edit(category_id):
     form = CategoryForm(request.form)
     if request.method == 'POST':
         form.upgrade(category)
+        redirect(url_for('category_module.edit', category_id=category.id))
+    form.parentid.data = category.parentid
+    form.parentid.choices = [(0,u'No parent category')]+[(h.id, get_full_lenght_name(h.id,h.name)) for h in Category.query.filter(Category.id.notin_(get_chained_cats(category.id,[category.id]))).all()]
     return render_template('category/edit.html', form=form, category=category)
 
 @category_module.route('/<int:category_id>/delete', methods=['GET', 'POST'])
@@ -59,7 +63,10 @@ def delete(category_id):
     if not check_rank(3):
         return abort(403)
     if request.method == 'POST':
-        db.session.delete(category)
+        temp = get_chained_cats(category.id,[category.id])
+        for i in temp:
+            categoryz = Category.query.get(i)
+            db.session.delete(categoryz)
         db.session.commit()
         flash(_('Category successfully deleted'), 'success')
         return redirect(url_for('category_module.list'))

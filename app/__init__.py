@@ -69,7 +69,6 @@ def make_celery(app):
 
 celery_all = make_celery(app)
 
-
 from app import models, views, admin_views
 from models import User
 
