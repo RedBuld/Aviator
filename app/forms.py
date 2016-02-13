@@ -202,6 +202,10 @@ class CategoryForm(Form):
     ])
     parentid = SelectField(_(u'Parent category'), coerce=int)
     visible = BooleanField(_(u'Visible'))
+    paid = BooleanField(_(u'Paid delivery'))
+    dcost = IntegerField(_(u'Cost of delivery'), [
+        validators.NumberRange(min=0)
+    ])
 
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
@@ -209,6 +213,8 @@ class CategoryForm(Form):
         self.name.label.text = _(u'Category Name')
         self.num.label.text = _(u'Position')
         self.visible.label.text = _(u'Visible')
+        self.paid.label.text = _(u'Paid')
+        self.dcost.label.text = _(u'Cost of delivery')
         self.parentid.label.text = _(u'Parent category')
         self.parentid.choices = [(0,u'No parent category')]+[(h.id, get_full_lenght_name(h.id,h.name)) for h in Category.query.all()]
 
@@ -216,7 +222,7 @@ class CategoryForm(Form):
         rv = Form.validate(self)
         if rv:
             category = Category()
-            category.init(self.name.data, self.num.data, self.parentid.data, self.visible.data)
+            category.init(self.name.data, self.num.data, self.parentid.data, self.visible.data, self.paid.data, self.dcost.data)
             db.session.add(category)
             db.session.commit()
             self.category = category
@@ -230,11 +236,14 @@ class CategoryForm(Form):
             category.name = self.name.data
             category.num = self.num.data
             category.parentid = self.parentid.data
-            category.visible = False
-            print str(self.visible.data)
-            if str(self.visible.data) == 'True':
-                category.visible = True
+            category.visible = self.visible.data
+            category.paid = self.paid.data
+            category.dcost = self.dcost.data
+            print str(self.dcost.data)
+            if str(self.dcost.data) == 'None':
+                category.dcost = 0
             db.session.add(category)
+            db.session.query(Category).filter(Category.id.in_(get_chained_cats(category.id,[]))).update({Category.visible:self.visible.data}, synchronize_session=False)
             db.session.commit()
             self.category = category
             return True

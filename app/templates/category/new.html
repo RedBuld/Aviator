@@ -1,10 +1,11 @@
-{% from "_formhelpers.html" import render_field, render_ranks, render_icon_input %}
+{% from "_formhelpers.html" import render_field, render_ranks, render_switch %}
 
 {% extends "base.html" %}
 {% block bodySubClass %}{% endblock %}
 {% block title %}{% trans %}New category{% endtrans %}{% endblock %}
 {% block menu %}
 {% if current_user.rank > 3 %}
+<li><a href="{{ url_for('settings_module.index') }}">{% trans %}Settings{% endtrans %}</a></li>
 <li><a href="{{ url_for('driver_module.list') }}">{% trans %}Drivers{% endtrans %}</a></li>
 <li><a href="{{ url_for('shop_module.list') }}">{% trans %}Shops{% endtrans %}</a></li>
 {% endif %}
@@ -46,6 +47,9 @@
         <p class="help-block">{{ error }}</p>
       {% endfor %}
     </div>
+    <div class="form-group{% if form.visible.errors %} has-error{% endif %}">
+      {{ render_switch(form.visible, form.visible.label.text, 1) }}
+    </div>
     <div class="form-group{% if form.num.errors %} has-error{% endif %}">
       {{ form.num.label }}
       {{ render_field(form.num, class="form-control", placeholder=form.num.label.text, required="required") }}
@@ -53,6 +57,19 @@
         <p class="help-block">{{ error }}</p>
       {% endfor %}
       <p class="help-block grey">{% trans %}Position - it's integer attribute. It's used for sorting.{% endtrans %}</p>
+    </div>
+    <div class="form-group{% if form.paid.errors %} has-error{% endif %}">
+      {{ render_switch(form.paid, form.paid.label.text) }}
+      {% for error in form.paid.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div class="form-group{% if form.dcost.errors %} has-error{% endif %}">
+      {{ form.dcost.label }}
+      {{ render_field(form.dcost, class="form-control", placeholder=form.dcost.label.text) }}
+      {% for error in form.dcost.errors %}
+        <p class="help-block">{{ error }}</p>
+      {% endfor %}
     </div>
     <hr>
     <div class="form-group">

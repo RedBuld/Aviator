@@ -4,8 +4,31 @@ from datetime import datetime
 from sqlalchemy import bindparam
 import hashlib, re, random, string
 
+def get_top_parent_category(id):
+    category = Category.query.filter(Category.id==id).all()
+    if len(category) > 0:
+        category = category[0]
+        if not category.parentid == 0:
+            return get_top_parent_category(category.parentid)
+        else:
+            return category
+
+def get_categories_by_cart(prds):
+    temp = []
+    for prd in prds:
+        if not prd['category_id'] in temp:
+            temp.append(prd['category_id'])
+    paid_cats = []
+    for cat in temp:
+        print cat
+        tcat = get_top_parent_category(cat)
+        if tcat.paid:
+            if not dict({'name':tcat.name,'cost':tcat.dcost}) in paid_cats:
+                paid_cats.append(dict({'name':tcat.name,'cost':tcat.dcost}))
+    return paid_cats
+
 def get_full_lenght_name(id,full_name):
-    category = Category.query.filter_by(id=id).first()
+    category = Category.query.filter(Category.id==id).first()
     if not category.parentid == 0:
         full_name = get_full_lenght_name(category.parentid,full_name)+'>'+category.name
     else:
@@ -13,11 +36,17 @@ def get_full_lenght_name(id,full_name):
     return full_name
 
 def get_chained_cats(id,arr):
-    categories = Category.query.filter_by(parentid=id).all()
+    categories = Category.query.filter(Category.parentid==id).all()
     for category in categories:
         if not category.id in arr:
             arr.append(category.id)
-        arr = arr+get_chained_cats(category.id,arr)
+        arr = get_chained_cats(category.id,arr)
+    return arr
+
+def get_chained_cats_lvl_one(id,arr):
+    categories = Category.query.filter(Category.parentid==id).all()
+    for category in categories:
+        arr.append(category.id)
     return arr
 
 products_to_users = db.Table('products_to_users',
@@ -210,11 +239,19 @@ class Category(db.Model):
     products = db.relationship('Product', backref='category', lazy='dynamic')
     parentid = db.Column('parentid', db.Integer, db.ForeignKey('category.id'), index=True)
     childrens = db.relationship('Category', lazy='subquery')
+    paid = db.Column('paid', db.Integer)
+    dcost = db.Column('dcost', db.Integer)
+    visible = db.Column('visible', db.Boolean)
 
-    def init(self, name, num, parentid, visible):
-        self.name = name.lower()
+    def init(self, name, num, parentid, visible, paid, dcost):
+        self.name = name
         self.num = num
         self.parentid = parentid
+        self.visible = visible
+        self.paid = paid
+        self.dcost = dcost
+        if str(dcost) == 'None':
+            self.dcost = 0
 
 class Product(db.Model):
     id = db.Column('id', db.Integer, primary_key=True)
@@ -226,7 +263,7 @@ class Product(db.Model):
     visible = db.Column('visible', db.Boolean)
 
     def init(self, name, memo, img, price):
-        self.name = name.lower()
+        self.name = name
         self.memo = memo
         self.img = img
         self.price = price
@@ -287,14 +324,21 @@ class Order(db.Model):
         a = db.session.query(products_to_orders).filter_by(order_id=self.id).all()
         b = Product.query.filter(Product.id.in_([x.product_id for x in a])).all()
         c = []
+        d = []
         price = 0
+        delivery = 0
+        for prd in b:
+            d.append({'category_id':prd.category_id})
+        temp = get_categories_by_cart(d)
+        for t in temp:
+            delivery = delivery + t['cost']
         for i in b:
             for j in a:
                 if i.id == j[0]:
                     i.count = j[2]
                     price += i.price*i.count
                     c.append(i)
-        return {'products': c, 'price': price}
+        return {'products': c, 'price': price, 'delivery': delivery}
 
     def get_products_count(self):
         a = db.session.query(products_to_orders).filter_by(order_id=self.id).all()

@@ -28,7 +28,7 @@
       {% if order.status == 0 %}
       {% set order_products = order.get_products() %}
       <div class="panel panel-primary">
-        <div class="panel-heading"><h3 class="panel-title">#{{ order.id }}&nbsp; ({{ order_products['price'] }}{% trans %}rub.{% endtrans %})</h3></div>
+        <div class="panel-heading"><h3 class="panel-title">#{{ order.id }}&nbsp; ({{ order_products['price']+order_products['delivery'] }}{% trans %}rub.{% endtrans %})</h3></div>
         <div class="panel-body">
           <h4>{{ order.address }}</h4>
           <br>
@@ -56,7 +56,7 @@
       {% if order.status == 1 %}
       {% set order_products = order.get_products() %}
       <div class="panel panel-primary">
-        <div class="panel-heading"><h3 class="panel-title">#{{ order.id }}&nbsp; ({{ order_products['price'] }}{% trans %}rub.{% endtrans %})</h3></div>
+        <div class="panel-heading"><h3 class="panel-title">#{{ order.id }}&nbsp; ({{ order_products['price']+order_products['delivery'] }}{% trans %}rub.{% endtrans %})</h3></div>
         <div class="panel-body">
           <ul class="list-group">
             {% if order.need_market %}<li class="list-group-item">{% trans %}Marketplace{% endtrans %}</li>{% endif %}

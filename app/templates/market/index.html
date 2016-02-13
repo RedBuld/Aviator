@@ -14,7 +14,7 @@
 <base href="{{ config['SITE_URL'] }}">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ category.name|capitalize }} | {{ config['SITE_NAME'] }}</title>
+<title>{{ category.name }} | {{ config['SITE_NAME'] }}</title>
 {% include 'market/functional/scripts.html' %}
 <script type="text/javascript">
   $(document).ready(function() {
@@ -47,7 +47,7 @@
     </script> 
     <div class="rb-featured-pro rb-nprolarge-nslider" data-animate="fadeInUp" data-delay="300">
       <div class="box-heading title">
-        <h1>{{ category.name }}</h1>
+        <h1 style="text-transform:none;">{{ category.name }}</h1>
       </div>
       <div class="box-content rb-product-content">
         <div class="rb-items rb-product-grid">

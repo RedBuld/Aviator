@@ -4,11 +4,11 @@ from flask import Blueprint, render_template, redirect, abort, g, session, reque
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.babelex import lazy_gettext, gettext as _, ngettext, refresh
 from .. import app, db, babel, thumb
-from ..models import User, Product, Category, Streets, Contacts, Subscribe, Order, Settings
+from ..models import User, Product, Category, Streets, Contacts, Subscribe, Order, Settings, get_chained_cats_lvl_one, get_categories_by_cart
 from order import create_order
 from ..forms import UserForm
 from ..tools import check_rank_user, check_rank
-from sqlalchemy import asc
+from sqlalchemy import asc, func
 from jinja2 import evalcontextfilter, Markup, escape
 import json
 
@@ -25,20 +25,23 @@ def set_client_session():
     #сессия корзины
     if 'bag' not in session:
         session['bag']=[]
+    if 'paidcats' not in session:
+        session['paidcats']=[]
     if 'last' not in session:
         session['last']=[]
     if 'total' not in session:
         session['total']={}
         session['total']['counts'] = 0
         session['total']['price'] = 0
+        session['total']['delivery']=0
 
 # 404 страница
 @app.errorhandler(404)
 def page_not_found(e):
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
     settings = Settings.query.all()
     return render_template('market/functional/error_page.html', categories_all=categories_all, settings=settings), 404
-    return redirect(url_for('market_module.index'))
+#    return redirect(url_for('market_module.index'))
 
 #смена языка
 @market_module.route('/set_locale', methods=["POST"])
@@ -57,24 +60,24 @@ def set_locale():
 @market_module.route('/', defaults={'category_name': ''})
 @market_module.route('/<category_name>')
 def index(category_name):
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
     if category_name == '':
-        category = Category.query.order_by(asc(Category.num)).first_or_404()
+        category = Category.query.order_by(asc(Category.num)).filter_by(visible=1).first_or_404()
     else:
-        category = Category.query.filter_by(name=category_name.lower()).first_or_404()
-    products = Product.query.filter_by(category_id=category.id)
+        category = Category.query.order_by(asc(Category.num)).filter(func.lower(Category.name)==func.lower(category_name)).first_or_404()
+    products = Product.query.filter(Product.category_id.in_(get_chained_cats_lvl_one(category.id,[category.id])))
     settings = Settings.query.all()
     return render_template('market/index.html', categories_all=categories_all, category=category, products=products, settings=settings)
 
 @market_module.route('/testx/')
 def testx():
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
     return render_template('market/testx.html', categories_all=categories_all)
 
 #страница продукта
 @market_module.route('/product/<int:product_id>')
 def product(product_id):
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
     product = Product.query.filter_by(id=product_id).first_or_404()
     current_category = Category.query.filter_by(id=product.category_id).first_or_404()
     settings = Settings.query.all()
@@ -96,20 +99,24 @@ def add_product(product_id,counts):
     matching = [d for d in session['bag'] if d['pid'] == id]
     if matching:
         matching[0]['qty'] += qty
-        session["last"] = matching[0]
-        session["total"]['price'] += qty*matching[0]['price']
+        session['last'] = matching[0]
+        session['total']['price'] += qty*matching[0]['price']
         session['total']['counts'] += qty
     else:
         product = Product.query.filter_by(id=product_id).first()
-        session["bag"].append(dict({'pid': id, 'name': product.name, 'qty': qty, 'img': thumb.thumbnail(product.img,'200x200'), 'price': product.price}))
-        session["last"] = dict({'pid': id, 'name': product.name, 'qty': qty, 'img': thumb.thumbnail(product.img,'200x200'), 'price': product.price})
+        session["bag"].append(dict({'pid': id, 'category_id':product.category_id, 'name': product.name, 'qty': qty, 'img': thumb.thumbnail(product.img,'200x200'), 'price': product.price}))
+        session['last'] = dict({'pid': id, 'category_id':product.category_id, 'name': product.name, 'qty': qty, 'img': thumb.thumbnail(product.img,'200x200'), 'price': product.price})
         session['total']['price'] += qty*product.price
         session['total']['counts'] += qty
+    session['paidcats'] = get_categories_by_cart(session['bag'])
+    session['total']['delivery'] = 0
+    for i in session['paidcats']:
+        session['total']['delivery'] = session['total']['delivery']+i['cost']
     result['result'] = 'success'
-    result['last'] = session["last"]
+    result['last'] = session['last']
     result['total'] = session['total']
     result['success'] = '<a href="/pid'+str(id)+'">'+session['last']['name']+'</a> '+_('added to ')+'<a href="/cart">'+_('shopping cart')+'</a>'
-    result['cartheader'] = ngettext('%(num)d item', '%(num)d items',session['total']['counts']) % {'num': session['total']['counts']}+' - '+str(session['total']['price'])+' '+_('rub.')
+    result['cartheader'] = ngettext('%(num)d item', '%(num)d items',session['total']['counts']) % {'num': session['total']['counts']}+' - '+str(session['total']['price']+session['total']['delivery'])+' '+_('rub.')
     return json.dumps(result)
 
 # уменьшение кол-ва продукта в корзине
@@ -121,18 +128,22 @@ def remove_product(product_id):
     if matching:
         if matching[0]['qty'] > 1:
             matching[0]['qty'] -= 1
-            session["last"] = matching[0]
-            session["total"]['price'] -= matching[0]['price']
+            session['last'] = matching[0]
+            session['total']['price'] -= matching[0]['price']
             session['total']['counts'] -= 1
         else:
             delete_product(id)
         result['result'] = 'success'
     else:
         result['result'] = 'false'
-    result['last'] = session["last"]
+    session['paidcats'] = get_categories_by_cart(session['bag'])
+    session['total']['delivery'] = 0
+    for i in session['paidcats']:
+        session['total']['delivery'] = session['total']['delivery']+i['cost']
+    result['last'] = session['last']
     result['total'] = session['total']
     result['success'] = '<a href="/pid'+str(id)+'">'+session['last']['name']+'</a> '+_('removed from ')+'<a href="/cart">'+_('shopping cart ')+'</a>'
-    result['cartheader'] = ngettext('%(num)d item', '%(num)d items',session['total']['counts']) % {'num': session['total']['counts']}+' - '+str(session['total']['price'])+' '+_('rub.')
+    result['cartheader'] = ngettext('%(num)d item', '%(num)d items',session['total']['counts']) % {'num': session['total']['counts']}+' - '+str(session['total']['price']+session['total']['delivery'])+' '+_('rub.')
     return json.dumps(result)
 
 # удаление продукта из корзины
@@ -147,16 +158,20 @@ def delete_product(product_id):
         name = matching[0]['name']
         price = matching[0]['price']
         session['bag'].remove(matching[0])
-        session["last"] = matching[0]
-        session["total"]['price'] -= qty*price
+        session['last'] = matching[0]
+        session['total']['price'] -= qty*price
         session['total']['counts'] -= qty
         result['result'] = 'success'
     else:
         result['result'] = 'false'
-    result['last'] = session["last"]
+    session['paidcats'] = get_categories_by_cart(session['bag'])
+    session['total']['delivery'] = 0
+    for i in session['paidcats']:
+        session['total']['delivery'] = session['total']['delivery']+i['cost']
+    result['last'] = session['last']
     result['total'] = session['total']
     result['success'] = '<a href="/pid'+str(id)+'">'+session['last']['name']+'</a> '+_('removed from ')+'<a href="/cart">'+_('shopping cart ')+'</a>'
-    result['cartheader'] = ngettext('%(num)d item', '%(num)d items',session['total']['counts']) % {'num': session['total']['counts']}+' - '+str(session['total']['price'])+' '+_('rub.')
+    result['cartheader'] = ngettext('%(num)d item', '%(num)d items',session['total']['counts']) % {'num': session['total']['counts']}+' - '+str(session['total']['price']+session['total']['delivery'])+' '+_('rub.')
     return json.dumps(result)
 
 # очистка корзины
@@ -164,9 +179,11 @@ def delete_product(product_id):
 def clean_cart():
     session['bag']=[]
     session['last']=[]
+    session['paidcats']=[]
     session['total']={}
     session['total']['counts'] = 0
     session['total']['price'] = 0
+    session['total']['delivery'] = 0
     return 'true'
 
 # мини корзина
@@ -181,7 +198,7 @@ def cart_overview():
 # большая корзина
 @market_module.route('/cart')
 def cart():
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
     if len(session['bag']) > 0:
         e = 1
     else:
@@ -201,7 +218,7 @@ def cartview():
 # заполнение данных клиента
 @market_module.route('/checkout')
 def checkout():
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
     if len(session['bag']) > 0:
         e = 1
     else:
@@ -244,7 +261,7 @@ def order_create():
 def success():
     if 'order_id' not in session:
         abort(404)
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
     order = Order.query.filter_by(id=session['order_id']).first()
     settings = Settings.query.all()
     return render_template('market/checkout_finished.html', categories_all=categories_all, order=order, settings=settings)
@@ -253,14 +270,14 @@ def success():
 # о нас
 @market_module.route('/about')
 def about():
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
     data = {}
     settings = Settings.query.all()
     return render_template('market/about.html', categories_all=categories_all, settings=settings)
 
 @market_module.route('/sitemap')
 def sitemap():
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
+    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
     products_by_cat = {}
     for category in categories_all:
         products_by_cat[category.name] = Product.query.filter_by(category_id=category.id).all()
@@ -284,7 +301,7 @@ def contact():
         }
         return json.dumps(result)
     else:
-        categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
+        categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
         settings = Settings.query.all()
         return render_template('market/contact.html', categories_all=categories_all, settings=settings)
 
@@ -363,7 +380,7 @@ def search(search_string):
             results['counts']['text'] = _('Show more')
         return json.dumps(results)
     else:
-        categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0).all()
+        categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
         settings = Settings.query.all()
         products = {}
         if not search_string == '':

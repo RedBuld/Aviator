@@ -744,6 +744,14 @@ msgstr "Ваша корзина пуста"
 msgid "Your Personal Details"
 msgstr "Персональная информация"
 
+#: templates/market/checkout.html:266
+msgid "The \\"\\" can not be empty"
+msgstr "Поле \\"\\" не может быть пустым"
+
+#: templates/market/checkout.html:266
+msgid "The \\"\\" is not valid"
+msgstr "Поле \\"\\" заполнено неверно"
+
 #: templates/market/checkout.html:85
 msgid "First Name"
 msgstr "Имя"

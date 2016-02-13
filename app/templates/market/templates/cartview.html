@@ -20,9 +20,21 @@
     <div class="cart-total">
       <table>
         <tbody>
+        {% if 'paidcats' in session and not session['paidcats'] == [] %}
+          <tr>
+            <td class="left">{% trans %}Sub-Total{% endtrans %}</td>
+            <td class="right">{{ total['price'] }} {% trans %}rub.{% endtrans %}</td>
+          </tr>
+          {% for i in session['paidcats'] %}
+          <tr>
+            <td class="left">{{ i['name'] }}</td>
+            <td class="right">+{{ i['cost'] }} {% trans %}rub.{% endtrans %}</td>
+          </tr>
+          {% endfor %}
+        {% endif %}
           <tr>
             <td class="left">{% trans %}Total{% endtrans %}:</td>
-            <td class="right">{{ total['price'] }} {% trans %}rub.{% endtrans %}</td>
+            <td class="right">{{ total['price']+total['delivery'] }} {% trans %}rub.{% endtrans %}</td>
           </tr>
         </tbody>
       </table>

@@ -132,3 +132,46 @@ border-radius(n)
   @media (max-width 500px)
     margin-top 10px
     float none
+
+input.switch
+  display: none
+
+input[type="checkbox"].switch:disabled + div
+  opacity: 0.7
+
+input[type="checkbox"].switch + div 
+  vertical-align: middle
+  width: 40px;  height: 20px
+  border-radius: 999px
+  -webkit-transition-duration: .4s
+  -webkit-transition-property: background-color, box-shadow
+  background-color: #E30000
+  border: 1px solid rgb(162, 0, 0)
+  box-shadow: inset 0 0 0 10px rgb(227, 0, 0)
+
+input[type="checkbox"].switch:checked + div 
+  width: 40px
+  background-position: 0 0
+  background-color: #00e359
+  border: 1px solid rgba(0, 162, 63,1)
+  box-shadow: inset 0 0 0 10px rgba(0,227,89,1)
+
+input[type="checkbox"].switch + div > div
+  float: left
+  width: 18px; height: 18px
+  border-radius: inherit
+  background: #ffffff
+  -webkit-transition-timing-function: cubic-bezier(.54,1.85,.5,1)
+  -webkit-transition-duration: 0.4s
+  -webkit-transition-property: transform, background-color, box-shadow
+  -moz-transition-timing-function: cubic-bezier(.54,1.85,.5,1)
+  -moz-transition-duration: 0.4s
+  -moz-transition-property: transform, background-color
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0 0 0 1px rgb(162, 0, 0)
+  pointer-events: none
+
+input[type="checkbox"].switch:checked + div > div
+  -webkit-transform: translate3d(20px, 0, 0)
+  -moz-transform: translate3d(20px, 0, 0)
+  background-color: #ffffff
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 162, 63,1)

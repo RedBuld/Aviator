@@ -90,10 +90,10 @@
             <div class="footer-social pull-right">
               <h3>{% trans %}Follow us{% endtrans %}</h3>
               <ul>
-                <li class="icon-vk"><a href="http://vk.com/vegas_pizza" traget="_blank" title="В контакте"><i class="sb sb-vk"></i></a></li>
+                <li class="icon-vk"><a href="{% for x in settings if x.name == 'link' %}{{ x.value }}{% endfor %}" target="_blank" title="В контакте"><i class="sb sb-vk"></i></a></li>
                 <li class="icon-facebook"><a href="javascript:;" onclick="Share.facebook('{{ config['SITE_URL'] }}','{{ config['SITE_NAME'] }}','','')" title="Facebook"><i class="sb sb-fb"></i></a></li>
                 <li class="icon-twitter"><a href="javascript:;" onclick="Share.facebook('{{ config['SITE_URL'] }}','{{ config['SITE_NAME'] }}')" title="Twitter"><i class="sb sb-tw"></i></a></li>
-                <li class="icon-ok"><a href="javascript:;" onclick="Share.facebook('{{ config['SITE_URL'] }}','{{ config['SITE_NAME'] }}')" title="Одноклассники"><i class="sb sb-ok"></i></a></li>
+                <li class="icon-ok"><a href="javascript:;" onclick="Share.odnoklassniki('{{ config['SITE_URL'] }}','{{ config['SITE_NAME'] }}')" title="Одноклассники"><i class="sb sb-ok"></i></a></li>
               </ul>
             </div>
           </div>

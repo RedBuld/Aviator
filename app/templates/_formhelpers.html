@@ -38,12 +38,23 @@
 
 {% macro attr_or_val(attr, val) %}{% if (val is none) or (val == '') or (val == 'None')%}{{ attr }}{% else %}{{ val }}{% endif %}{% endmacro %}
 
-{% macro render_checkbox(checkbox, val) %}
+{% macro render_checkbox(checkbox, val, class) %}
 {% if val %}
-{{ render_field(checkbox, checked='checked') }}
+{{ render_field(checkbox, checked="checked", class=class) }}
 {% else %}
-{{ render_field(checkbox) }}
+{{ render_field(checkbox, class=class) }}
 {% endif %}
+{% endmacro %}
+
+{% macro render_switch(input,label,value) %}
+<label>{{ label }}
+{% if value %}
+{{ render_field(input, checked="checked", class="switch") }}
+{% else %}
+{{ render_field(input, class="switch") }}
+{% endif %}
+<div><div></div></div>
+</label>
 {% endmacro %}
 
 {% macro render_categories_select(categories) %}
@@ -56,10 +67,6 @@
 
 {% macro render_image_input(width) %}
 <iframe src="{{ url_for('upload_module.image') }}" class="file-load" style="overflow:hidden;" width="{{ width }}" height="34" frameborder="0"></iframe>
-{% endmacro %}
-
-{% macro render_icon_input(width) %}
-<iframe src="{{ url_for('upload_module.icon') }}" class="file-load" style="overflow:hidden;" width="{{ width }}" height="34" frameborder="0"></iframe>
 {% endmacro %}
 
 {% macro render_workload(len, max) %}

@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2015 ORGANIZATION
+# Copyright (C) 2016 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-17 14:35+0300\n"
+"POT-Creation-Date: 2016-02-13 17:32+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.1.1\n"
 
-#: forms.py:25 forms.py:66 forms.py:95 templates/contacts/list.html:39
-#: templates/market/checkout.html:108 templates/user/list.html:40
+#: forms.py:25 forms.py:76 forms.py:101 templates/contacts/list.html:39
+#: templates/market/checkout.html:106 templates/user/list.html:40
 msgid "Email"
 msgstr ""
 
-#: forms.py:26 forms.py:70 forms.py:96
+#: forms.py:26 forms.py:80 forms.py:102
 msgid "Password"
 msgstr ""
 
@@ -46,99 +46,116 @@ msgstr ""
 msgid "Passwords do not match."
 msgstr ""
 
-#: forms.py:62 forms.py:94 forms.py:235 forms.py:247
-#: templates/market/contact.html:52 templates/market/templates/cartview.html:7
+#: forms.py:62 forms.py:68
+msgid "Amount"
+msgstr ""
+
+#: forms.py:72 forms.py:100 forms.py:253 forms.py:265
+#: templates/market/contact.html:51 templates/market/templates/cartview.html:7
 #: templates/market/templates/checkview.html:12 templates/order/active.html:40
 #: templates/order/archive.html:58 templates/order/export.html:37
 #: templates/order/list.html:39 templates/user/list.html:39
 msgid "Name"
 msgstr ""
 
-#: forms.py:74 forms.py:97
+#: forms.py:84 forms.py:103
 msgid "Repeat Password"
 msgstr ""
 
-#: forms.py:79 forms.py:98 templates/base.html:36
+#: forms.py:89 forms.py:104 templates/base.html:35
 msgid "Language"
 msgstr ""
 
-#: forms.py:80 forms.py:99 templates/user/list.html:41
+#: forms.py:90 forms.py:105 templates/user/list.html:41
 msgid "Rank"
 msgstr ""
 
-#: forms.py:85 forms.py:100
-msgid "Amount"
-msgstr ""
-
-#: forms.py:89 forms.py:101 templates/driver/list.html:69
+#: forms.py:95 forms.py:106 templates/driver/list.html:69
 #: templates/order/active.html:39 templates/order/archive.html:57
 #: templates/order/export.html:36 templates/order/list.html:38
+#: templates/settings/index.html:99
 msgid "Phone"
 msgstr ""
 
-#: forms.py:108 forms.py:126
+#: forms.py:113 forms.py:131
 msgid "This email is already in use"
 msgstr ""
 
-#: forms.py:152 forms.py:164 templates/shop/list.html:39
+#: forms.py:157 forms.py:169 templates/shop/list.html:39
 msgid "Shop Name"
 msgstr ""
 
-#: forms.py:156 forms.py:165 templates/order/active.html:41
+#: forms.py:161 forms.py:170 templates/order/active.html:41
 #: templates/order/archive.html:59 templates/order/export.html:38
-#: templates/order/list.html:40 templates/shop/list.html:40
+#: templates/order/list.html:40 templates/settings/index.html:90
+#: templates/shop/list.html:40
 msgid "Address"
 msgstr ""
 
-#: forms.py:190 forms.py:203 templates/category/list.html:39
+#: forms.py:195 forms.py:213 templates/category/list.html:39
 msgid "Category Name"
 msgstr ""
 
-#: forms.py:194 forms.py:204 templates/category/list.html:40
+#: forms.py:199 forms.py:214 templates/category/list.html:40
 msgid "Position"
 msgstr ""
 
-#: forms.py:198 forms.py:205 templates/category/list.html:41
-#: templates/category/list.html:50
+#: forms.py:203 forms.py:218
+msgid "Parent category"
+msgstr ""
+
+#: forms.py:204 forms.py:215
 msgid "Visible"
 msgstr ""
 
-#: forms.py:239 forms.py:248
+#: forms.py:205
+msgid "Paid delivery"
+msgstr ""
+
+#: forms.py:206 forms.py:217
+msgid "Cost of delivery"
+msgstr ""
+
+#: forms.py:216
+msgid "Paid"
+msgstr ""
+
+#: forms.py:257 forms.py:266
 msgid "Reply Text"
 msgstr ""
 
-#: forms.py:263 forms.py:282 templates/driver/products.html:28
+#: forms.py:281 forms.py:300 templates/driver/products.html:28
 #: templates/product/list.html:53 templates/user/edit.html:132
 msgid "Product Name"
 msgstr ""
 
-#: forms.py:267 forms.py:283
+#: forms.py:285 forms.py:301
 msgid "Memo"
 msgstr ""
 
-#: forms.py:268 forms.py:284 forms.py:341
+#: forms.py:286 forms.py:302 forms.py:359
 msgid "Image"
 msgstr ""
 
-#: forms.py:271 forms.py:285 templates/market/templates/cartview.html:9
+#: forms.py:289 forms.py:303 templates/market/templates/cartview.html:9
 #: templates/market/templates/checkview.html:14 templates/order/export.html:40
 #: templates/product/list.html:54
 msgid "Price"
 msgstr ""
 
-#: forms.py:275 forms.py:286
+#: forms.py:293 forms.py:304
 msgid "Category"
 msgstr ""
 
-#: forms.py:297 forms.py:321
+#: forms.py:315 forms.py:339
 msgid "Category not found"
 msgstr ""
 
-#: forms.py:300
+#: forms.py:318
 msgid "Image not found"
 msgstr ""
 
-#: forms.py:343
+#: forms.py:361
 msgid "Images only"
 msgstr ""
 
@@ -146,7 +163,7 @@ msgstr ""
 msgid "Category successfully created"
 msgstr ""
 
-#: modules/category.py:64
+#: modules/category.py:74
 msgid "Category successfully deleted"
 msgstr ""
 
@@ -158,7 +175,7 @@ msgstr ""
 msgid "Thanks for your feedback"
 msgstr ""
 
-#: modules/contacts.py:63 modules/order.py:189
+#: modules/contacts.py:63 modules/order.py:210
 msgid "Dear"
 msgstr ""
 
@@ -170,15 +187,15 @@ msgstr ""
 msgid "The key is incorrect"
 msgstr ""
 
-#: modules/market.py:103
+#: modules/market.py:118
 msgid "added to "
 msgstr ""
 
-#: modules/market.py:103 modules/market.py:126 modules/market.py:150
+#: modules/market.py:118
 msgid "shopping cart"
 msgstr ""
 
-#: modules/market.py:104 modules/market.py:127 modules/market.py:151
+#: modules/market.py:119 modules/market.py:146 modules/market.py:174
 #: templates/market/design/header.html:9
 #, python-format
 msgid "%(num)d item"
@@ -186,64 +203,90 @@ msgid_plural "%(num)d items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: modules/market.py:104 modules/market.py:127 modules/market.py:151
-#: templates/driver/orders.html:31 templates/driver/orders.html:37
-#: templates/driver/orders.html:59 templates/driver/orders.html:67
-#: templates/driver/products.html:38 templates/market/cart_overview.html:19
-#: templates/market/product.html:84 templates/market/quickview.html:34
-#: templates/market/design/header.html:9
-#: templates/market/templates/cartview.html:25
-#: templates/market/templates/checkview.html:27
+#: modules/market.py:119 modules/market.py:146 modules/market.py:174
+#: modules/market.py:377 templates/driver/orders.html:31
+#: templates/driver/orders.html:37 templates/driver/orders.html:59
+#: templates/driver/orders.html:67 templates/driver/products.html:38
+#: templates/market/cart_overview.html:24
+#: templates/market/cart_overview.html:30 templates/market/product.html:84
+#: templates/market/quickview.html:34 templates/market/design/header.html:9
+#: templates/market/templates/cartview.html:26
+#: templates/market/templates/cartview.html:31
+#: templates/market/templates/cartview.html:37
+#: templates/market/templates/checkview.html:28
+#: templates/market/templates/checkview.html:33
+#: templates/market/templates/checkview.html:39
 #: templates/market/templates/product.html:36
 #: templates/market/templates/productinbag.html:28
 #: templates/market/templates/productincart.html:26
 #: templates/market/templates/productincart.html:27
 #: templates/market/templates/productincheck.html:20
 #: templates/market/templates/productincheck.html:21
-#: templates/order/export.html:56 templates/order/products.html:4
-#: templates/order/products.html:9 templates/product/edit.html:51
-#: templates/product/list.html:62 templates/product/new.html:53
-#: templates/user/edit.html:118 templates/user/products.html:13
+#: templates/order/calculation.html:62 templates/order/export.html:56
+#: templates/order/products.html:4 templates/order/products.html:9
+#: templates/product/edit.html:51 templates/product/list.html:62
+#: templates/product/new.html:53 templates/user/edit.html:118
+#: templates/user/products.html:13
 msgid "rub."
 msgstr ""
 
-#: modules/market.py:126 modules/market.py:150
-msgid "been removed from "
+#: modules/market.py:145 modules/market.py:173
+msgid "removed from "
 msgstr ""
 
-#: modules/market.py:278
+#: modules/market.py:145 modules/market.py:173
+msgid "shopping cart "
+msgstr ""
+
+#: modules/market.py:314 modules/market.py:338
 msgid "Incorrect Email"
 msgstr ""
 
-#: modules/market.py:284
+#: modules/market.py:320
 msgid "You already subscribed"
 msgstr ""
 
-#: modules/market.py:292
+#: modules/market.py:320
+msgid "Unsubscribe"
+msgstr ""
+
+#: modules/market.py:328
 msgid "You have subscribed to our newsletter"
 msgstr ""
 
-#: modules/order.py:104
+#: modules/market.py:346
+msgid "You have unsubscribed from our newsletter"
+msgstr ""
+
+#: modules/market.py:350
+msgid "You already unsubscribed"
+msgstr ""
+
+#: modules/market.py:380
+msgid "Show more"
+msgstr ""
+
+#: modules/order.py:125
 msgid "Order successfully deleted"
 msgstr ""
 
-#: modules/order.py:140
+#: modules/order.py:161
 msgid "Order' driver successfully changed"
 msgstr ""
 
-#: modules/order.py:173
+#: modules/order.py:194
 msgid "Hey! That's your order code from"
 msgstr ""
 
-#: modules/order.py:184
+#: modules/order.py:205
 msgid "Order code"
 msgstr ""
 
-#: modules/order.py:190
+#: modules/order.py:211
 msgid "It's your order code"
 msgstr ""
 
-#: modules/order.py:191
+#: modules/order.py:212
 msgid "Thank you for your order!"
 msgstr ""
 
@@ -255,7 +298,7 @@ msgstr ""
 msgid "Product successfully deleted"
 msgstr ""
 
-#: modules/settings.py:25
+#: modules/settings.py:29
 msgid "Settings successfully updated"
 msgstr ""
 
@@ -271,12 +314,17 @@ msgstr ""
 msgid "User successfully created"
 msgstr ""
 
-#: modules/user.py:84
+#: modules/user.py:56
+msgid "User creation failed"
+msgstr ""
+
+#: modules/user.py:86
 msgid "User successfully deleted"
 msgstr ""
 
 #: settings/common.py:26 templates/order/active.html:43
-#: templates/order/archive.html:62
+#: templates/order/archive.html:62 templates/order/calculation.html:47
+#: templates/order/calculation.html:48
 msgid "Driver"
 msgstr ""
 
@@ -292,28 +340,30 @@ msgstr ""
 msgid "Senior Manager"
 msgstr ""
 
-#: templates/base.html:17
+#: templates/base.html:16
 msgid "Toggle navigation"
 msgstr ""
 
-#: templates/base.html:31 templates/category/list.html:8
+#: templates/base.html:30 templates/category/edit.html:8
+#: templates/category/list.html:8 templates/category/new.html:8
 #: templates/contacts/list.html:8 templates/driver/list.html:8
 #: templates/driver/list.html:73 templates/order/active.html:8
-#: templates/order/archive.html:8 templates/order/export.html:6
-#: templates/order/list.html:8 templates/product/list.html:14
-#: templates/settings/index.html:5 templates/settings/index.html:8
-#: templates/settings/index.html:25 templates/settings/index.html:29
-#: templates/shop/list.html:8 templates/user/edit.html:8
+#: templates/order/archive.html:8 templates/order/calculation.html:8
+#: templates/order/export.html:6 templates/order/list.html:8
+#: templates/product/list.html:14 templates/settings/index.html:5
+#: templates/settings/index.html:8 templates/settings/index.html:51
+#: templates/settings/index.html:55 templates/shop/list.html:8
+#: templates/statistic/index.html:8 templates/user/edit.html:8
 #: templates/user/edit.html:34 templates/user/list.html:8
 #: templates/user/new.html:8
 msgid "Settings"
 msgstr ""
 
-#: templates/base.html:33
+#: templates/base.html:32
 msgid "Log-out"
 msgstr ""
 
-#: templates/base.html:35
+#: templates/base.html:34
 msgid "Toggle help"
 msgstr ""
 
@@ -329,7 +379,7 @@ msgstr ""
 msgid "Log-in"
 msgstr ""
 
-#: templates/category/delete.html:3 templates/category/edit.html:61
+#: templates/category/delete.html:3 templates/category/edit.html:79
 #: templates/contacts/delete.html:3
 msgid "Delete Category"
 msgstr ""
@@ -355,52 +405,55 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: templates/category/edit.html:5 templates/category/edit.html:24
-#: templates/category/list.html:42 templates/contacts/reply.html:5
+#: templates/category/edit.html:5 templates/category/edit.html:25
+#: templates/category/list.html:41 templates/contacts/reply.html:5
 #: templates/contacts/reply.html:24
 msgid "Category settings"
 msgstr ""
 
-#: templates/category/edit.html:8 templates/category/list.html:9
-#: templates/category/new.html:8 templates/contacts/list.html:9
+#: templates/category/edit.html:9 templates/category/list.html:9
+#: templates/category/new.html:9 templates/contacts/list.html:9
 #: templates/contacts/new.html:8 templates/contacts/reply.html:8
 #: templates/driver/list.html:9 templates/driver/list.html:25
 #: templates/driver/list.html:29 templates/order/active.html:9
-#: templates/order/archive.html:9 templates/order/export.html:7
-#: templates/order/list.html:9 templates/product/edit.html:8
-#: templates/product/list.html:15 templates/product/new.html:8
-#: templates/settings/index.html:9 templates/shop/edit.html:8
-#: templates/shop/list.html:9 templates/shop/new.html:8
+#: templates/order/archive.html:9 templates/order/calculation.html:9
+#: templates/order/export.html:7 templates/order/list.html:9
+#: templates/product/edit.html:8 templates/product/list.html:15
+#: templates/product/new.html:8 templates/settings/index.html:9
+#: templates/shop/edit.html:8 templates/shop/list.html:9
+#: templates/shop/new.html:8 templates/statistic/index.html:9
 #: templates/user/edit.html:9 templates/user/list.html:9
 #: templates/user/new.html:9
 msgid "Drivers"
 msgstr ""
 
-#: templates/category/edit.html:9 templates/category/list.html:10
-#: templates/category/new.html:9 templates/contacts/list.html:10
+#: templates/category/edit.html:10 templates/category/list.html:10
+#: templates/category/new.html:10 templates/contacts/list.html:10
 #: templates/contacts/new.html:9 templates/contacts/reply.html:9
 #: templates/driver/list.html:10 templates/order/active.html:10
-#: templates/order/archive.html:10 templates/order/export.html:8
-#: templates/order/list.html:10 templates/product/edit.html:9
-#: templates/product/list.html:16 templates/product/new.html:9
-#: templates/settings/index.html:10 templates/shop/edit.html:9
-#: templates/shop/edit.html:28 templates/shop/list.html:5
-#: templates/shop/list.html:10 templates/shop/list.html:25
-#: templates/shop/list.html:29 templates/shop/new.html:9
-#: templates/shop/new.html:28 templates/user/edit.html:10
+#: templates/order/archive.html:10 templates/order/calculation.html:10
+#: templates/order/export.html:8 templates/order/list.html:10
+#: templates/product/edit.html:9 templates/product/list.html:16
+#: templates/product/new.html:9 templates/settings/index.html:10
+#: templates/shop/edit.html:9 templates/shop/edit.html:28
+#: templates/shop/list.html:5 templates/shop/list.html:10
+#: templates/shop/list.html:25 templates/shop/list.html:29
+#: templates/shop/new.html:9 templates/shop/new.html:28
+#: templates/statistic/index.html:10 templates/user/edit.html:10
 #: templates/user/list.html:10 templates/user/new.html:10
 msgid "Shops"
 msgstr ""
 
-#: templates/category/edit.html:12 templates/category/list.html:13
-#: templates/category/new.html:12 templates/contacts/list.html:13
+#: templates/category/edit.html:13 templates/category/list.html:13
+#: templates/category/new.html:13 templates/contacts/list.html:13
 #: templates/contacts/new.html:12 templates/contacts/reply.html:12
 #: templates/driver/list.html:13 templates/order/active.html:13
-#: templates/order/archive.html:13 templates/order/export.html:11
-#: templates/order/list.html:13 templates/product/edit.html:12
-#: templates/product/list.html:19 templates/product/new.html:12
-#: templates/settings/index.html:13 templates/shop/edit.html:12
-#: templates/shop/list.html:13 templates/shop/new.html:12
+#: templates/order/archive.html:13 templates/order/calculation.html:13
+#: templates/order/export.html:11 templates/order/list.html:13
+#: templates/product/edit.html:12 templates/product/list.html:19
+#: templates/product/new.html:12 templates/settings/index.html:13
+#: templates/shop/edit.html:12 templates/shop/list.html:13
+#: templates/shop/new.html:12 templates/statistic/index.html:13
 #: templates/user/edit.html:13 templates/user/edit.html:29
 #: templates/user/list.html:5 templates/user/list.html:13
 #: templates/user/list.html:25 templates/user/list.html:29
@@ -408,91 +461,101 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: templates/category/edit.html:13 templates/category/edit.html:28
+#: templates/category/edit.html:14 templates/category/edit.html:29
 #: templates/category/list.html:5 templates/category/list.html:14
 #: templates/category/list.html:25 templates/category/list.html:29
-#: templates/category/new.html:13 templates/category/new.html:28
+#: templates/category/new.html:14 templates/category/new.html:29
 #: templates/contacts/list.html:14 templates/contacts/new.html:13
 #: templates/contacts/new.html:28 templates/contacts/reply.html:13
 #: templates/driver/list.html:14 templates/order/active.html:14
-#: templates/order/archive.html:14 templates/order/export.html:12
-#: templates/order/list.html:14 templates/product/edit.html:13
-#: templates/product/list.html:20 templates/product/new.html:13
-#: templates/settings/index.html:14 templates/shop/edit.html:13
-#: templates/shop/list.html:14 templates/shop/new.html:13
+#: templates/order/archive.html:14 templates/order/calculation.html:14
+#: templates/order/export.html:12 templates/order/list.html:14
+#: templates/product/edit.html:13 templates/product/list.html:20
+#: templates/product/new.html:13 templates/settings/index.html:14
+#: templates/shop/edit.html:13 templates/shop/list.html:14
+#: templates/shop/new.html:13 templates/statistic/index.html:14
 #: templates/user/edit.html:14 templates/user/list.html:14
 #: templates/user/new.html:14
 msgid "Categories"
 msgstr ""
 
-#: templates/category/edit.html:14 templates/category/list.html:15
-#: templates/category/new.html:14 templates/contacts/list.html:15
+#: templates/category/edit.html:15 templates/category/list.html:15
+#: templates/category/new.html:15 templates/contacts/list.html:15
 #: templates/contacts/new.html:14 templates/contacts/reply.html:14
 #: templates/driver/list.html:15 templates/driver/orders.html:9
 #: templates/driver/products.html:5 templates/driver/products.html:9
 #: templates/driver/products.html:14 templates/driver/products.html:18
 #: templates/driver/route.html:9 templates/order/active.html:15
 #: templates/order/active.html:42 templates/order/archive.html:15
-#: templates/order/archive.html:61 templates/order/export.html:13
-#: templates/order/export.html:41 templates/order/list.html:15
-#: templates/order/list.html:41 templates/product/edit.html:14
-#: templates/product/edit.html:28 templates/product/list.html:7
-#: templates/product/list.html:21 templates/product/list.html:32
-#: templates/product/list.html:39 templates/product/new.html:14
-#: templates/product/new.html:28 templates/settings/index.html:15
-#: templates/shop/edit.html:14 templates/shop/list.html:15
-#: templates/shop/new.html:14 templates/user/edit.html:15
+#: templates/order/archive.html:61 templates/order/calculation.html:15
+#: templates/order/export.html:13 templates/order/export.html:41
+#: templates/order/list.html:15 templates/order/list.html:41
+#: templates/product/edit.html:14 templates/product/edit.html:28
+#: templates/product/list.html:7 templates/product/list.html:21
+#: templates/product/list.html:32 templates/product/list.html:39
+#: templates/product/new.html:14 templates/product/new.html:28
+#: templates/settings/index.html:15 templates/shop/edit.html:14
+#: templates/shop/list.html:15 templates/shop/new.html:14
+#: templates/statistic/index.html:15 templates/user/edit.html:15
 #: templates/user/edit.html:35 templates/user/list.html:15
 #: templates/user/new.html:15
 msgid "Products"
 msgstr ""
 
-#: templates/category/edit.html:15 templates/category/list.html:16
-#: templates/category/new.html:15 templates/contacts/list.html:5
+#: templates/category/edit.html:16 templates/category/list.html:16
+#: templates/category/new.html:16 templates/contacts/list.html:5
 #: templates/contacts/list.html:16 templates/contacts/list.html:25
 #: templates/contacts/list.html:29 templates/contacts/new.html:15
 #: templates/contacts/reply.html:15 templates/contacts/reply.html:28
 #: templates/driver/list.html:16 templates/order/active.html:16
-#: templates/order/archive.html:16 templates/order/export.html:14
-#: templates/order/list.html:16 templates/product/edit.html:15
-#: templates/product/list.html:22 templates/product/new.html:15
-#: templates/settings/index.html:16 templates/shop/edit.html:15
-#: templates/shop/list.html:16 templates/shop/new.html:15
+#: templates/order/archive.html:16 templates/order/calculation.html:16
+#: templates/order/export.html:14 templates/order/list.html:16
+#: templates/product/edit.html:15 templates/product/list.html:22
+#: templates/product/new.html:15 templates/settings/index.html:16
+#: templates/shop/edit.html:15 templates/shop/list.html:16
+#: templates/shop/new.html:15 templates/statistic/index.html:16
 #: templates/user/edit.html:16 templates/user/list.html:16
 #: templates/user/new.html:16
 msgid "Contacts"
 msgstr ""
 
-#: templates/category/edit.html:18 templates/category/list.html:19
-#: templates/category/new.html:18 templates/contacts/list.html:19
+#: templates/category/edit.html:19 templates/category/list.html:19
+#: templates/category/new.html:19 templates/contacts/list.html:19
 #: templates/contacts/new.html:18 templates/contacts/reply.html:18
 #: templates/driver/list.html:19 templates/driver/orders.html:5
 #: templates/driver/orders.html:8 templates/driver/orders.html:14
 #: templates/driver/orders.html:18 templates/driver/products.html:8
 #: templates/driver/route.html:8 templates/order/active.html:19
 #: templates/order/active.html:29 templates/order/archive.html:19
-#: templates/order/archive.html:29 templates/order/export.html:17
-#: templates/order/export.html:27 templates/order/list.html:5
-#: templates/order/list.html:19 templates/order/list.html:25
-#: templates/order/list.html:29 templates/product/edit.html:18
-#: templates/product/list.html:25 templates/product/new.html:18
-#: templates/settings/index.html:19 templates/shop/edit.html:18
-#: templates/shop/list.html:19 templates/shop/new.html:18
+#: templates/order/archive.html:29 templates/order/calculation.html:19
+#: templates/order/export.html:17 templates/order/export.html:27
+#: templates/order/list.html:5 templates/order/list.html:19
+#: templates/order/list.html:25 templates/order/list.html:29
+#: templates/product/edit.html:18 templates/product/list.html:25
+#: templates/product/new.html:18 templates/settings/index.html:19
+#: templates/shop/edit.html:18 templates/shop/list.html:19
+#: templates/shop/new.html:18 templates/statistic/index.html:19
+#: templates/statistic/index.html:28 templates/statistic/index.html:33
 #: templates/user/edit.html:19 templates/user/list.html:19
 #: templates/user/new.html:19
 msgid "Orders"
 msgstr ""
 
-#: templates/category/edit.html:25 templates/contacts/reply.html:25
+#: templates/category/edit.html:26 templates/contacts/reply.html:25
 msgid "Here you can change category name, position and visible."
 msgstr ""
 
-#: templates/category/edit.html:31
+#: templates/category/edit.html:32
 msgid "Go to list of products, which added to this category"
 msgstr ""
 
-#: templates/category/edit.html:57 templates/product/edit.html:76
-#: templates/settings/index.html:48 templates/shop/edit.html:48
+#: templates/category/edit.html:59 templates/category/new.html:59
+#: templates/contacts/new.html:48
+msgid "Position - it's integer attribute. It's used for sorting."
+msgstr ""
+
+#: templates/category/edit.html:75 templates/product/edit.html:76
+#: templates/settings/index.html:111 templates/shop/edit.html:48
 #: templates/user/edit.html:79 templates/user/edit.html:101
 msgid "Save"
 msgstr ""
@@ -506,9 +569,11 @@ msgid "Create a new category"
 msgstr ""
 
 #: templates/category/list.html:32 templates/contacts/list.html:31
-#: templates/driver/list.html:53 templates/product/list.html:42
-#: templates/shop/list.html:32 templates/user/categories.html:9
-#: templates/user/list.html:32 templates/user/products.html:9
+#: templates/driver/list.html:53 templates/market/search.html:17
+#: templates/market/search.html:44 templates/market/design/top_menu.html:29
+#: templates/product/list.html:42 templates/shop/list.html:32
+#: templates/user/categories.html:9 templates/user/list.html:32
+#: templates/user/products.html:9
 msgid "Search"
 msgstr ""
 
@@ -520,29 +585,21 @@ msgid "Search..."
 msgstr ""
 
 #: templates/category/list.html:50
-msgid "Not Visible"
-msgstr ""
-
-#: templates/category/list.html:52
 msgid "Set-up the category"
 msgstr ""
 
-#: templates/category/new.html:5 templates/category/new.html:24
-#: templates/category/new.html:29 templates/category/new.html:33
+#: templates/category/new.html:5 templates/category/new.html:25
+#: templates/category/new.html:30 templates/category/new.html:34
 #: templates/contacts/new.html:5 templates/contacts/new.html:24
 #: templates/contacts/new.html:29 templates/contacts/new.html:33
 msgid "New category"
 msgstr ""
 
-#: templates/category/new.html:25 templates/contacts/new.html:25
+#: templates/category/new.html:26 templates/contacts/new.html:25
 msgid "Here you can create a new category."
 msgstr ""
 
-#: templates/category/new.html:48 templates/contacts/new.html:48
-msgid "Position - it's integer attribute. It's used for sorting."
-msgstr ""
-
-#: templates/category/new.html:59 templates/contacts/new.html:59
+#: templates/category/new.html:76 templates/contacts/new.html:59
 #: templates/product/new.html:83 templates/shop/new.html:51
 #: templates/user/new.html:87
 msgid "Create"
@@ -709,114 +766,118 @@ msgstr ""
 msgid "Client address"
 msgstr ""
 
-#: templates/market/about.html:16 templates/market/about.html:44
-#: templates/market/design/footer.html:58
+#: templates/market/about.html:17 templates/market/about.html:43
+#: templates/market/sitemap.html:53 templates/market/design/footer.html:67
 #: templates/market/design/header.html:69
 msgid "About Us"
 msgstr ""
 
-#: templates/market/cart.html:16 templates/market/cart.html:90
-#: templates/market/cart_overview.html:23 templates/market/checkout.html:59
-#: templates/market/checkout.html:258
-#: templates/market/checkout_finished.html:43
+#: templates/market/about.html:53
+msgid "WHO ARE WE"
+msgstr ""
+
+#: templates/market/cart.html:17 templates/market/cart.html:88
+#: templates/market/cart_overview.html:34 templates/market/checkout.html:57
+#: templates/market/checkout.html:301
+#: templates/market/checkout_finished.html:43 templates/market/sitemap.html:51
 #: templates/market/templates/cartview.html:2
-#: templates/market/templates/cartview.html:35
+#: templates/market/templates/cartview.html:47
 msgid "Shopping Cart"
 msgstr ""
 
-#: templates/market/cart_overview.html:18
+#: templates/market/cart_overview.html:29
 #: templates/market/templates/cartview.html:10
-#: templates/market/templates/cartview.html:24
+#: templates/market/templates/cartview.html:36
 #: templates/market/templates/checkview.html:15
-#: templates/market/templates/checkview.html:26
+#: templates/market/templates/checkview.html:38
 msgid "Total"
 msgstr ""
 
-#: templates/market/cart_overview.html:25 templates/market/checkout.html:16
-#: templates/market/checkout.html:60 templates/market/checkout.html:67
-#: templates/market/checkout_finished.html:44
-#: templates/market/templates/cartview.html:31
+#: templates/market/cart_overview.html:36 templates/market/checkout.html:17
+#: templates/market/checkout.html:58 templates/market/checkout.html:65
+#: templates/market/checkout_finished.html:44 templates/market/sitemap.html:52
+#: templates/market/templates/cartview.html:43
 msgid "Checkout"
 msgstr ""
 
-#: templates/market/cart_overview.html:29 templates/market/checkout.html:259
-#: templates/market/templates/cartview.html:36
+#: templates/market/cart_overview.html:40 templates/market/checkout.html:302
+#: templates/market/templates/cartview.html:48
 msgid "Your shopping cart is empty"
 msgstr ""
 
-#: templates/market/checkout.html:77
+#: templates/market/checkout.html:76
 msgid "Your Personal Details"
 msgstr ""
 
-#: templates/market/checkout.html:85
+#: templates/market/checkout.html:84
 msgid "First Name"
 msgstr ""
 
-#: templates/market/checkout.html:91
-msgid "The \"First Name\" can not be empty"
-msgstr ""
-
-#: templates/market/checkout.html:97
+#: templates/market/checkout.html:95
 msgid "Last Name"
 msgstr ""
 
-#: templates/market/checkout.html:114
+#: templates/market/checkout.html:112
 msgid "The \"Email\" can not be empty"
 msgstr ""
 
-#: templates/market/checkout.html:115
+#: templates/market/checkout.html:113
 msgid "The \"Email\" incorrect"
 msgstr ""
 
-#: templates/market/checkout.html:121
+#: templates/market/checkout.html:119
 msgid "Telephone"
 msgstr ""
 
-#: templates/market/checkout.html:127
+#: templates/market/checkout.html:125
 msgid "The \"Telephone\" can not be empty"
 msgstr ""
 
-#: templates/market/checkout.html:140
+#: templates/market/checkout.html:138
 msgid "Your Address"
 msgstr ""
 
-#: templates/market/checkout.html:147
+#: templates/market/checkout.html:145
 msgid "Street"
 msgstr ""
 
-#: templates/market/checkout.html:152
+#: templates/market/checkout.html:150
 msgid "Select street"
 msgstr ""
 
-#: templates/market/checkout.html:155
+#: templates/market/checkout.html:153
 msgid "Select the street from the list"
 msgstr ""
 
-#: templates/market/checkout.html:160
+#: templates/market/checkout.html:158
 msgid "House"
 msgstr ""
 
-#: templates/market/checkout.html:166
+#: templates/market/checkout.html:164
 msgid "The \"House\" can not be empty"
 msgstr ""
 
-#: templates/market/checkout.html:171
+#: templates/market/checkout.html:169
 msgid "Apartment / Office"
 msgstr ""
 
-#: templates/market/checkout.html:177
+#: templates/market/checkout.html:175
 msgid "The \"Apartment / Office\" can not be empty"
 msgstr ""
 
-#: templates/market/checkout.html:199
+#: templates/market/checkout.html:197
 msgid "Add Comments About Your Order"
 msgstr ""
 
-#: templates/market/checkout.html:213
+#: templates/market/checkout.html:211
 msgid "Confirm Order"
 msgstr ""
 
-#: templates/market/checkout_finished.html:15
+#: templates/market/checkout.html:266
+msgid "The \"\" can not be empty"
+msgstr ""
+
+#: templates/market/checkout_finished.html:17
 msgid "Checkout success"
 msgstr ""
 
@@ -836,41 +897,42 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: templates/market/contact.html:16 templates/market/contact.html:44
+#: templates/market/contact.html:17 templates/market/contact.html:43
 #: templates/market/design/footer.html:8 templates/market/design/header.html:68
 msgid "Contact Us"
 msgstr ""
 
-#: templates/market/contact.html:48 templates/market/design/footer.html:56
+#: templates/market/contact.html:47 templates/market/sitemap.html:54
+#: templates/market/design/footer.html:65
 msgid "Contact us"
 msgstr ""
 
-#: templates/market/contact.html:50
+#: templates/market/contact.html:49
 msgid "Contact Form"
 msgstr ""
 
-#: templates/market/contact.html:64
+#: templates/market/contact.html:63
 msgid "Message"
 msgstr ""
 
-#: templates/market/contact.html:72
+#: templates/market/contact.html:71
 msgid "Submit"
 msgstr ""
 
-#: templates/market/contact.html:87 templates/market/contact.html:91
-#: templates/market/contact.html:100
+#: templates/market/contact.html:86 templates/market/contact.html:90
+#: templates/market/contact.html:99
 msgid "This field cannot be empty"
 msgstr ""
 
-#: templates/market/contact.html:95
+#: templates/market/contact.html:94
 msgid "E-Mail Address does not appear to be valid!"
 msgstr ""
 
-#: templates/market/contact.html:112
+#: templates/market/contact.html:111
 msgid "Message sent"
 msgstr ""
 
-#: templates/market/contact.html:112
+#: templates/market/contact.html:111
 msgid "Message sent successfully"
 msgstr ""
 
@@ -894,39 +956,51 @@ msgstr ""
 msgid "Share"
 msgstr ""
 
-#: templates/market/design/footer.html:26
-msgid "Subscribe to our newsletter today!"
+#: templates/market/search.html:78
+msgid "Searching results"
 msgstr ""
 
-#: templates/market/design/footer.html:36
-msgid "E-mail address"
+#: templates/market/search.html:87
+msgid ""
+"There are no results that match your search. Please refine it and try "
+"again."
 msgstr ""
 
-#: templates/market/design/footer.html:37
-msgid "Subscribe"
-msgstr ""
-
-#: templates/market/design/footer.html:54
-msgid "Infromation"
-msgstr ""
-
-#: templates/market/design/footer.html:57
+#: templates/market/sitemap.html:17 templates/market/sitemap.html:43
+#: templates/market/sitemap.html:47 templates/market/design/footer.html:66
 msgid "Site Map"
 msgstr ""
 
-#: templates/market/design/footer.html:80
+#: templates/market/sitemap.html:50 templates/market/design/footer.html:63
+msgid "Infromation"
+msgstr ""
+
+#: templates/market/design/footer.html:35
+msgid "Subscribe to our newsletter today!"
+msgstr ""
+
+#: templates/market/design/footer.html:45
+msgid "E-mail address"
+msgstr ""
+
+#: templates/market/design/footer.html:46
+msgid "Subscribe"
+msgstr ""
+
+#: templates/market/design/footer.html:91
 msgid "Follow us"
 msgstr ""
 
-#: templates/market/design/footer.html:106
+#: templates/market/design/footer.html:117
 msgid "Back To Top"
 msgstr ""
 
-#: templates/market/functional/info.html:7
-msgid "WHO ARE WE"
+#: templates/market/templates/cartview.html:25
+#: templates/market/templates/checkview.html:27
+msgid "Sub-Total"
 msgstr ""
 
-#: templates/market/templates/cartview.html:32
+#: templates/market/templates/cartview.html:44
 msgid "Continue Shopping"
 msgstr ""
 
@@ -975,7 +1049,7 @@ msgstr ""
 msgid "Change driver"
 msgstr ""
 
-#: templates/order/active.html:58
+#: templates/order/active.html:58 templates/order/list.html:55
 msgid "Change"
 msgstr ""
 
@@ -988,15 +1062,15 @@ msgstr ""
 msgid "Here you can download all orders."
 msgstr ""
 
-#: templates/order/archive.html:34
+#: templates/order/archive.html:34 templates/statistic/index.html:40
 msgid "Day"
 msgstr ""
 
-#: templates/order/archive.html:37
+#: templates/order/archive.html:37 templates/statistic/index.html:41
 msgid "Week"
 msgstr ""
 
-#: templates/order/archive.html:40
+#: templates/order/archive.html:40 templates/statistic/index.html:42
 msgid "Month"
 msgstr ""
 
@@ -1010,6 +1084,42 @@ msgstr ""
 
 #: templates/order/archive.html:60 templates/order/export.html:39
 msgid "Date"
+msgstr ""
+
+#: templates/order/calculation.html:5 templates/order/calculation.html:25
+#: templates/order/calculation.html:29 templates/order/list.html:31
+msgid "Calculation"
+msgstr ""
+
+#: templates/order/calculation.html:26
+msgid "Here you can calculate drivers"
+msgstr ""
+
+#: templates/order/calculation.html:37
+msgid "Start date"
+msgstr ""
+
+#: templates/order/calculation.html:42
+msgid "Stop date"
+msgstr ""
+
+#: templates/order/calculation.html:56
+msgid "Calculate"
+msgstr ""
+
+#: templates/order/calculation.html:62
+msgid "finished"
+msgstr ""
+
+#: templates/order/calculation.html:62
+#, python-format
+msgid "%(num)d order"
+msgid_plural "%(num)d orders"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/order/calculation.html:62
+msgid "to the amount of"
 msgstr ""
 
 #: templates/order/change_driver.html:3 templates/order/change_driver.html:12
@@ -1082,6 +1192,10 @@ msgstr ""
 msgid "Take time"
 msgstr ""
 
+#: templates/order/list.html:52
+msgid "Canceled"
+msgstr ""
+
 #: templates/order/products.html:4
 msgid "Products in order"
 msgstr ""
@@ -1092,6 +1206,7 @@ msgid "Close"
 msgstr ""
 
 #: templates/product/delete.html:3 templates/product/edit.html:80
+#: templates/product/list.html:65
 msgid "Delete Product"
 msgstr ""
 
@@ -1133,8 +1248,20 @@ msgstr ""
 msgid "Here you can create a new product."
 msgstr ""
 
-#: templates/settings/index.html:26
+#: templates/settings/index.html:52
 msgid "Base settings of site."
+msgstr ""
+
+#: templates/settings/index.html:61
+msgid "Confirmation code"
+msgstr ""
+
+#: templates/settings/index.html:72
+msgid "\"About\" quote"
+msgstr ""
+
+#: templates/settings/index.html:81
+msgid "\"About\" text"
 msgstr ""
 
 #: templates/shop/delete.html:3 templates/shop/edit.html:52
@@ -1173,6 +1300,11 @@ msgstr ""
 
 #: templates/shop/new.html:25
 msgid "Here you can create a new shop."
+msgstr ""
+
+#: templates/statistic/index.html:5 templates/statistic/index.html:25
+#: templates/statistic/index.html:29
+msgid "Charts"
 msgstr ""
 
 #: templates/upload/icon.html:6 templates/upload/icon.html:13

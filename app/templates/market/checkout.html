@@ -65,6 +65,7 @@
           <div class="block-title">{% trans %}Checkout{% endtrans %}</div>
           <div class="block-content">
             <!--левая колонка-->
+            <form id="checkout_form" action="">
             <div id="qc_left" class="aqc-column aqc-column-1" style="width:40%">
               <div id="step_2" data-sort="2" data-row="1" data-column="1" data-width="50" class="blocks" style="display: block;">
                 <div id="payment_address_wrap">
@@ -77,52 +78,48 @@
                     <div class="panel-body">
                       <div id="payment_address" class="form-horizontal ">
                         <!--правая колонка-->
-                        <div id="firstname_input" class="text-input form-group row sort-item required">
+                        <div id="firstname_input" class="text-input form-group row required">
                           <div class="col-xs-5">
                             <label class="control-label" for="payment_address_firstname"> 
-                              <span class="text" title="">{% trans %}First Name{% endtrans %}</span> 
+                              <span class="text">{% trans %}First Name{% endtrans %}</span> 
                             </label>
                           </div>
                           <div class="col-xs-7"> 
-                            <input type="text" name="firstname" id="payment_address_firstname" data-require="require" value="" class="form-control">
+                            <input type="text" name="firstname" id="payment_address_firstname" class="form-control" autofocus="autofocus" required>
                           </div>
-                          <div class="col-xs-12 text-danger hidden">{% trans %}The "First Name" can not be empty{% endtrans %}</div>
                         </div>
                         <!--правая колонка-->
-                        <div id="lastname_input" class="text-input form-group row sort-item">
+                        <div id="lastname_input" class="text-input form-group row">
                           <div class="col-xs-5">
                             <label class="control-label" for="payment_address_lastname"> 
-                              <span class="text" title="">{% trans %}Last Name{% endtrans %}</span> 
+                              <span class="text">{% trans %}Last Name{% endtrans %}</span> 
                             </label>
                           </div>
                           <div class="col-xs-7"> 
-                            <input type="text" name="lastname" id="payment_address_lastname" value="" class="form-control">
+                            <input type="text" name="lastname" id="payment_address_lastname" class="form-control">
                           </div>
                         </div>
                         <!--правая колонка-->
-                        <div id="email_input" class="text-input form-group row sort-item required">
+                        <div id="email_input" class="text-input form-group row required">
                           <div class="col-xs-5">
                             <label class="control-label" for="payment_address_email"> 
-                              <span class="text" title="">{% trans %}Email{% endtrans %}</span> 
+                              <span class="text">{% trans %}Email{% endtrans %}</span> 
                             </label>
                           </div>
                           <div class="col-xs-7"> 
-                            <input type="text" name="email" id="payment_address_email" data-require="require" value="" class="form-control">
+                            <input type="email" name="email" id="payment_address_email" class="form-control" required>
                           </div>
-                          <div class="col-xs-12 text-danger hidden">{% trans %}The "Email" can not be empty{% endtrans %}</div>
-                          <div class="col-xs-12 secer text-danger hidden">{% trans %}The "Email" incorrect{% endtrans %}</div>
                         </div>
                         <!--правая колонка-->
-                        <div id="telephone_input" class="text-input form-group row sort-item required">
+                        <div id="telephone_input" class="text-input form-group row required">
                           <div class="col-xs-5">
                             <label class="control-label" for="payment_address_telephone"> 
-                              <span class="text" title="">{% trans %}Telephone{% endtrans %}</span> 
+                              <span class="text">{% trans %}Telephone{% endtrans %}</span> 
                             </label>
                           </div>
                           <div class="col-xs-7"> 
-                            <input type="text" name="telephone" id="payment_address_telephone" data-require="require" value="" class="form-control">
+                            <input type="tel" name="telephone" pattern="(\+?\d[- .]*){6,13}" id="payment_address_telephone" class="form-control" required>
                           </div>
-                          <div class="col-xs-12 text-danger hidden">{% trans %}The "Telephone" can not be empty{% endtrans %}</div>
                         </div>
                         <div class="clear"></div>
                       </div>
@@ -130,7 +127,7 @@
                   </div>
                   <!--КОНЕЦ ТАБЛИЦЫ-->
                   <!--ТАБЛИЦА: адресс-->
-                  <div id="heading_input" class="panel panel-default sort-item heading ">
+                  <div id="heading_input" class="panel panel-default heading ">
                     <div class="panel-heading">
                       <span class="wrap">
                         <span class="fa fa-fw qc-icon-payment-address"></span>
@@ -139,40 +136,37 @@
                     </div>
                     <div class="panel-body">
                       <div class="form-horizontal">
-                        <div id="address_street" class="select-input form-group row sort-item required">
+                        <div id="address_street" class="select-input form-group row required">
                           <div class="col-xs-5">
                             <label class="control-label" for="payment_address_street"> 
-                              <span class="text" title="">{% trans %}Street{% endtrans %}</span>
+                              <span class="text">{% trans %}Street{% endtrans %}</span>
                             </label>
                           </div>
                           <div class="col-xs-7">
-                            <select name="street" data-require="require" id="payment_address_street" class="form-control">
+                            <select name="street" id="payment_address_street" class="form-control" style="visibility:hidden;" required>
                               <option value="">--- {% trans %}Select street{% endtrans %} ---</option>
                             </select>
                           </div>
-                          <div class="col-xs-12 text-danger hidden">{% trans %}Select the street from the list{% endtrans %}</div>
                         </div>
-                        <div id="address_house" class="text-input form-group row sort-item required">
+                        <div id="address_house" class="text-input form-group row required">
                           <div class="col-xs-5">
                             <label class="control-label" for="payment_address_house"> 
-                              <span class="text" title="">{% trans %}House{% endtrans %}</span>
+                              <span class="text">{% trans %}House{% endtrans %}</span>
                             </label>
                           </div>
                           <div class="col-xs-7"> 
-                            <input type="text" name="house" id="payment_address_house" data-require="require" value="" class="form-control">
+                            <input type="text" name="house" id="payment_address_house" class="form-control" required>
                           </div>
-                          <div class="col-xs-12 text-danger hidden">{% trans %}The "House" can not be empty{% endtrans %}</div>
                         </div>
-                        <div id="address_apartment" class="text-input form-group row sort-item required">
+                        <div id="address_apartment" class="text-input form-group row required">
                           <div class="col-xs-5">
                             <label class="control-label" for="payment_address_apartment"> 
-                              <span class="text" title="">{% trans %}Apartment / Office{% endtrans %}</span>
+                              <span class="text">{% trans %}Apartment / Office{% endtrans %}</span>
                             </label>
                           </div>
                           <div class="col-xs-7"> 
-                            <input type="text" name="apartment" id="payment_address_apartment" data-require="require" value="" class="form-control">
+                            <input type="text" name="apartment" id="payment_address_apartment" class="form-control" required>
                           </div>
-                          <div class="col-xs-12 text-danger hidden">{% trans %}The "Apartment / Office" can not be empty{% endtrans %}</div>
                         </div>
                       </div>
                     </div>
@@ -220,6 +214,7 @@
                 <!--КОНЕЦ ТАБЛИЦЫ-->
               </div>
             </div>
+            </form>
             <!--КОНЕЦ: правая колонка-->
             <script type="text/javascript">
               var cobtadd = {
@@ -255,18 +250,33 @@
                 }
               };
               function validateAllFields(){
-                var no_error = true;
-                if($('#firstname_input input').val()===''){no_error = false;$('#firstname_input div.col-xs-12').removeClass('hidden');}else{$('#firstname_input div.col-xs-12').addClass('hidden');}
-                if($('#email_input input').val()===''){no_error = false;$('#email_input div.col-xs-12:not(".secer")').removeClass('hidden');$('#email_input div.col-xs-12.secer').addClass('hidden');}else{if( !(/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/i.test($('#email_input input').val())) ){$('#email_input div.col-xs-12').addClass('hidden');$('#email_input div.col-xs-12.secer').removeClass('hidden');}else{$('#email_input div.col-xs-12:not(".secer")').addClass('hidden');}}
-                if($('#telephone_input input').val()===''){no_error = false;$('#telephone_input div.col-xs-12').removeClass('hidden');}else{$('#telephone_input div.col-xs-12').addClass('hidden');}
-                if($('#address_street select').val()===''){no_error = false;$('#address_street div.col-xs-12').removeClass('hidden');}else{$('#address_street div.col-xs-12').addClass('hidden');}
-                if($('#address_house input').val()===''){no_error = false;$('#address_house div.col-xs-12').removeClass('hidden');}else{$('#address_house div.col-xs-12').addClass('hidden');}
-                if($('#address_apartment input').val()===''){no_error = false;$('#address_apartment div.col-xs-12').removeClass('hidden');}else{$('#address_apartment div.col-xs-12').addClass('hidden');}
-                if(no_error){
+                validy = true;
+                $('#checkout_form input, #checkout_form select').each(function(index,value){
+                  temp = $(value).parent().parent().attr('id');
+                  $('#checkout_form #'+temp+' .alert').remove();
+                  if($('#checkout_form input, #checkout_form select')[index].validity.valueMissing)
+                  {
+                    validy = false;
+                    e = '{% trans %}The \"\" can not be empty{% endtrans %}';
+                    e = e.split('\"\"');
+                    e = e[0]+'\"'+$('#checkout_form #'+temp+' label span').html()+'\"'+e[1];
+                    $('#checkout_form #'+temp+'').append('<div class="alert alert-danger">'+e+'</div>');
+                  }
+                  if($('#checkout_form input, #checkout_form select')[index].validity.typeMismatch||$('#checkout_form input, #checkout_form select')[index].validity.patternMismatch)
+                  {
+                    validy = false;
+                    e = '{% trans %}The \"\" is not valid{% endtrans %}';
+                    e = e.split('\"\"');
+                    e = e[0]+'\"'+$('#checkout_form #'+temp+' label span').html()+'\"'+e[1];
+                    $('#checkout_form #'+temp+'').append('<div class="alert alert-danger">'+e+'</div>');
+                  }
+                })
+                if(validy)
+                {
                   $.ajax({
                     url: '/order_create',
                     type: 'post',
-                    data:  $('#quickcheckout input, #quickcheckout select[data-require=require],#quickcheckout textarea'),
+                    data:  $('#quickcheckout input, #quickcheckout select, #quickcheckout textarea'),
                     dataType: 'json',
                     beforeSend: function() {
                     },

@@ -42,7 +42,8 @@ def calculation():
         total['counts'] = 0
         orderz = Order.query.filter(Order.registered_on>=date_start, Order.registered_on<=date_end, Order.driver_id==driver, Order.status==2).all()
         for order in orderz:
-            total['summ'] += order.get_products()['price']
+            tmp = order.get_products()
+            total['summ'] += tmp['price']+tmp['delivery']
             total['counts'] += 1
         return render_template('order/calculation.html',drivers=drivers, orderz=orderz, total=total)
     return render_template('order/calculation.html',drivers=drivers)

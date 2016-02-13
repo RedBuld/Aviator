@@ -22,9 +22,21 @@
           </tbody>
         </table>
         <div class="form-horizontal qc-summary ">
+          {% if 'paidcats' in session and not session['paidcats'] == [] %}
+            <div class="row qc-totals">
+              <label class="col-xs-6 control-label">{% trans %}Sub-Total{% endtrans %}</label>
+              <div class="col-xs-6 form-control-static">{{ total['price'] }} {% trans %}rub.{% endtrans %}</div>
+            </div>
+            {% for i in session['paidcats'] %}
+            <div class="row qc-totals">
+              <label class="col-xs-6 control-label">{{ i['name'] }}</label>
+              <div class="col-xs-6 form-control-static">+{{ i['cost'] }} {% trans %}rub.{% endtrans %}</div>
+            </div>
+            {% endfor %}
+          {% endif %}
           <div class="row qc-totals">
             <label class="col-xs-6 control-label">{% trans %}Total{% endtrans %}</label>
-            <div class="col-xs-6 form-control-static">{{ total['price'] }} {% trans %}rub.{% endtrans %}</div>
+            <div class="col-xs-6 form-control-static">{{ total['price']+total['delivery'] }} {% trans %}rub.{% endtrans %}</div>
           </div>
         </div>
       </div>

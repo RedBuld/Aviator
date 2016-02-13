@@ -53,7 +53,7 @@ MAIL_USERNAME = 'sibiryakov.ya@gmail.com'
 
 MAIL_PASSWORD = '1409199696Rus'
 
-SITE_URL = 'http://localhost/'
+SITE_URL = '/'
 
 RQ_DEFAULT_HOST = 'localhost'
 

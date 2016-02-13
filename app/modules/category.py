@@ -50,6 +50,9 @@ def edit(category_id):
     if request.method == 'POST':
         form.upgrade(category)
         redirect(url_for('category_module.edit', category_id=category.id))
+    form.dcost.data = category.dcost
+    if str(form.dcost.data) == 'None':
+        form.dcost.data = 0
     form.parentid.data = category.parentid
     form.parentid.choices = [(0,u'No parent category')]+[(h.id, get_full_lenght_name(h.id,h.name)) for h in Category.query.filter(Category.id.notin_(get_chained_cats(category.id,[category.id]))).all()]
     return render_template('category/edit.html', form=form, category=category)
