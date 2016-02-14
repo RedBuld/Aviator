@@ -57,6 +57,22 @@
 </label>
 {% endmacro %}
 
+{% macro switcher(input,parameter, label, settings, language) %}
+<label>{% trans %}{{ label }}{% endtrans %}</label>
+  <div class="switcher pull-right">
+    {% for lang in config['LANGUAGES'] %}
+      <span class="{{ lang[0] }}{% if language == lang[0] %} enabled{% endif %}" d-param="{{ parameter }}" d-lang="{{ lang[0] }}"></span>
+    {% endfor %}
+  </div>
+  {% for lang in config['LANGUAGES'] %}
+    {% if lang[0] == language %}
+      {{ render_field(input[parameter+'_'+lang[0]], class="form-control "+parameter+" active", rows="3", placeholder=label) }}
+    {% else %}
+      {{ render_field(input[parameter+'_'+lang[0]], class="form-control "+parameter, rows="3", placeholder=label) }}
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
 {% macro render_categories_select(categories) %}
 <select name="category" id="category" class="form-control">
   {% for category in categories %}
@@ -67,6 +83,14 @@
 
 {% macro render_image_input(width) %}
 <iframe src="{{ url_for('upload_module.image') }}" class="file-load" style="overflow:hidden;" width="{{ width }}" height="34" frameborder="0"></iframe>
+{% endmacro %}
+
+{% macro render_upload_logo(width) %}
+<iframe src="{{ url_for('upload_module.logo') }}" id="logoform" class="file-load-logo" style="overflow:hidden;" width="{{ width }}" height="34" frameborder="0"></iframe>
+{% endmacro %}
+
+{% macro render_upload_about(width) %}
+<iframe src="{{ url_for('upload_module.about') }}" id="aboutform" class="file-load-about" style="overflow:hidden;" width="{{ width }}" height="34" frameborder="0"></iframe>
 {% endmacro %}
 
 {% macro render_workload(len, max) %}

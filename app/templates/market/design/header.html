@@ -64,7 +64,7 @@
         <div class="list-links pull-right col-sm-6">
           <div class="rb-menu-logo">
             <ul>
-              <li><a href="{% for x in settings if x.name == 'link' %}{{ x.value }}{% endfor %}" target="_blank" title="ВКонтакте">ВКонтакте</a></li>
+              <li><a href="{{ settings['link'] }}" target="_blank" title="ВКонтакте">ВКонтакте</a></li>
               <li><a href="{{ config['SITE_URL'] }}contact" title="{% trans %}Contact Us{% endtrans %}">{% trans %}Contact Us{% endtrans %}</a></li>
               <li><a href="{{ config['SITE_URL'] }}about" title="{% trans %}About Us{% endtrans %}">{% trans %}About Us{% endtrans %}</a></li>
             </ul>

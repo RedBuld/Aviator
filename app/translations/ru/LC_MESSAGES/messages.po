@@ -72,9 +72,6 @@ msgstr "Ранк"
 msgid "Amount"
 msgstr "Количество"
 
-#: forms.py:89 forms.py:101 templates/driver/list.html:69 templates/order/active.html:39
-#: templates/order/archive.html:57 templates/order/export.html:36
-#: templates/order/list.html:38
 msgid "Phone"
 msgstr "Телефон"
 

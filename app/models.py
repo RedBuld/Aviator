@@ -64,7 +64,7 @@ class Settings(db.Model):
         self.value = value
 
     def update(self):
-        self = self
+        db.session.add(self)
         db.session.commit()
 
 class User(db.Model):

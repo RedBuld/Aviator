@@ -433,3 +433,26 @@ window.initPackage ['settings'], ->
         $('.' + $(this).attr('d-param')).removeClass 'active'
         $('textarea[name=' + $(this).attr('d-param') + '_' + $(this).attr('d-lang') + ']').addClass 'active'
         return
+    setInterval ->
+        v = window.getUrlVars document.getElementsByClassName('file-load-logo')[0].contentWindow
+        if typeof v.path != 'undefined'
+            if String(prev) != String(v.path)
+                document.getElementById('logoform').src="/admin/upload/logo?nocache="+nocache()
+                $('#img-cont-logo').attr 'src', '/static/market/image/logo.png?nocache='+nocache()
+            prev = v.path
+        v = window.getUrlVars document.getElementsByClassName('file-load-about')[0].contentWindow
+        if typeof v.path != 'undefined'
+            if String(prev) != String(v.path)
+                document.getElementById('aboutform').src="/admin/upload/about?nocache="+nocache()
+                $('#img-cont-about').attr 'src', '/static/market/image/about-us/'+v.path+'?nocache='+nocache()
+            prev = v.path
+    , 500
+
+nocache = ->
+    return Math.random().toString(36).substring(7);
+
+invert = (rgb) ->
+  rgb = Array.prototype.join.call(arguments).match(/(-?[0-9\.]+)/g);
+  for i in rgb.length
+    rgb[i] = ((i == 3) ? 1 : 255) - rgb[i];
+  return rgb;

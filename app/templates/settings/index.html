@@ -1,4 +1,4 @@
-{% from "_formhelpers.html" import render_field, render_pagination, get_rank %}
+{% from "_formhelpers.html" import render_field, attr_or_val, render_pagination, render_upload_logo, render_upload_about, render_switch, switcher %}
 
 {% extends "base.html" %}
 {% block bodySubClass %}{% endblock %}
@@ -45,6 +45,9 @@ textarea.active {
 .enabled {
   background-color: #3071a9;
 }
+.form-edit-big {
+  width: 100%;
+}
 </style>
 <div class="container">
   <div class="jumbotron jumbotron-small help-cont">
@@ -55,61 +58,50 @@ textarea.active {
     <li class="active">{% trans %}Settings{% endtrans %}</li>
   </ol>
   <hr>
-  <form action="" method="POST" class="form-edit-big">
+  <form action="" method="POST" class="form-edit-big" style="float: left;">
   <div class="form-group">
-    <label for="key">
-      {%- trans %}Confirmation code{% endtrans -%}
-      <input type="checkbox" name="key" id="key" class="switch" value="1"{% if settings['key']=='1' %} checked{% endif %}/>
-      <div><div></div></div>
-    </label>
-    {# <label for="emoney">
-      {%- trans %}Payment cards{% endtrans -%}
-      <input type="checkbox" name="emoney" id="emoney" class="switch" value="1"{% if settings['emoney']=='1' %} checked{% endif %}/>
-      <div><div></div></div>
-    </label> #}
+    {{ render_switch(form.key, _(form.key.label.text), settings['key']|int) }}
+    {{ render_switch(form.emoney, _(form.emoney.label.text), settings['emoney']|int) }}
+  </div>
+  <div class="form_group">
+    {{ switcher(form,'about_q',_('"About" quote'),settings, session['locale']) }}
   </div>
   <div class="form-group">
-    <label for="about_q">{% trans %}"About" quote{% endtrans %}</label>
-    <div class="switcher pull-right">
-      <span class="ru{% if session['locale']=='ru' %} enabled{% endif %}" d-param="about_q" d-lang="ru"></span>
-      <span class="en{% if session['locale']=='en' %} enabled{% endif %}" d-param="about_q" d-lang="en"></span>
-    </div>
-    <textarea class="form-control about_q{% if session['locale']=='ru' %} active{% endif %}" name="about_q_ru" id="about_q" rows="3">{{ settings['about_q_ru'] }}</textarea>
-    <textarea class="form-control about_q{% if session['locale']=='en' %} active{% endif %}" name="about_q_en" id="about_q" rows="3">{{ settings['about_q_en'] }}</textarea>
+    {{ switcher(form,'about_text',_('"About" text'),settings, session['locale']) }}
   </div>
   <div class="form-group">
-    <label for="about_text">{% trans %}"About" text{% endtrans %}</label>
-    <div class="switcher pull-right">
-      <span class="ru{% if session['locale']=='ru' %} enabled{% endif %}" d-param="about_text" d-lang="ru"></span>
-      <span class="en{% if session['locale']=='en' %} enabled{% endif %}" d-param="about_text" d-lang="en"></span>
-    </div>
-    <textarea class="form-control about_text{% if session['locale']=='ru' %} active{% endif %}" name="about_text_ru" id="about_text" rows="3">{{ settings['about_text_ru'] }}</textarea>
-    <textarea class="form-control about_text{% if session['locale']=='en' %} active{% endif %}" name="about_text_en" id="about_text" rows="3">{{ settings['about_text_en'] }}</textarea>
+    {{ switcher(form,'address',_('Address'),settings, session['locale']) }}
   </div>
   <div class="form-group">
-    <label for="address">{% trans %}Address{% endtrans %}</label>
-    <div class="switcher pull-right">
-      <span class="ru{% if session['locale']=='ru' %} enabled{% endif %}" d-param="address" d-lang="ru"></span>
-      <span class="en{% if session['locale']=='en' %} enabled{% endif %}" d-param="address" d-lang="en"></span>
-    </div>
-    <textarea class="form-control address{% if session['locale']=='ru' %} active{% endif %}" name="address_ru" id="address" rows="1">{{ settings['address_ru'] }}</textarea>
-    <textarea class="form-control address{% if session['locale']=='en' %} active{% endif %}" name="address_en" id="address" rows="1">{{ settings['address_en'] }}</textarea>
+    {{ form.phone.label }}
+    {{ render_field(form.phone, class="form-control", value=attr_or_val(settings.phone, form.phone.data), placeholder=form.phone.label.text) }}
   </div>
   <div class="form-group">
-    <label for="phone">{% trans %}Phone{% endtrans %}</label>
-    <input class="form-control" name="phone" id="phone" value="{{ settings['phone'] }}">
+    {{ form.email.label }}
+    {{ render_field(form.email, class="form-control", value=attr_or_val(settings.email, form.email.data), placeholder=form.email.label.text) }}
   </div>
   <div class="form-group">
-    <label for="email">Email</label>
-    <input class="form-control" name="email" id="email" value="{{ settings['email'] }}">
-  </div>
-  <div class="form-group">
-    <label for="link">ВКонтакте</label>
-    <input class="form-control" name="link" id="link" value="{{ settings['link'] }}">
+    {{ form.link.label }}
+    {{ render_field(form.link, class="form-control", value=attr_or_val(settings.link, form.link.data), placeholder=form.link.label.text) }}
+    {{ link }}
   </div>
   <div class="form-group">
     <input type="submit" class="btn btn-primary btn-block" value="{% trans %}Save{% endtrans %}">
   </div>
   </form>
+  <div class="form-edit-big" style="float:right;">
+    <div class="form-group">
+      <label for="logoform">{% trans %}Logo{% endtrans %}</label><br>
+      {{ render_field(logo.img, class="form-control hidden", value="/static/market/image/logo.png", required="required") }}
+      <img id="img-cont-logo" style="background-color:#000;" width="400" src="/static/market/image/logo.png">
+      {{ render_upload_logo('100%') }}
+    </div>
+    <div class="form-group">
+      <label for="aboutform">{% trans %}About{% endtrans %}</label><br>
+      {{ render_field(about.img, class="form-control hidden", value="/static/market/image/about-us/image.png", required="required") }}
+      <img id="img-cont-about" style="background-color:#000;" width="400" src="/static/market/image/about-us/image.jpg">
+      {{ render_upload_about('100%') }}
+    </div>
+  </div>
 </div>
 {% endblock %}

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask.ext.babelex import lazy_gettext, gettext as _, ngettext
 from app import app, db, babel
 from wtforms import TextAreaField, ValidationError, Form, BooleanField, IntegerField, TextField, PasswordField, SelectField, validators
@@ -9,15 +10,15 @@ from app.models import User, Shop, Category, Product, Upload, Settings, get_full
 from app.tools import remove_img, check_img
 
 class LoginForm(Form):
-    email = TextField('Email', [
+    email = TextField(u'Email', [
         validators.Length(min=4, max=50),
         validators.Required()
     ])
-    password = PasswordField('New Password', [
+    password = PasswordField(_(u'New Password'), [
         validators.Length(max=250),
         validators.Required()
     ])
-    remember_me = BooleanField(u'remember_me')
+    remember_me = BooleanField(_(u'Remember Me'))
 
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
@@ -363,3 +364,56 @@ class UploadForm(Form):
 
     def validate_img(self):
         return self.img.validate(self)
+
+class UploadLogoForm(Form):
+    img = FileField(_(u'Image'), validators=[
+        FileRequired(),
+        FileAllowed(['png'], _(u'Images only'))
+    ])
+
+    def validate_img(self):
+        return self.img.validate(self)
+
+class UploadAboutForm(Form):
+    img = FileField(_(u'Image'), validators=[
+        FileRequired(),
+        FileAllowed(app.config['IMAGES'], _(u'Images only'))
+    ])
+
+    def validate_img(self):
+        return self.img.validate(self)
+
+class SettingsFormOne(Form):
+    key = BooleanField(u'Confirmation code')
+    emoney = BooleanField(u'Payment cards')
+    phone = TextField(u'Phone')
+    email = TextField(u'Email')
+    link = TextField(u'ВКонтакте')
+
+    def __init__(self, *args, **kwargs):
+        Form.__init__(self, *args, **kwargs)
+        self.key.label.text = _(u'Confirmation code')
+        self.emoney.label.text = _(u'Payment cards')
+        self.phone.label.text = _(u'Phone')
+        self.email.label.text = u'Email'
+        self.link.label.text = u'ВКонтакте'
+
+    def upgrade(self, settings):
+        for i in settings:
+            print self[i].data
+            if i in self:
+                param = Settings.query.get(i)
+                if param is None:
+                    param = Settings()
+                    param.init(i,self[i].data)
+                    db.session.add(param)
+                    db.session.commit()
+                else:
+                    param.value = self[i].data
+                    Settings.update(param)
+            else:
+                param = Settings()
+                param.init(i,self[i].data)
+                db.session.add(param)
+                db.session.commit()
+        return True

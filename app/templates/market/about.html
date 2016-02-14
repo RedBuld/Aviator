@@ -46,36 +46,26 @@
     <div id="content" class="col-sm-12">
       <div class="banner-about-us">
         <a class="banner effect-shine" title="banner" href="{{ config['SITE_URL'] }}about">
-          <img class="img-responsive" src="{{ url_for('static', filename='market/image/about-us/about_us_1.jpg') }}" alt="banner-about-us">
+          <img class="img-responsive" src="{{ url_for('static', filename='market/image/about-us/'+settings['about']) }}" alt="banner-about-us">
         </a>
       </div>
       <div class="b-about-us">
         <p>{% trans %}WHO ARE WE{% endtrans %}?</p>
-        {% for x in settings if x.name == 'about_q_'+session['locale'] %}
-          <span class="icon quote">{{ x.value|nl2br }}</span>
-        {% endfor %}
-        {% for x in settings if x.name == 'about_text_'+session['locale'] %}
-          <span>{{ x.value|nl2br }}</span>
-        {% endfor %}
+          <span class="icon quote">{{ settings['about_q_'+session['locale']]|nl2br }}</span>
+          <span>{{ settings['about_text_'+session['locale']]|nl2br }}</span>
       </div>
       <div class="contact-us">
         <div class="address">
           <i class="fa fa-map-marker"></i>
-          {% for x in settings if x.name == 'address_'+session['locale'] %}
-            <a class="map" href="#" data-lat="59.223486, 39.888875" data-toggle="modal" data-target="#mapsmodal">{{ x.value }}</a>
-          {% endfor %}
+            <a class="map" href="#" data-lat="59.223486, 39.888875" data-toggle="modal" data-target="#mapsmodal">{{ settings['address_'+session['locale']] }}</a>
         </div>
         <div class="phone">
           <i class="fa fa-phone"></i>
-          {% for x in settings if x.name == 'phone' %}
-            <span>{{ x.value }}</span>
-          {% endfor %}
+            <span>{{ settings['phone'] }}</span>
         </div>
         <div class="email">
           <i class="fa fa-envelope-o"></i>
-          {% for x in settings if x.name == 'email' %}
-            <span>Email: {{ x.value }}</span>
-          {% endfor %}
+            <span>Email: {{ settings['email'] }}</span>
         </div>
       </div>
     </div>

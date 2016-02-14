@@ -31,7 +31,6 @@ def get_filename(directory, f):
         t = True
         s = string.digits + string.ascii_letters
         f = secure_filename(''.join(random.choice(s) for x in range(30))+ext)
-        print f
         for filename in filenames:
             if filename == f:
                 t = False
@@ -42,7 +41,7 @@ def get_filename(directory, f):
 def remove_img(url):
     try:
         os.remove(app.config['UPLOADS_FOLDER'] + '/' + url)
-    except  Exception, e:
+    except Exception, e:
         pass
     filenames = os.listdir(app.config['MEDIA_THUMBNAIL_FOLDER'])
     for filename in filenames:
@@ -53,3 +52,15 @@ def remove_img(url):
 
 def check_img(url):
     return os.path.isfile(app.config['UPLOADS_FOLDER'] + '/' + url)
+
+def remove_logo():
+    try:
+        os.remove(app.config['LOGO_FOLDER']+'/logo.png')
+    except Exception, e:
+        pass
+
+def remove_about(url):
+    try:
+        os.remove(app.config['ABOUT_FOLDER'] + '/' + url)
+    except Exception, e:
+        pass

@@ -67,12 +67,10 @@ def index(category_name):
         category = Category.query.order_by(asc(Category.num)).filter(func.lower(Category.name)==func.lower(category_name)).first_or_404()
     products = Product.query.filter(Product.category_id.in_(get_chained_cats_lvl_one(category.id,[category.id])))
     settings = Settings.query.all()
-    return render_template('market/index.html', categories_all=categories_all, category=category, products=products, settings=settings)
-
-@market_module.route('/testx/')
-def testx():
-    categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
-    return render_template('market/testx.html', categories_all=categories_all)
+    sett = {}
+    for i in settings:
+        sett[i.name] = i.value
+    return render_template('market/index.html', categories_all=categories_all, category=category, products=products, settings=sett)
 
 #страница продукта
 @market_module.route('/product/<int:product_id>')
@@ -81,7 +79,10 @@ def product(product_id):
     product = Product.query.filter_by(id=product_id).first_or_404()
     current_category = Category.query.filter_by(id=product.category_id).first_or_404()
     settings = Settings.query.all()
-    return render_template('market/product.html', product=product, categories_all=categories_all, category=current_category, settings=settings)
+    sett = {}
+    for i in settings:
+        sett[i.name] = i.value
+    return render_template('market/product.html', product=product, categories_all=categories_all, category=current_category, settings=sett)
 
 #обзор продукта
 @market_module.route('/quickview/<int:product_id>')
@@ -204,7 +205,10 @@ def cart():
     else:
         e = 0
     settings = Settings.query.all()
-    return render_template('market/cart.html', categories_all=categories_all, products = session['bag'], empty=e, settings=settings)
+    sett = {}
+    for i in settings:
+        sett[i.name] = i.value
+    return render_template('market/cart.html', categories_all=categories_all, products = session['bag'], empty=e, settings=sett)
 
 # таблица большой корзины
 @market_module.route('/cartview')
@@ -224,7 +228,10 @@ def checkout():
     else:
         e = 0
     settings = Settings.query.all()
-    return render_template('market/checkout.html', categories_all=categories_all, products = session['bag'], empty=e, settings=settings)
+    sett = {}
+    for i in settings:
+        sett[i.name] = i.value
+    return render_template('market/checkout.html', categories_all=categories_all, products = session['bag'], empty=e, settings=sett)
 
 # таблица заполнения данных клиента
 @market_module.route('/checkview')
@@ -264,16 +271,21 @@ def success():
     categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
     order = Order.query.filter_by(id=session['order_id']).first()
     settings = Settings.query.all()
-    return render_template('market/checkout_finished.html', categories_all=categories_all, order=order, settings=settings)
+    sett = {}
+    for i in settings:
+        sett[i.name] = i.value
+    return render_template('market/checkout_finished.html', categories_all=categories_all, order=order, settings=sett)
 
 # дополнительные секции
 # о нас
 @market_module.route('/about')
 def about():
     categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
-    data = {}
+    sett = {}
     settings = Settings.query.all()
-    return render_template('market/about.html', categories_all=categories_all, settings=settings)
+    for i in settings:
+        sett[i.name] = i.value
+    return render_template('market/about.html', categories_all=categories_all, settings=sett)
 
 @market_module.route('/sitemap')
 def sitemap():
@@ -282,7 +294,10 @@ def sitemap():
     for category in categories_all:
         products_by_cat[category.name] = Product.query.filter_by(category_id=category.id).all()
     settings = Settings.query.all()
-    return render_template('market/sitemap.html', categories_all=categories_all, products_by_cat=products_by_cat, settings=settings)
+    sett = {}
+    for i in settings:
+        sett[i.name] = i.value
+    return render_template('market/sitemap.html', categories_all=categories_all, products_by_cat=products_by_cat, settings=sett)
 
 # обратная связь
 @market_module.route('/contact', methods=['GET','POST'])
@@ -303,7 +318,10 @@ def contact():
     else:
         categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
         settings = Settings.query.all()
-        return render_template('market/contact.html', categories_all=categories_all, settings=settings)
+        sett = {}
+        for i in settings:
+            sett[i.name] = i.value
+        return render_template('market/contact.html', categories_all=categories_all, settings=sett)
 
 # обратная связь
 @market_module.route('/subscribe', methods=['POST'])
@@ -382,12 +400,15 @@ def search(search_string):
     else:
         categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
         settings = Settings.query.all()
+        sett = {}
+        for i in settings:
+            sett[i.name] = i.value
         products = {}
         if not search_string == '':
             search_string = search_string.lower()
             for e in search_string.split(' '):
                 products = Product.query.filter(Product.name.ilike('%' + e + '%')).all()
-        return render_template('market/search.html', categories_all=categories_all, products=products, settings=settings)
+        return render_template('market/search.html', categories_all=categories_all, products=products, settings=sett)
 
 @app.template_filter()
 @evalcontextfilter

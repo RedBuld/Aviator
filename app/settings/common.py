@@ -21,13 +21,21 @@ RECAPTCHA_PUBLIC_KEY = '6LfGxuYSAAAAAB5OZkdl9LZu84h4RBuRNRpaLOBu'
 
 RECAPTCHA_PRIVATE_KEY = '6LfGxuYSAAAAAO2TQK2EJcAUtbJHyEu0Ge9YNSVf'
 
-LANGUAGES = [('en', u'English'), ('ru', u'Русский')]
+LANGUAGES = [('ru', u'Русский'), ('en', u'English')]
 
 RANKS = [(1, _(u'Driver'), 3), (2, _(u'Operator'), 3), (3, _(u'Manager'), 4), (4, _(u'Senior Manager'), 5)]
 
 IMAGES = ['png', 'jpg', 'jpeg']
 
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+
+LOGO_FOLDER = path('assets/market/image/')
+
+LOGO_URL = '/assets/market/image/'
+
+ABOUT_FOLDER = path('assets/market/image/about-us/')
+
+ABOUT_URL = '/assets/market/image/about-us/'
 
 UPLOADS_FOLDER = path('media')
 
