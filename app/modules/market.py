@@ -31,8 +31,11 @@ def set_client_session():
         session['last']=[]
     if 'total' not in session:
         session['total']={}
+    if 'counts' not in session['total']:
         session['total']['counts'] = 0
+    if 'price' not in session['total']:
         session['total']['price'] = 0
+    if 'delivery' not in session['total']:
         session['total']['delivery']=0
 
 # 404 страница
