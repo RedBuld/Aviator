@@ -152,12 +152,15 @@ def change_driver(order_id):
                     else:
                         s = products_to_users.update().values(count=i[2]+j[2]).where(products_to_users.c.user_id==d.id).\
                             where(products_to_users.c.product_id==i[0])
-                        print str(s)
             if n:
                 s = products_to_users.insert().values(count=i[2], user_id=d.id, product_id=i[0])
             db.session.execute(s)
         db.session.commit()
         send_order(order, d)
+        temp_user = User.query.get(d.id)
+        if Settings.query.get('pdel').value:
+            pdel = Settings.query.get('pdelcost').value
+            temp_user.set_bank(pdel,'plus')
         flash(_('Order\' driver successfully changed'), 'success')
         return redirect(url_for('order_module.active'))
     return render_template('order/change_driver.html', order=order)

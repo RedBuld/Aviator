@@ -240,7 +240,6 @@ class CategoryForm(Form):
             category.visible = self.visible.data
             category.paid = self.paid.data
             category.dcost = self.dcost.data
-            print str(self.dcost.data)
             if str(self.dcost.data) == 'None':
                 category.dcost = 0
             db.session.add(category)
@@ -386,21 +385,24 @@ class UploadAboutForm(Form):
 class SettingsFormOne(Form):
     key = BooleanField(u'Confirmation code')
     emoney = BooleanField(u'Payment cards')
+    pdel = BooleanField(u'Driver paid')
     phone = TextField(u'Phone')
     email = TextField(u'Email')
     link = TextField(u'ВКонтакте')
+    pdelcost = TextField(u'Cost of order')
 
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
         self.key.label.text = _(u'Confirmation code')
         self.emoney.label.text = _(u'Payment cards')
+        self.pdel.label.text = _(u'Driver paid')
         self.phone.label.text = _(u'Phone')
         self.email.label.text = u'Email'
         self.link.label.text = u'ВКонтакте'
+        self.pdelcost.label.text = _(u'Cost of order')
 
     def upgrade(self, settings):
         for i in settings:
-            print self[i].data
             if i in self:
                 param = Settings.query.get(i)
                 if param is None:
@@ -416,4 +418,16 @@ class SettingsFormOne(Form):
                 param.init(i,self[i].data)
                 db.session.add(param)
                 db.session.commit()
+        if not self['key'].data:
+            param = Settings.query.get('key')
+            param.value = 0
+            Settings.update(param)
+        if not self['emoney'].data:
+            param = Settings.query.get('emoney')
+            param.value = 0
+            Settings.update(param)
+        if not self['pdel'].data:
+            param = Settings.query.get('pdel')
+            param.value = 0
+            Settings.update(param)
         return True

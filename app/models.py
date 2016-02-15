@@ -20,7 +20,6 @@ def get_categories_by_cart(prds):
             temp.append(prd['category_id'])
     paid_cats = []
     for cat in temp:
-        print cat
         tcat = get_top_parent_category(cat)
         if tcat.paid:
             if not dict({'name':tcat.name,'cost':tcat.dcost}) in paid_cats:

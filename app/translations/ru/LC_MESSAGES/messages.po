@@ -1320,6 +1320,27 @@ msgstr "выполнил(а)"
 msgid "to the amount of"
 msgstr "на сумму"
 
+msgid "Driver paid"
+msgstr "Платные заказы"
+
+msgid "Cost of order"
+msgstr "Цена заказа"
+
+msgid "Driver"
+msgstr "Водитель"
+
+msgid "Operator"
+msgstr "Диспетчер"
+
+msgid "Manager"
+msgstr "Менеджер"
+
+msgid "Senior Manager"
+msgstr "Администратор"
+
+msgid "Sub-Total"
+msgstr "Товары"
+
 #, python-format
 msgid "%(num)d order"
 msgid_plural "%(num)d orders"

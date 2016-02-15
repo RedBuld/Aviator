@@ -72,7 +72,7 @@
         <div class="row">
           <div class="column col-sm-6 col-xs-12 pull-left not-animated" data-animate="fadeInUp" data-delay="500">
             <div class="payment pull-left">
-              {% if settings['emoney']=='1' %}
+              {% if settings['emoney'] == '1' %}
                 <ul>
                   <li><a title="MasterCard" href="javascript:;" class="masterCard"><img alt="MasterCard" src="{{ url_for('static', filename='market/image/master.png') }}" /></a></li>
                   <li><a title="Visa" href="javascript:;" class="visa"><img alt="Visa" src="{{ url_for('static', filename='market/image/visa.png') }}"></a></li>

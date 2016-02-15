@@ -16,11 +16,15 @@
         <tbody>
         {% if 'paidcats' in session and not session['paidcats'] == [] %}
           <tr>
-            <td colspan="2">Доставка</td>
+            <td class="left"><b>{% trans %}Sub-Total{% endtrans %}</b></td>
+            <td class="right">{{ total['price'] }} {% trans %}rub.{% endtrans %}</td>
+          </tr>
+          <tr>
+            <td class="left" colspan="2"><b>Доставка<b></td>
           </tr>
           {% for i in session['paidcats'] %}
           <tr>
-            <td class="left">{{ i['name'] }}</td>
+            <td class="left" style="padding-left:50px;">{{ i['name'] }}</td>
             <td class="right">{{ i['cost'] }} {% trans %}rub.{% endtrans %}</td>
           </tr>
           {% endfor %}
@@ -31,9 +35,11 @@
           </tr>
         </tbody>
       </table>
-      <a href="{{ config['SITE_URL'] }}cart" class="btn btn-default">{% trans %}Shopping Cart{% endtrans %}</a>
-      &nbsp;
-      <a href="{{ config['SITE_URL'] }}checkout" class="btn btn-checkout">{% trans %}Checkout{% endtrans %}</a>
+      <p>
+        <a href="{{ config['SITE_URL'] }}cart" class="btn btn-default">{% trans %}Shopping Cart{% endtrans %}</a>
+        &nbsp;
+        <a href="{{ config['SITE_URL'] }}checkout" class="btn btn-checkout">{% trans %}Checkout{% endtrans %}</a>
+      </p>
     </div>
   </li>
 {% else %}

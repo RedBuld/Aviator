@@ -9,11 +9,11 @@
   <td class="qc-quantity   ">
     <div class="input-group">
       <span class="input-group-btn">
-        <button class="btn btn-defaut decrease" onclick="cobtadd.uncart('{{ product['pid'] }}');" ><i class="fa fa-minus"></i></button>
+        <button class="btn btn-defaut decrease" type="button" onclick="cobtadd.uncart('{{ product['pid'] }}');" ><i class="fa fa-minus"></i></button>
       </span>            
       <input type="text" value="{{ product['qty'] }}" class="qc-product-qantity form-control text-center" name="cart[{{ product['pid'] }}]" data-refresh="{{ product['qty'] }}" readonly="readonly">
       <span class="input-group-btn">
-        <button class="btn btn-defaut increase" onclick="cobtadd.cart('{{ product['pid'] }}');" ><i class="fa fa-plus"></i></button>
+        <button class="btn btn-defaut increase" type="button" onclick="cobtadd.cart('{{ product['pid'] }}');" ><i class="fa fa-plus"></i></button>
       </span>
     </div>
   </td>

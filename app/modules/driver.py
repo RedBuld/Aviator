@@ -97,6 +97,9 @@ def order_accept(order_id):
     if not order.driver == current_user:
         return abort(403)
     rem_products_and_confirm(order, current_user)
+    if Settings.query.get('pdel').value:
+        pdel = Settings.query.get('pdelcost').value
+        current_user.set_bank(pdel,'minus')
     return redirect(url_for('driver_module.orders', t='active'))
 
 @driver_module.route('/order/<int:order_id>/cancel')
