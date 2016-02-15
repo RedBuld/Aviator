@@ -22,6 +22,17 @@ function getURLVar(key) {
 		}
 	}
 }
+$(window).resize(function(){
+	xsmenu();
+});
+xsmenu = function(){
+	if($('.menu').hasClass('fixed'))
+	{
+		$('.xsmenuover').css('height',$(window).height() - $('.hormenu').height() - 3);
+	}else{
+		$('.xsmenuover').css('height',$(window).height() - $('.header-container').height() + $(window).scrollTop());
+	}
+}
 init_xs = function(){
 	$('button.xs-menu').off('click').on('click',function(){
 		if($('#xsmenu').hasClass('open')){
