@@ -1013,10 +1013,11 @@ img{
 #xsmenu.open {
   display: block;
 }
-/*#xsmenu .xsmenuover {
+#xsmenu .xsmenuover {
   overflow-x: hidden;
   overflow-y: auto;
-}*/
+  height: calc(100% - 40px);
+}
 #xsmenu ul {
   margin: 0;
   padding: 0;

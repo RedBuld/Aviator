@@ -22,17 +22,6 @@ function getURLVar(key) {
 		}
 	}
 }
-$(window).resize(function(){
-	xsmenu();
-});
-xsmenu = function(){
-	if($('.menu').hasClass('fixed'))
-	{
-		$('.xsmenuover').css('height',$(window).height() - $('.hormenu').height() - 3);
-	}else{
-		$('.xsmenuover').css('height',$(window).height() - $('.header-container').height() + $(window).scrollTop());
-	}
-}
 init_xs = function(){
 	$('button.xs-menu').off('click').on('click',function(){
 		if($('#xsmenu').hasClass('open')){
@@ -42,7 +31,6 @@ init_xs = function(){
 		}
 	});
 	$('#xsmenu p.plus').off('click').on('click',function(){
-		console.log($(this).parent().hasClass('active'));
 		if($(this).parent().hasClass('active'))
 		{
 			$(this).parent().removeClass('active');
