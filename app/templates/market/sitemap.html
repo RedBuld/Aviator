@@ -47,24 +47,41 @@
         <h1>{% trans %}Site Map{% endtrans %}</h1>
           <div class="col-sm-3">
             <ul>
-              <h3>{% trans %}Infromation{% endtrans %}</h3>
+              <h2><b>{% trans %}Infromation{% endtrans %}</b></h2>
               <li><a href="{{ config['SITE_URL'] }}cart">{% trans %}Shopping Cart{% endtrans %}</a></li>
               <li><a href="{{ config['SITE_URL'] }}checkout">{% trans %}Checkout{% endtrans %}</a></li>
               <li><a href="{{ config['SITE_URL'] }}about">{% trans %}About Us{% endtrans %}</a></li>
               <li><a href="{{ config['SITE_URL'] }}contact">{% trans %}Contact us{% endtrans %}</a></li>
+              <li><a href="{{ config['SITE_URL'] }}search">{% trans %}Search{% endtrans %}</a></li>
             </ul>
           </div>
-          {% for category in categories_all %}
-          {% if products_by_cat[category.name] %}
-          <div class="col-sm-4">
-            <ul>
-              <h3><a href="{{ config['SITE_URL'] }}{{ category.name }}">{{ category.name }}</a></h3>
-              {% for product in products_by_cat[category.name] %}
-                <li><a href="{{ config['SITE_URL'] }}/product/{{ product.id }}">{{ product.name }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-          {% endif %}
+          {% for categoryz in categories_all %}
+            {% if products_by_cat[categoryz.name]|length > 0 %}
+              <div class="pull-left col-xs-12 col-sm-12">
+                <h2><a href="{{ config['SITE_URL'] }}{{ categoryz.name }}"><b>{{ categoryz.name }}</b></a></h2>
+                <ul>
+                  {% for category in categoryz.childrens recursive %}
+                    {% if products_by_cat[category.name]|length > 0 %}
+                      <li class="col-xs-12 col-sm-{%- if category.childrens -%}12{%- else -%}3{%- endif -%}">
+                        <h3><a href="{{ config['SITE_URL'] }}{{ category.name }}"><b>{{ category.name }}</b></a></h3>
+                        {%- if category.childrens -%}
+                          <ul>
+                            {{- loop(category.childrens) -}}
+                          </ul>
+                        {%- endif -%}
+                        {% if products_by_cat[category.name]|length > 0 and category.childrens|length == 0 %}
+                        <ul>
+                          {% for product in products_by_cat[category.name] %}
+                            <li><a href="{{ config['SITE_URL'] }}/product/{{ product.id }}">{{ product.name }}</a></li>
+                          {% endfor %}
+                        </ul>
+                        {% endif %}
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
           {% endfor %}
       </div>
     </div>

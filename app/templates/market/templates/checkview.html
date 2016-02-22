@@ -21,16 +21,19 @@
           {% endfor %}
           </tbody>
         </table>
-        <div class="form-horizontal qc-summary ">
+        <div class="form-horizontal qc-summary">
           {% if 'paidcats' in session and not session['paidcats'] == [] %}
             <div class="row qc-totals">
               <label class="col-xs-6 control-label">{% trans %}Sub-Total{% endtrans %}</label>
               <div class="col-xs-6 form-control-static">{{ total['price'] }} {% trans %}rub.{% endtrans %}</div>
             </div>
+            <div class="row qc-totals">
+              <label class="col-xs-6 control-label"><b>{% trans %}Delivery{% endtrans %}</b></label>
+            </div>
             {% for i in session['paidcats'] %}
             <div class="row qc-totals">
-              <label class="col-xs-6 control-label">{{ i['name'] }}</label>
-              <div class="col-xs-6 form-control-static">+{{ i['cost'] }} {% trans %}rub.{% endtrans %}</div>
+              <label class="col-xs-6 control-label delname">{{ i['name'] }}</label>
+              <div class="col-xs-6 form-control-static">{{ i['cost'] }} {% trans %}rub.{% endtrans %}</div>
             </div>
             {% endfor %}
           {% endif %}
@@ -42,4 +45,9 @@
       </div>
     </div>
   </div>
+<style>
+  .delname {
+    font-weight: normal !important;
+  }
+</style>
 {% endif %}

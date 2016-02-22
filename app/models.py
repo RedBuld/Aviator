@@ -335,6 +335,7 @@ class Order(db.Model):
             for j in a:
                 if i.id == j[0]:
                     i.count = j[2]
+                    i.cat = get_top_parent_category(i.category_id)
                     price += i.price*i.count
                     c.append(i)
         return {'products': c, 'price': price, 'delivery': delivery}

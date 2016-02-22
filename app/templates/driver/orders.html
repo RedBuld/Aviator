@@ -34,7 +34,7 @@
           <br>
           <ul class="list-group">
             {% for product in order_products['products'] %}
-            <li class="list-group-item"><span class="badge">{{ product.count }}</span>{{ product.name }} ({{ product.price }}{% trans %}rub.{% endtrans %})</li>
+            <li class="list-group-item"><span class="badge">{{ product.count }}</span>[{{ product.category }}]{{ product.name }} ({{ product.price }}{% trans %}rub.{% endtrans %})</li>
             {% endfor %}
           </ul>
           <div class="btn-group btn-group-justified">
@@ -64,7 +64,7 @@
           </ul>
           <ul class="list-group">
             {% for product in order_products['products'] %}
-            <li class="list-group-item"><span class="badge">{{ product.count }}</span>{{ product.name }} ({{ product.price }}{% trans %}rub.{% endtrans %})</li>
+            <li class="list-group-item"><span class="badge">{{ product.count }}</span>[{{ product.category }}]{{ product.name }} ({{ product.price }}{% trans %}rub.{% endtrans %})</li>
             {% endfor %}
           </ul>
           <div class="btn-group btn-group-justified">

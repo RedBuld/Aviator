@@ -1341,6 +1341,9 @@ msgstr "Администратор"
 msgid "Sub-Total"
 msgstr "Товары"
 
+msgid "Delivery"
+msgstr "Доставка"
+
 #, python-format
 msgid "%(num)d order"
 msgid_plural "%(num)d orders"

@@ -4,11 +4,11 @@ from flask import Blueprint, render_template, redirect, abort, g, session, reque
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.babelex import lazy_gettext, gettext as _, ngettext, refresh
 from .. import app, db, babel, thumb
-from ..models import User, Product, Category, Streets, Contacts, Subscribe, Order, Settings, get_chained_cats_lvl_one, get_categories_by_cart
+from ..models import User, Product, Category, Streets, Contacts, Subscribe, Order, Settings, get_chained_cats_lvl_one, get_categories_by_cart, get_top_parent_category
 from order import create_order
 from ..forms import UserForm
 from ..tools import check_rank_user, check_rank
-from sqlalchemy import asc, func
+from sqlalchemy import asc, func, or_
 from jinja2 import evalcontextfilter, Markup, escape
 import json
 
@@ -293,14 +293,15 @@ def about():
 @market_module.route('/sitemap')
 def sitemap():
     categories_all = Category.query.order_by(asc(Category.num)).filter_by(parentid=0,visible=1).all()
+    cats = Category.query.order_by(asc(Category.num)).filter_by(visible=1).all()
     products_by_cat = {}
-    for category in categories_all:
-        products_by_cat[category.name] = Product.query.filter_by(category_id=category.id).all()
+    for category in cats:
+        products_by_cat[category.name] = Product.query.filter(Product.category_id.in_(get_chained_cats_lvl_one(category.id,[category.id]))).all()
     settings = Settings.query.all()
     sett = {}
     for i in settings:
         sett[i.name] = i.value
-    return render_template('market/sitemap.html', categories_all=categories_all, products_by_cat=products_by_cat, settings=sett)
+    return render_template('market/sitemap.html', categories_all=categories_all, cats=cats, products_by_cat=products_by_cat, settings=sett)
 
 # обратная связь
 @market_module.route('/contact', methods=['GET','POST'])
@@ -409,8 +410,12 @@ def search(search_string):
         products = {}
         if not search_string == '':
             search_string = search_string.lower()
-            for e in search_string.split(' '):
-                products = Product.query.filter(Product.name.ilike('%' + e + '%')).all()
+            conditions = []
+            for e in search_string.replace('_',' ').replace(',',' ').replace('.',' ').split(' '):
+                conditions.append(Product.name.ilike(u'%{}%'.format(e)))
+            products = Product.query.order_by(asc(Product.category_id)).order_by(asc(Product.name)).filter(
+                or_(*conditions)
+            ).all()
         return render_template('market/search.html', categories_all=categories_all, products=products, settings=sett)
 
 @app.template_filter()
