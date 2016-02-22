@@ -68,7 +68,7 @@ def index(category_name):
         category = Category.query.order_by(asc(Category.num)).filter_by(visible=1).first_or_404()
     else:
         category = Category.query.order_by(asc(Category.num)).filter(func.lower(Category.name)==func.lower(category_name)).first_or_404()
-    products = Product.query.filter(Product.category_id.in_(get_chained_cats_lvl_one(category.id,[category.id])))
+    products = Product.query.order_by(asc(Product.category_id)).filter(Product.category_id.in_(get_chained_cats_lvl_one(category.id,[category.id])))
     settings = Settings.query.all()
     sett = {}
     for i in settings:
@@ -392,12 +392,13 @@ def search(search_string):
         if not search_string == '':
             search_string = search_string.lower()
             for e in search_string.replace('_',' ').replace(',',' ').replace('.',' ').split(' '):
-                temp = Product.query.filter(Product.name.ilike('%' + e + '%')).all()
-                for i in temp:
-                    results['products'][i.id] = {}
-                    results['products'][i.id]["name"] = i.name
-                    results['products'][i.id]["price"] = str(i.price) +' '+ _('rub.')
-                    results['products'][i.id]["img"] = thumb.thumbnail(i.img,'200x200')
+                if not e == "":
+                    temp = Product.query.filter(Product.name.ilike('%' + e + '%')).all()
+                    for i in temp:
+                        results['products'][i.id] = {}
+                        results['products'][i.id]["name"] = i.name
+                        results['products'][i.id]["price"] = str(i.price) +' '+ _('rub.')
+                        results['products'][i.id]["img"] = thumb.thumbnail(i.img,'200x200')
             results['counts']['val'] = len(results['products'])
             results['counts']['text'] = _('Show more')
         return json.dumps(results)
@@ -412,7 +413,9 @@ def search(search_string):
             search_string = search_string.lower()
             conditions = []
             for e in search_string.replace('_',' ').replace(',',' ').replace('.',' ').split(' '):
-                conditions.append(Product.name.ilike(u'%{}%'.format(e)))
+                if not e == "":
+                    conditions.append(Product.name.ilike(u'%{}%'.format(e)))
+                    print e
             products = Product.query.order_by(asc(Product.category_id)).order_by(asc(Product.name)).filter(
                 or_(*conditions)
             ).all()
