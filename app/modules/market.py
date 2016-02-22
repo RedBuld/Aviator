@@ -391,7 +391,7 @@ def search(search_string):
         results['counts'] = {}
         if not search_string == '':
             search_string = search_string.lower()
-            for e in search_string.split(' '):
+            for e in search_string.replace('_',' ').replace(',',' ').replace('.',' ').split(' '):
                 temp = Product.query.filter(Product.name.ilike('%' + e + '%')).all()
                 for i in temp:
                     results['products'][i.id] = {}
