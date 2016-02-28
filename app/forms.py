@@ -203,7 +203,7 @@ class CategoryForm(Form):
     ])
     parentid = SelectField(_(u'Parent category'), coerce=int)
     visible = BooleanField(_(u'Visible'))
-    paid = BooleanField(_(u'Paid delivery'))
+    paid = BooleanField(_(u'Paid'))
     dcost = IntegerField(_(u'Cost of delivery'), [
         validators.NumberRange(min=0)
     ])
@@ -217,7 +217,7 @@ class CategoryForm(Form):
         self.paid.label.text = _(u'Paid')
         self.dcost.label.text = _(u'Cost of delivery')
         self.parentid.label.text = _(u'Parent category')
-        self.parentid.choices = [(0,u'No parent category')]+[(h.id, get_full_lenght_name(h.id,h.name)) for h in Category.query.all()]
+        self.parentid.choices = [(0,_(u'No parent category'))]+[(h.id, get_full_lenght_name(h.id,h.name)) for h in Category.query.all()]
 
     def create_new(self):
         rv = Form.validate(self)

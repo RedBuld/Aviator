@@ -1323,8 +1323,14 @@ msgstr "на сумму"
 msgid "Driver paid"
 msgstr "Платные заказы"
 
+msgid "Paid"
+msgstr "Категория платная"
+
+msgid "Cost of delivery"
+msgstr "Стоимость доставки"
+
 msgid "Cost of order"
-msgstr "Цена заказа"
+msgstr "Стоимость заказа"
 
 msgid "Driver"
 msgstr "Водитель"

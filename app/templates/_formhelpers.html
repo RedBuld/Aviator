@@ -24,7 +24,7 @@
 <select name="rank" id="rank" class="form-control">
   {% for rank in config['RANKS'] %}
   {% if user.rank >= rank[2] %}
-  <option value="{{ rank[0] }}" {% if val == rank[0] %} selected="selected"{% endif %}>{{ rank[1] }}</option>
+  <option value="{{ rank[0] }}" {% if val == rank[0] %} selected="selected"{% endif %}>{{ _(rank[1]) }}</option>
   {% endif %}
   {% endfor %}
 </select>
@@ -48,7 +48,8 @@
 
 {% macro render_switch(input,label,value) %}
 <label>{{ label }}
-{% if value|int %}
+{% if value %}
+{% set value=value|int %}
 {{ render_field(input, checked="checked", class="switch") }}
 {% else %}
 {{ render_field(input, class="switch") }}
