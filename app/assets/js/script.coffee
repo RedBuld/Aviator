@@ -170,10 +170,10 @@ window.initPackage ['category/new', 'category/'+$('#id').val()+'/edit'], ->
     $('#parentid').change ->
         if parseInt(this.value) != 0
             $('#dcost').attr 'readonly', 'readonly'
-            $('#paid').attr 'readonly', 'readonly'
+            $('#paid').attr 'disabled', 'disabled'
         else
             $('#dcost').removeAttr 'readonly'
-            $('#paid').removeAttr 'readonly'
+            $('#paid').removeAttr 'disabled'
     $('#parentid').change()
 
 window.initPackage ['driver/map', 'driver/list'], ->
