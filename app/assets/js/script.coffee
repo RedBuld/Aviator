@@ -169,11 +169,11 @@ window.initPackage ['product/'+$('#id').val()+'/edit'], ->
 window.initPackage ['category/new', 'category/'+$('#id').val()+'/edit'], ->
     $('#parentid').change ->
         if parseInt(this.value) != 0
-            $('#dcost').attr 'disabled', 'disabled'
-            $('#paid').attr 'disabled', 'disabled'
+            $('#dcost').attr 'readonly', 'readonly'
+            $('#paid').attr 'readonly', 'readonly'
         else
-            $('#dcost').removeAttr 'disabled'
-            $('#paid').removeAttr 'disabled'
+            $('#dcost').removeAttr 'readonly'
+            $('#paid').removeAttr 'readonly'
     $('#parentid').change()
 
 window.initPackage ['driver/map', 'driver/list'], ->
