@@ -139,23 +139,24 @@ def change_driver(order_id):
         return abort(403)
     if request.method == 'POST':
         d = order.driver
-        ptu = db.session.query(products_to_users).filter_by(user_id=d.id).all()
-        pto = db.session.query(products_to_orders).filter_by(order_id=order.id).all()
-        for i in pto:
-            n = True
-            for j in ptu:
-                if i[0] == j[0]:
-                    n = False
-                    if i[2] == -j[2]:
-                        s = products_to_users.delete().where(products_to_users.c.user_id==d.id).\
-                            where(products_to_users.c.product_id==i[0])
-                    else:
-                        s = products_to_users.update().values(count=i[2]+j[2]).where(products_to_users.c.user_id==d.id).\
-                            where(products_to_users.c.product_id==i[0])
-            if n:
-                s = products_to_users.insert().values(count=i[2], user_id=d.id, product_id=i[0])
-            db.session.execute(s)
-        db.session.commit()
+        if not d == None:
+            ptu = db.session.query(products_to_users).filter_by(user_id=d.id).all()
+            pto = db.session.query(products_to_orders).filter_by(order_id=order.id).all()
+            for i in pto:
+                n = True
+                for j in ptu:
+                    if i[0] == j[0]:
+                        n = False
+                        if i[2] == -j[2]:
+                            s = products_to_users.delete().where(products_to_users.c.user_id==d.id).\
+                                where(products_to_users.c.product_id==i[0])
+                        else:
+                            s = products_to_users.update().values(count=i[2]+j[2]).where(products_to_users.c.user_id==d.id).\
+                                where(products_to_users.c.product_id==i[0])
+                if n:
+                    s = products_to_users.insert().values(count=i[2], user_id=d.id, product_id=i[0])
+                db.session.execute(s)
+            db.session.commit()
         send_order(order, d)
         temp_user = User.query.get(d.id)
         if Settings.query.get('pdel').value:
