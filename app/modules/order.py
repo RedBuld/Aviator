@@ -158,10 +158,11 @@ def change_driver(order_id):
                 db.session.execute(s)
             db.session.commit()
         send_order(order, d)
-        temp_user = User.query.get(d.id)
-        if Settings.query.get('pdel').value:
-            pdel = Settings.query.get('pdelcost').value
-            temp_user.set_bank(pdel,'plus')
+        if not d == None:
+            temp_user = User.query.get(d.id)
+            if Settings.query.get('pdel').value:
+                pdel = Settings.query.get('pdelcost').value
+                temp_user.set_bank(pdel,'plus')
         flash(_('Order\' driver successfully changed'), 'success')
         return redirect(url_for('order_module.active'),301)
     return render_template('order/change_driver.html', order=order)

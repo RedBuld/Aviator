@@ -182,7 +182,7 @@ def send_order(order, user):
     data2 = {}
     products = db.session.query(products_to_orders).filter_by(order_id=order.id).all()
     order.status = 0
-    d = User.query.filter(User.rank==1, User.coord!=None, User.coord_date>=(datetime.now() - const_timedelta) ).all()
+    d = User.query.filter(User.rank==1, User.coord!=None, User.coord_date>=(datetime.now() - const_timedelta), user.bank >= Settings.query.get('pdel').value ).all()
     ids = [x.id for x in d]
     if ids == []:
         order.status = 3
