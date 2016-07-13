@@ -6,3 +6,7 @@ run install.bat
 from node install uglify-js, clean-css
 
 from Aviator folder run cmd "manage.py runserver"
+
+#http://localhost/
+
+admin login/pass: RedBuld/1234
