@@ -1,11 +1,9 @@
 # Aviator
 install node.js, python 2.7.2, pip |ADD TO PATH ALL|
 
-run install.bat
+from nodejs install uglify-js, clean-css
 
-from node install uglify-js, clean-css
-
-from Aviator folder run cmd "manage.py runserver"
+from Aviator folder run install.bat, after cmd "manage.py runserver"
 
 http://localhost/
 
