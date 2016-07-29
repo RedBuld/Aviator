@@ -1,5 +1,5 @@
 # Aviator
-install node.js, python 2.7.2, pip |ADD TO PATH ALL|
+install node.js, python 2.7.4, pip |ADD TO PATH ALL|
 
 from nodejs install uglify-js, clean-css
 
