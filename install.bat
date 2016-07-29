@@ -1,1 +1,1 @@
-pip install -r requirements/development.txt
+pip install -r %~dp0/requirements/development.txt
